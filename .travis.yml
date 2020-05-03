@@ -1,0 +1,19 @@
+language: python
+
+python:
+    - "3.7"
+
+# In order for coverage to work, the package needs to be installed in editable/
+# symlink mode.  Unfortunately, this means we can't use pip to install the 
+# package (as of version 19.2), because pip cannot use `pyproject.toml` for 
+# editable installs.  Instead it requires `setup.py`, which we don't have.  
+# This means we need to use `flit` directly to install the package.
+install:
+    - pip install -U flit flit coverage pytest pytest-cov python-coveralls
+    - flit install --symlink
+
+script: 
+    - py.test tests --cov autoclasstoc
+
+after_success:
+    - coveralls
