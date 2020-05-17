@@ -7,6 +7,7 @@ module = "autoclasstoc"
 author = "Kale Kundert"
 author-email = "kale@thekunderts.net"
 home-page = 'https://github.com/kalekundert/autoclasstoc'
+description-file = 'README.rst'
 requires-python = "~=3.7"
 requires = [
   'sphinx',
