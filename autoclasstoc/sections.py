@@ -85,9 +85,12 @@ class Section:
         assert self.cls
 
         attrs = self._filter_attrs(self.cls.__dict__)
-        inherited_attrs = self._find_inherited_attrs()
+        inherited_attrs = {
+                parent: self._filter_attrs(attrs)
+                for parent, attrs in self._find_inherited_attrs().items()
+        }
 
-        if not attrs and not any(inherited_attrs.items()):
+        if not attrs and not any(inherited_attrs.values()):
             return []
 
         wrapper = self._make_container()
@@ -99,8 +102,7 @@ class Section:
         if not self.include_inherited:
             return [wrapper]
 
-        for parent, all_attrs in self._find_inherited_attrs().items():
-            attrs = self._filter_attrs(all_attrs)
+        for parent, attrs in inherited_attrs.items():
             if not attrs:
                 continue
 
