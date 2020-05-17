@@ -4,7 +4,8 @@ Python
 .. module:: autoclasstoc
 
 The primary purpose of the Python API is to define custom sections for the 
-class TOCs.  This is done by subclassing the `Section` class.
+class TOCs.  This is done by subclassing the `Section` class, although a number 
+of helper functions and classes are also available.
 
 .. autosummary::
   :toctree: autogen

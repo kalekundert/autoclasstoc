@@ -84,14 +84,17 @@ class Section:
         assert self.state
         assert self.cls
 
+        attrs = self._filter_attrs(self.cls.__dict__)
+        inherited_attrs = self._find_inherited_attrs()
+
+        if not attrs and not any(inherited_attrs.items()):
+            return []
+
         wrapper = self._make_container()
         wrapper += self._make_rubric()
 
-        attrs = self._filter_attrs(self.cls.__dict__)
-        if not attrs:
-            return []
-
-        wrapper += self._make_links(attrs)
+        if attrs:
+            wrapper += self._make_links(attrs)
 
         if not self.include_inherited:
             return [wrapper]
