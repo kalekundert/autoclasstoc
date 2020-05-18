@@ -10,5 +10,6 @@ autoclasstoc.Section
   :private-members:
 
   .. autoclasstoc::
+     :sections: public-attrs,public-methods,private-methods
 
   

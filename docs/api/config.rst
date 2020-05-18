@@ -12,11 +12,12 @@ The following setting can be defined in ``conf.py``:
   section names are available by default:
 
   - ``public-methods``: Methods and properties that don't begin with an 
-    underscore (or that are special methods, e.g. `__init__`).
+    underscore (or that are special methods, e.g. :py:meth:`__init__`).
   - ``private-methods``: Methods and properties that begin with an underscore.
   - ``public-attrs``: Non-methods and non-classes that don't begin with an 
     underscore.
-  - ``private-attrs``: Non-methods non-classes that begin with an underscore.
+  - ``private-attrs``: Non-methods and non-classes that begin with an 
+    underscore.
   - ``inner-classes``: Classes defined within the class in question.
 
   The names of any custom `Section` classes that have been defined can be used 

@@ -1,6 +1,6 @@
-*********************
-`collections.Counter`
-*********************
+*******************
+collections.Counter
+*******************
 
 The snippet below shows how :rst:dir:`autoclasstoc` can be used to document the 
 `collections.Counter` class from the Python standard library.  Even though this 
@@ -14,6 +14,8 @@ description for any method.
     :members:
     :private-members:
     :special-members:
+    :inherited-members:
+    :undoc-members:
 
     .. autoclasstoc::
 

@@ -1,6 +1,6 @@
-**************
-`pathlib.Path`
-**************
+************
+pathlib.Path
+************
 
 The snippet below shows how :rst:dir:`autoclasstoc` can be used to document the 
 `pathlib.Path` class from the Python standard library.  This example also 
@@ -14,6 +14,7 @@ default, but can easily be expanded.
     :private-members:
     :special-members:
     :inherited-members:
+    :undoc-members:
 
     .. autoclasstoc::
 
