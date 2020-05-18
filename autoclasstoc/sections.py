@@ -220,7 +220,7 @@ class PublicAttributes(Section):
     title = "Public Attributes:"
 
     def predicate(self, name, attr):
-        return is_attribute(attr) and is_public(name)
+        return is_attribute(name, attr) and is_public(name)
 
 class PrivateAttributes(Section):
     """
@@ -230,7 +230,7 @@ class PrivateAttributes(Section):
     title = "Private Attributes:"
 
     def predicate(self, name, attr):
-        return is_attribute(attr) and is_private(name)
+        return is_attribute(name, attr) and is_private(name)
 
 class InnerClasses(Section):
     """
@@ -259,6 +259,9 @@ def is_attribute(name, attr):
     """
     Return true if the given attribute is not a method or an inner class.
     """
+    if name in ['__module__', '__doc__']:
+        return False
+
     return all([
         not inspect.isclass(attr),
         not inspect.isfunction(attr),
