@@ -45,4 +45,4 @@ be easy to incorporate into any existing project.
 See the `complete documentation`__ for more information (including examples).
 
 __ https://autoclasstoc.readthedocs.io/en/latest
-- 
+
