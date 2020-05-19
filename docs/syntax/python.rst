@@ -8,7 +8,8 @@ class TOCs.  This is done by subclassing the `Section` class, although a number
 of helper functions and classes are also available.
 
 .. autosummary::
-  :toctree: autogen
+  :toctree: api
+  :recursive:
 
   autoclasstoc.AutoClassToc
   autoclasstoc.Section

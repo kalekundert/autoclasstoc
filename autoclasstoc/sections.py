@@ -51,8 +51,8 @@ class Section:
             state (docutils.parsers.rst.states.RSTState): The state object 
                 associated with the :rst:dir:`autoclasstoc` directive.  This 
                 can be used to evaluate restructured text markup using 
-                `nodes_from_rst()`.  cls (type): The class to make the TOC 
-                section for.
+                `nodes_from_rst()`.  
+            cls (type): The class to make the TOC section for.
         """
         self.state = state
         self.cls = cls

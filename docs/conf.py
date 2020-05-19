@@ -33,6 +33,12 @@ intersphinx_mapping = {
 autodoc_default_options = {
         'exclude-members': '__weakref__,__dict__,__module__',
 }
+autoclasstoc_sections = [
+        'public-attrs',
+        'public-methods',
+        'private-methods',
+]
+autosummary_generate = True
 pygments_style = 'sphinx'
 html_theme = 'sphinx_rtd_theme'
 htmlhelp_basename = 'autoclasstocdoc'

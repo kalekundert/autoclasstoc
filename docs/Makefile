@@ -48,6 +48,7 @@ help:
 
 clean:
 	rm -rf $(BUILDDIR)/*
+	rm -rf syntax/api
 
 html:
 	$(SPHINXBUILD) -b html $(ALLSPHINXOPTS) $(BUILDDIR)/html
@@ -176,6 +177,3 @@ pseudoxml:
 	@echo
 	@echo "Build finished. The pseudo-XML files are in $(BUILDDIR)/pseudoxml."
 
-# Careful, this overwrites any existing files.
-autogen: api/python.rst api/python/autoclasstoc.utils.rst api/python/autoclasstoc.nodes.rst
-	sphinx-autogen -t _templates $^

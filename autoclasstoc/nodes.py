@@ -55,6 +55,9 @@ class details_summary(General, TextElement):
     html = visit_html, depart_html
 
 def setup(app):
+    """
+    Configure Sphinx to use the `details` and `details_summary` nodes.
+    """
     app.add_node(
             details,
             html=details.html,

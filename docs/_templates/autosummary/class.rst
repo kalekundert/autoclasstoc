@@ -9,6 +9,4 @@
   :private-members:
 
   .. autoclasstoc::
-
-  
-
+  .. rubric:: Full Documentation:

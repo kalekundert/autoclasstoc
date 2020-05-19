@@ -20,7 +20,7 @@
   :caption: Syntax Reference
   :hidden:
 
-  api/rst
-  api/config
-  api/python
+  syntax/rst
+  syntax/sphinx
+  syntax/python
 

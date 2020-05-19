@@ -1,6 +1,6 @@
-*************
-Configuration
-*************
+********************
+Sphinx Configuration
+********************
 The following setting can be defined in ``conf.py``:
 
 .. confval:: autoclasstoc_sections
