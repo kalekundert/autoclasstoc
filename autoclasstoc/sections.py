@@ -246,12 +246,8 @@ def is_method(name, attr):
     """
     Return true if the given attribute is a method or property.
     """
-    if name in ['__weakref__', '__dict__']:
-        return False
-
     return any([
         inspect.isfunction(attr),
-        inspect.isdatadescriptor(attr),
         inspect.ismethoddescriptor(attr),
     ])
 
@@ -259,30 +255,39 @@ def is_attribute(name, attr):
     """
     Return true if the given attribute is not a method or an inner class.
     """
-    if name in ['__module__', '__doc__']:
+    if is_special(name):
         return False
 
     return all([
         not inspect.isclass(attr),
         not inspect.isfunction(attr),
-        not inspect.isdatadescriptor(attr),
         not inspect.ismethoddescriptor(attr),
     ])
+
+def is_special(name):
+    """
+    Return True is the name starts and ends with a double-underscore.
+
+    Such names typically have special meaning to Python.
+    """
+    return name.startswith('__') and name.endswith('__')
 
 def is_public(name):
     """
     Return true if the given name is public.
 
     Specifically, a name is public if it either doesn't start with an 
-    underscore, or if it starts and ends with two underscores (i.e. a "dunder" 
+    underscore, or if it starts and ends with two underscores (i.e. a "special"
     method).
     """
-    dunder = name.startswith('__') and name.endswith('__')
-    return dunder or not name.startswith('_')
+    return not name.startswith('_') or is_special(name)
 
 def is_private(name):
     """
     Return true if the given name is private.
+
+    A name is private if it starts with an underscore, but does not start and 
+    end with two underscores (i.e. not a special method).
     """
     return not is_public(name)
 
