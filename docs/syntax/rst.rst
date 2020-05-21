@@ -9,15 +9,16 @@ The following directive can be used in any restructured text file:
   Create a table of contents (TOC) for the given Python class.
 
   The TOC contains a link to each method defined in the given class.  By 
-  default, the links are organized into two groups: "Public Methods" and 
-  "Private Methods".  Public methods are those with names that either don't 
-  begin with an underscore or begin and end with two underscores (i.e. "dunder 
-  methods").  Every other method is private.  It's easy to define custom 
+  default, the links are organized into four groups: "Public Attributes", 
+  "Public Methods", "Private Attributes", and "Private Methods".  Public 
+  attributes/methods are those with names that either don't begin with an 
+  underscore or begin and end with two underscores (i.e.  "dunder methods").  
+  Every other attribute/method is private.  It's easy to define custom 
   sections; see :doc:`/advanced_usage` for more details.
   
-  In addition to methods directly defined in the given class, the TOC will also 
-  include links to inherited methods.  These links are grouped by the class 
-  they are inherited from, and are collapsed by default to keep the TOC 
+  In addition to attributes directly defined in the given class, the TOC will 
+  also include links to inherited attributes.  These links are grouped by the 
+  class they are inherited from, and are collapsed by default to keep the TOC 
   succinct.
 
   The ``[qualified class name]`` argument is optional if this directive occurs 
@@ -28,9 +29,9 @@ The following directive can be used in any restructured text file:
 
   .. rst:directive:option:: sections
 
-      A comma-separated list of sections to include in the class TOC.  This 
-      supercedes the :confval:`autoclasstoc_sections` setting from ``conf.py``.  
-      The default is "public-methods,private-methods".
+      A comma-separated list of sections to include in the class TOC.  If 
+      specified, this supercedes the :confval:`autoclasstoc_sections` setting 
+      from ``conf.py``.  
 
   .. rst:directive:option:: exclude-sections
 

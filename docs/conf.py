@@ -20,6 +20,7 @@ extensions = [
         '_ext.show_nodes',
         'autoclasstoc',
         'sphinx.ext.autodoc',
+        'sphinx.ext.autosectionlabel',
         'sphinx.ext.autosummary',
         'sphinx.ext.viewcode',
         'sphinx.ext.intersphinx',
@@ -41,3 +42,7 @@ autoclasstoc_sections = [
 autosummary_generate = True
 pygments_style = 'sphinx'
 html_theme = 'sphinx_rtd_theme'
+
+def setup(app):
+    app.add_css_file('css/autoclasstoc.css')
+

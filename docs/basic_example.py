@@ -1,5 +1,3 @@
-#!/usr/bin/env python3
-
 class Parent:
 
     def inherited_method(self):

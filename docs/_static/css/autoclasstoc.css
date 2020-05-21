@@ -1,0 +1,19 @@
+/* Make filename captions look nicer. */
+.rst-content .code-block-caption {
+  padding: 0;
+  margin: 0.5em 0;
+  text-align: left;
+}
+
+/* Don't double highlight code in definition lists. */
+.rst-content dl dt code.literal {
+  border-radius: 0px;
+  border: none;
+  color: black;
+  font-weight: none;
+	font-size: 100%;
+	margin: 0;
+	padding: 0;
+  background: none;
+}
+

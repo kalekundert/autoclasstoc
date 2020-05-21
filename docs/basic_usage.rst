@@ -15,16 +15,16 @@ Follow these steps to start using :rst:dir:`autoclasstoc` in your project:
    extensions are required:
 
    .. code-block:: python
+      :caption: conf.py
 
-       # conf.py
-       extensions = [
-               ...
-               'autoclasstoc',
-               'sphinx.ext.autodoc',
-               'sphinx.ext.autosummary',
-               'sphinx.ext.viewcode',
-               ...
-       ]
+      extensions = [
+              ...
+              'autoclasstoc',
+              'sphinx.ext.autodoc',
+              'sphinx.ext.autosummary',
+              'sphinx.ext.viewcode',
+              ...
+      ]
 
    You may also want to configure :rst:dir:`autoclass` to include documentation 
    for every member of every class by default (see below).  Some projects shy 
@@ -35,8 +35,8 @@ Follow these steps to start using :rst:dir:`autoclasstoc` in your project:
    :doc:`examples/collections` example).
    
    .. code-block:: python
+      :caption: conf.py
    
-      # conf.py
       autodoc_default_options = {
           'members': True,
           'special-members': True,
@@ -63,7 +63,6 @@ Follow these steps to start using :rst:dir:`autoclasstoc` in your project:
           :special-members:
           :private-members:
           :inherited-members:
-          :exclude-members: __weakref__
 
           .. autoclasstoc::
           
