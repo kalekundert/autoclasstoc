@@ -41,4 +41,3 @@ autoclasstoc_sections = [
 autosummary_generate = True
 pygments_style = 'sphinx'
 html_theme = 'sphinx_rtd_theme'
-htmlhelp_basename = 'autoclasstocdoc'

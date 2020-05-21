@@ -9,5 +9,8 @@ version: 2
 python:
   version: 3.7
   install:
+    # The requirements file is only needed to install sphinx>=3.1 before it's 
+    # been released.  Once it's released, I can get rid of this.
+    - requirements: docs/requirements.txt
     - method: pip
       path: .
