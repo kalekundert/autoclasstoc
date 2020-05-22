@@ -48,8 +48,8 @@ def pick_sections(sections, exclude=None):
 
     The return value will be a list in the same order as *sections*, but with 
     any sections from *exclude* removed.  Both arguments can specify sections 
-    using string names (e.g. "public-methods") or actual `Section` classes.  
-    All names will be converted to classes in the return value.
+    using string names (e.g. "public-methods") or un-instantiated `Section` 
+    classes.  All names will be converted to classes in the return value.
     """
 
     def _section_from_anything(x):

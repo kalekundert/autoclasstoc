@@ -73,18 +73,18 @@ Custom sections
 ===============
 By default, :rst:dir:`autoclasstoc` divides the TOC into sections based whether 
 or not attributes are methods, and whether or not they are public.  This is a 
-reasonable way to organize attributes, but for many projects it may make sense 
-to add custom sections specific to that project.  Fortunately, this is easy to 
+reasonable default, but for many projects it may make sense to add custom 
+sections specific to the idioms of that project.  Fortunately, this is easy to 
 configure.  The basic steps are:
 
 1. Define new `autoclasstoc.Section` subclasses.
 2. Reference the subclasses either in ``conf.py`` or in the documentation 
    itself.
   
-This approach is very powerful, because `Section` controls all aspects of 
-defining and formatting the TOC sections, and its subclasses can overwrite any 
-of that behavior.  Below are some specific examples showing how custom sections 
-can be configured:
+This approach is very powerful, because the `Section` class controls all 
+aspects of defining and formatting the TOC sections, and its subclasses can 
+overwrite any of that behavior.  Below are some specific examples showing how 
+custom sections can be configured:
 
 Based on name
 -------------
@@ -95,17 +95,16 @@ methods that begin with the prefix "on\_", e.g. :meth:`on_mouse_down()` or
 :meth:`on_key_up()`.
 
 The first step is to define a new `Section` subclass with the following 
-features:
+attributes:
 
-- :attr:`~autoclasstoc.Section.key` specifies the string that can be used to 
-  include or exclude the section from class TOCs.
+- :attr:`~autoclasstoc.Section.key`: used to include or exclude the section 
+  from class TOCs.
  
-- :attr:`~autoclasstoc.Section.title` specifies the name of the section that 
-  will be shown in the documentation.  It's conventional to end the title with 
-  a trailing colon.
+- :attr:`~autoclasstoc.Section.title`: how the section will be labeled in the 
+  documentation.
 
-- :meth:`~autoclasstoc.Section.predicate` specifies which attributes to include 
-  in this section.
+- :meth:`~autoclasstoc.Section.predicate`: which attributes to include in the 
+  section.
 
 .. code-block::
   :caption: conf.py
@@ -148,9 +147,9 @@ Based on decorator
 ------------------
 A more explicit way to categorize methods is to use a decorator to label 
 methods that belong to a particular section.  This approach only is only 
-applicable to methods and inner classes, but is easy to implement.  For this 
-example, we'll make a section for "Read Only" methods that are identified by a 
-decorator:
+applicable to methods and inner classes (because data attributes cannot be 
+decorated), but is easy to implement.  For this example, we'll make a section 
+for "Read Only" methods that are identified by a decorator:
 
 The first step is to write a decorator to label read-only methods:
 

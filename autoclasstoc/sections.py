@@ -36,6 +36,8 @@ class Section:
     title = None
     """
     The text that will be used to label this section.
+
+    It's conventional to end the title with a trailing colon.
     """
 
     include_inherited = True
@@ -123,9 +125,10 @@ class Section:
 
         See Also:
             `is_method`
-            `is_attribute`
+            `is_data_attr`
             `is_public`
             `is_private`
+            `is_special`
         """
         raise NotImplementedError
 
@@ -212,25 +215,33 @@ class PrivateMethods(Section):
     def predicate(self, name, attr):
         return is_method(name, attr) and is_private(name)
 
-class PublicAttributes(Section):
+class PublicDataAttrs(Section):
     """
-    Include a "Public Attributes" section in the class TOC.
+    Include a "Public Data Attributes" section in the class TOC.
+
+    Note that only data attributes defined at the class level will be included 
+    in the TOC.  Data attributes defined in :meth:`__init__` (for example) will 
+    not be found.
     """
     key = 'public-attrs'
-    title = "Public Attributes:"
+    title = "Public Data Attributes:"
 
     def predicate(self, name, attr):
-        return is_attribute(name, attr) and is_public(name)
+        return is_data_attr(name, attr) and is_public(name)
 
-class PrivateAttributes(Section):
+class PrivateDataAttrs(Section):
     """
-    Include a "Private Attributes" section in the class TOC.
+    Include a "Private Data Attributes" section in the class TOC.
+
+    Note that only data attributes defined at the class level will be included 
+    in the TOC.  Data attributes defined in :meth:`__init__` (for example) will 
+    not be found.
     """
     key = 'private-attrs'
-    title = "Private Attributes:"
+    title = "Private Data Attributes:"
 
     def predicate(self, name, attr):
-        return is_attribute(name, attr) and is_private(name)
+        return is_data_attr(name, attr) and is_private(name)
 
 class InnerClasses(Section):
     """
@@ -251,11 +262,17 @@ def is_method(name, attr):
         inspect.ismethoddescriptor(attr),
     ])
 
-def is_attribute(name, attr):
+def is_data_attr(name, attr, exclude_special=True):
     """
-    Return true if the given attribute is not a method or an inner class.
+    Return true if the given attribute is a data attribute, e.g. not a method 
+    or an inner class.  Many data attributes are properties.
+
+    By default, attributes with double-underscore names (e.g. :attr:`__dict__`) 
+    are not considered data attributes.  Unlike special methods, these "special 
+    attributes" are very rarely relevant to users of a class.  This behavior 
+    can be disabled by toggling the *exclude_special* argument.
     """
-    if is_special(name):
+    if exclude_special and is_special(name):
         return False
 
     return all([
@@ -263,14 +280,6 @@ def is_attribute(name, attr):
         not inspect.isfunction(attr),
         not inspect.ismethoddescriptor(attr),
     ])
-
-def is_special(name):
-    """
-    Return True is the name starts and ends with a double-underscore.
-
-    Such names typically have special meaning to Python.
-    """
-    return name.startswith('__') and name.endswith('__')
 
 def is_public(name):
     """
@@ -290,4 +299,12 @@ def is_private(name):
     end with two underscores (i.e. not a special method).
     """
     return not is_public(name)
+
+def is_special(name):
+    """
+    Return True if the name starts and ends with a double-underscore.
+
+    Such names typically have special meaning to Python, e.g. :meth:`__init__`.
+    """
+    return name.startswith('__') and name.endswith('__')
 

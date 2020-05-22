@@ -16,11 +16,11 @@ available.
   autoclasstoc.Section
   autoclasstoc.PublicMethods
   autoclasstoc.PrivateMethods
-  autoclasstoc.PublicAttributes
-  autoclasstoc.PrivateAttributes
+  autoclasstoc.PublicDataAttrs
+  autoclasstoc.PrivateDataAttrs
   autoclasstoc.InnerClasses
   autoclasstoc.is_method
-  autoclasstoc.is_attribute
+  autoclasstoc.is_data_attr
   autoclasstoc.is_public
   autoclasstoc.is_private
   autoclasstoc.is_special

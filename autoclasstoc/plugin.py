@@ -53,9 +53,9 @@ def setup(app):
     nodes.setup(app)
 
     default_sections = [
-            'public-attributes',
+            'public-attrs',
             'public-methods',
-            'private-attributes',
+            'private-attrs',
             'private-methods'
     ]
 

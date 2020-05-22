@@ -7,6 +7,7 @@
 
   basic_usage
   advanced_usage
+  getting_help
 
 .. toctree::
   :caption: Examples
