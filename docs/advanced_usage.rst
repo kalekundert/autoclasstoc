@@ -224,7 +224,7 @@ custom `Section` subclass easy to write:
 .. code-block:: python
   :caption: conf.py
 
-  from autoclasstoc import section
+  from autoclasstoc import Section
 
   def is_read_only(attr):
       from inspect import getdoc
