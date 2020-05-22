@@ -23,6 +23,7 @@ available.
   autoclasstoc.is_attribute
   autoclasstoc.is_public
   autoclasstoc.is_private
+  autoclasstoc.is_special
   autoclasstoc.utils
   autoclasstoc.nodes
   autoclasstoc.ConfigError
