@@ -77,7 +77,7 @@ reasonable default, but for many projects it may make sense to add custom
 sections specific to the idioms of that project.  Fortunately, this is easy to 
 configure.  The basic steps are:
 
-1. Define new `autoclasstoc.Section` subclasses.
+1. Define new :class:`autoclasstoc.Section` subclasses.
 2. Reference the subclasses either in ``conf.py`` or in the documentation 
    itself.
   
@@ -115,7 +115,7 @@ attributes:
       key = 'event-handlers'
       title = "Event Handlers:"
 
-      def predicate(self, name, attr):
+      def predicate(self, name, attr, meta):
           return is_method(name, attr) and name.startswith('on_')
 
 We also have to redefine the "Public Methods" section, so that it *doesn't* 
@@ -128,8 +128,8 @@ include the event handlers (as it otherwise would):
 
   class RemainingPublicMethods(PublicMethods):
       
-      def predicate(self, name, attr):
-          return super().predicate(name, attr) and not name.startswith('on_')
+      def predicate(self, name, attr, meta):
+          return super().predicate(name, attr, meta) and not name.startswith('on_')
   
 Finally, we need to specify that our new sections should be used by default 
 (and what order they should go in):
@@ -176,14 +176,14 @@ Next, we have to define `Section` subclasses that are aware of the decorator:
       key = 'read-only'
       title = "Read-Only Methods:"
 
-      def predicate(self, name, attr):
+      def predicate(self, name, attr, meta):
           return getattr(attr, '__readonly__', False)
 
   class ReadWriteSection(Section):
       key = 'read-write'
       title = "Read/Write Methods:"
       
-      def predicate(self, name, attr):
+      def predicate(self, name, attr, meta):
           return not getattr(attr, '__readonly__', False)
 
   autoclasstoc_sections = [
@@ -199,11 +199,11 @@ Based on ``:meta:`` fields
 --------------------------
 With :ext:`autodoc`, it's possible to describe how an object should be 
 documented by including `:meta: <info-field-lists>` fields in that object's 
-docstring.  These fields can also be used to categorize methods.
-
-As in the previous section, we'll make a custom section for read-only methods.  
-The snippet below shows how such a method might be identified using a meta 
-field:
+docstring.  :rst:dir:`autoclasstoc` automatically parses these fields and 
+provides them as an argument to :meth:`~autoclasstoc.Section.predicate()`, so 
+they can be easily used to categorize attributes.  As in the previous example, 
+we'll make a custom section for read-only methods.  The snippet below shows how 
+such a method might be identified using a meta field:
 
 .. code-block:: python
 
@@ -217,34 +217,28 @@ field:
           """
           pass
 
-Sphinx contains a helper function for parsing meta fields, which makes our 
-custom `Section` subclass easy to write:
+These meta fields are parsed into a dictionary such that ``:meta key: value`` 
+would give ``{'key': 'value'}``.  This dictionary is provided to the 
+:meth:`~autoclasstoc.Section.predicate()` method via the *meta* argument:
 
 .. code-block:: python
   :caption: conf.py
 
   from autoclasstoc import Section
 
-  def is_read_only(attr):
-      from inspect import getdoc
-      from sphinx.util.docstrings import extract_metadata
-
-      meta = extract_metadata(getdoc(attr))
-      return 'read-only' in meta
-
   class ReadOnlySection(Section):
       key = 'read-only'
       title = "Read-Only Methods:"
 
-      def predicate(self, name, attr):
-          return is_read_only(attr)
+      def predicate(self, name, attr, meta):
+          return 'read-only' in meta
 
   class ReadWriteSection(Section):
       key = 'read-write'
       title = "Read/Write Methods:"
       
-      def predicate(self, name, attr):
-          return not is_read_only(attr)
+      def predicate(self, name, attr, meta):
+          return 'read-only' not in meta
 
   autoclasstoc_sections = [
           'read-only',

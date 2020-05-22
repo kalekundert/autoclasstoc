@@ -114,14 +114,19 @@ class Section:
 
         return [wrapper]
 
-    def predicate(self, name, attr):
+    def predicate(self, name, attr, meta):
         """
         Return true if the given attribute should be included in this section.
 
         Arguments:
-            name (str): The name of the argument.  In most cases, this is 
-                identical to ``attr.__name__``.
-            attr (object): The attribute instance itself.
+            name (str): The name of the attribute.  In most cases, this is 
+                identical to :attr:`attr.__name__`.
+            attr (object): The attribute object itself.
+            meta (dict): Any `:meta:`__ fields present in the attribute's 
+                docstring, as parsed by 
+                :func:`sphinx.util.docstrings.extract_metadata()`. 
+
+        __ https://www.sphinx-doc.org/en/master/usage/restructuredtext/domains.html#info-field-lists
 
         See Also:
             `is_method`
@@ -201,7 +206,7 @@ class PublicMethods(Section):
     key = 'public-methods'
     title = "Public Methods:"
 
-    def predicate(self, name, attr):
+    def predicate(self, name, attr, meta):
         return is_method(name, attr) and is_public(name)
 
 
@@ -212,7 +217,7 @@ class PrivateMethods(Section):
     key = 'private-methods'
     title = "Private Methods:"
 
-    def predicate(self, name, attr):
+    def predicate(self, name, attr, meta):
         return is_method(name, attr) and is_private(name)
 
 class PublicDataAttrs(Section):
@@ -226,7 +231,7 @@ class PublicDataAttrs(Section):
     key = 'public-attrs'
     title = "Public Data Attributes:"
 
-    def predicate(self, name, attr):
+    def predicate(self, name, attr, meta):
         return is_data_attr(name, attr) and is_public(name)
 
 class PrivateDataAttrs(Section):
@@ -240,7 +245,7 @@ class PrivateDataAttrs(Section):
     key = 'private-attrs'
     title = "Private Data Attributes:"
 
-    def predicate(self, name, attr):
+    def predicate(self, name, attr, meta):
         return is_data_attr(name, attr) and is_private(name)
 
 class InnerClasses(Section):
@@ -250,7 +255,7 @@ class InnerClasses(Section):
     key = 'inner-classes'
     title = "Inner Classes:"
 
-    def predicate(self, name, attr):
+    def predicate(self, name, attr, meta):
         return inspect.isclass(attr)
 
 def is_method(name, attr):

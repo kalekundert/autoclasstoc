@@ -16,7 +16,8 @@ def pick_class(qual_name, env):
     Arguments:
         qual_name (str): The name of the class to pick, or None if the class 
             should be inferred from the environment.
-        env (sphinx.environment.BuildEnvironment): This object is available as ``self.env`` from `SphinxDirective` 
+        env (sphinx.environment.BuildEnvironment): This object is available as 
+            :attr:`self.env` from :class:`~sphinx.util.docutils.SphinxDirective` 
             subclasses.
     """
     if qual_name:
@@ -145,10 +146,13 @@ def filter_attrs(attrs, predicate):
     """
     Remove attributes for which the given predicate function returns False.
     """
+    from inspect import getdoc
+    from sphinx.util.docstrings import extract_metadata
+
     return {
-            k: attrs[k]
-            for k in attrs
-            if predicate(k, attrs[k])
+            k: v
+            for k, v in attrs.items()
+            if predicate(k, v, extract_metadata(getdoc(v)))
     }
 
 def nodes_from_rst(state, rst):
