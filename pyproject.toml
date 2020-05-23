@@ -10,7 +10,7 @@ home-page = 'https://github.com/kalekundert/autoclasstoc'
 description-file = 'README.rst'
 requires-python = "~=3.7"
 requires = [
-  'sphinx',
+  'sphinx~=3.0',
   'docutils',
 ]
 classifiers = [
