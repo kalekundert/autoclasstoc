@@ -86,7 +86,7 @@ class Section:
         assert self.state
         assert self.cls
 
-        attrs = self._filter_attrs(self.cls.__dict__)
+        attrs = self._filter_attrs(self._find_attrs())
         inherited_attrs = {
                 parent: self._filter_attrs(attrs)
                 for parent, attrs in self._find_inherited_attrs().items()
@@ -193,9 +193,25 @@ class Section:
         """
         return utils.filter_attrs(attrs, self.predicate)
 
+    def _find_attrs(self):
+        """
+        Return all attributes associated with this class.
+        
+        These attributes will subsequently be filtered to remove any that 
+        aren't relevant to this section, so there is no need to do any 
+        filtering here.  The return value should be a name-to-attribute 
+        dictionary in the same format as :attr:`__dict__`.
+        """
+        return self.cls.__dict__
+
     def _find_inherited_attrs(self):
         """
         Find attributes that this class has inherited from other classes.
+
+        These attributes will subsequently be filtered to remove any that 
+        aren't relevant to this section, so there is no need to do any 
+        filtering here.  The return value should be a dictionary mapping parent 
+        class types to :attr:`__dict__` style dictionaries.
         """
         return utils.find_inherited_attrs(self.cls)
 
