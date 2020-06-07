@@ -11,11 +11,11 @@ python:
 # editable installs.  Instead it requires `setup.py`, which we don't have.
 # This means we need to use `flit` directly to install the package.
 install:
-    - pip install -U flit flit coverage pytest pytest-cov python-coveralls
+    - pip install flit pytest-cov python-coveralls
     - flit install --symlink
 
 script:
-    - py.test tests --cov autoclasstoc
+    - pytest tests --cov autoclasstoc
 
 after_success:
     - coveralls
