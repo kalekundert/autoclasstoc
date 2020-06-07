@@ -8,7 +8,7 @@ author = "Kale Kundert"
 author-email = "kale@thekunderts.net"
 home-page = 'https://github.com/kalekundert/autoclasstoc'
 description-file = 'README.rst'
-requires-python = "~=3.7"
+requires-python = "~=3.6"
 requires = [
   'sphinx~=3.0',
   'docutils',
@@ -22,5 +22,3 @@ classifiers = [
 'Documentation' = 'https://autoclasstoc.readthedocs.io/en/latest/'
 'Version Control' = 'https://github.com/kalekundert/autoclasstoc'
 'Bug Tracker' = 'https://github.com/kalekundert/autoclasstoc/issues'
-
-
