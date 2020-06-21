@@ -1,6 +1,6 @@
-******
-Python
-******
+**********
+Python API
+**********
 .. module:: autoclasstoc
 
 The primary purpose of the Python API is to define :ref:`custom sections 
