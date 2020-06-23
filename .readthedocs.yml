@@ -7,10 +7,10 @@ version: 2
 # How to install the project.  We need to specify to use `pip`, because 
 # otherwise RTD may try to directly execute `setup.py`, which doesn't exist.
 python:
-  version: 3.7
+  version: 3.6
   install:
-    # The requirements file is only needed to install sphinx>=3.1 before it's 
-    # been released.  Once it's released, I can get rid of this.
-    - requirements: docs/requirements.txt
     - method: pip
       path: .
+      extra_requirements:
+        - docs
+
