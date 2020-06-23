@@ -90,6 +90,8 @@ def make_toc(state, cls, sections):
         section = section_cls(state, cls)
         section.check()
         n += section.format()
+
+    n.append(_nodes.transition())
     return n
 
 def make_container():
