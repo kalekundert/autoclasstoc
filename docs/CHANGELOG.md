@@ -15,6 +15,9 @@ Changes unreleased.
 
 ### Documentation
 
+- README:
+  - Minimal update for this project #9 ([069434f](https://github.com/imAsparky/sphinxclasstocr/commit/069434f3012051cf3c712e44363c705b2b864078))
+
 - docs:
   - Modified for readthedocs #10 ([ebd218f](https://github.com/imAsparky/sphinxclasstocr/commit/ebd218fc7ba1cc3fc4f9449adc120ad4ac48aca6))
 
