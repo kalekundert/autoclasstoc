@@ -25,3 +25,7 @@
   syntax/sphinx
   syntax/python
 
+  .. toctree::
+  :caption: Changelog
+
+  CHANGELOG.md
