@@ -4,13 +4,13 @@ build-backend = "flit.buildapi"
 
 [tool.flit.metadata]
 module = "autoclasstoc"
-author = "Kale Kundert"
-author-email = "kale@thekunderts.net"
-home-page = 'https://github.com/kalekundert/autoclasstoc'
+author = "Mark Sevelj"
+author-email = "mark.sevelj@dunwright.com.au"
+home-page = 'https://github.com/imAsparky/sphinxclasstocr'
 description-file = 'README.rst'
-requires-python = "~=3.6"
+requires-python = ">=3.6"
 requires = [
-  'sphinx~=3.0',
+  'sphinx>=3.0',
   'docutils',
 ]
 classifiers = [
@@ -30,11 +30,11 @@ docs = [
 ]
 
 [tool.flit.metadata.urls]
-'Documentation' = 'https://autoclasstoc.readthedocs.io/en/latest/'
-'Version Control' = 'https://github.com/kalekundert/autoclasstoc'
-'Bug Tracker' = 'https://github.com/kalekundert/autoclasstoc/issues'
-'Continuous Integration' = 'https://github.com/kalekundert/autoclasstoc/actions'
-'Test Coverage' = 'https://coveralls.io/github/kalekundert/autoclasstoc'
+'Documentation' = 'https://sphinxclasstocr.readthedocs.io/en/latest/'
+'Version Control' = 'https://github.com/imAsparky/sphinxclasstocr'
+'Bug Tracker' = 'https://github.com/imAsparky/sphinxclasstocr/issues'
+'Continuous Integration' = 'https://github.com/imAsparky/sphinxclasstocr/actions'
+# 'Test Coverage' = 'https://coveralls.io/github/kalekundert/autoclasstoc'
 
 [tool.semantic_release]
 version_variable = 'autoclasstoc/__init__.py:__version__'
