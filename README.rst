@@ -12,8 +12,8 @@ sphinxclasstocr
    :target: https://sphinxclasstocr.readthedocs.io/en/latest/?badge=latest
    :alt: Documentation Status
 
-**sphinxclasstocr is a fork of this excellent project`autoclasstoc
-<https://github.com/kalekundert/autoclasstoc/>`__.**
+**sphinxclasstocr is a fork of this excellent project
+`autoclasstoc <https://github.com/kalekundert/autoclasstoc/>`__.**
 
 *Work is in progress to modify autoclasstoc to meet the needs of our projects.*
 
