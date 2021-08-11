@@ -1,4 +1,9 @@
 # Byte-compiled / optimized / DLL files
+
+# PROJECT FILES
+# vscode
+workspace.code-workspace
+
 __pycache__/
 *.py[cod]
 
