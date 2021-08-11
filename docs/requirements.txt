@@ -1,5 +1,5 @@
 # git+https://github.com/sphinx-doc/sphinx@master#egg=sphinx==4.0.0
-Sphinx==4.0.3
-myst-parser==0.15.1
-autoclasstoc==1.2.0
-sphinx_rtd_theme==0.5.2
+Sphinx
+myst-parser
+autoclasstoc
+sphinx_rtd_theme
