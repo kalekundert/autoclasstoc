@@ -5,7 +5,7 @@ The :mod:`autoclasstoc` module defines two new *docutils* nodes, which make it
 possible to create collapsible content in HTML.
 """
 
-from docutils.nodes import General, Element, TextElement
+from docutils.nodes import Element, General, TextElement
 
 
 class details(General, Element):

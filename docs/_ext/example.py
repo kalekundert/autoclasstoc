@@ -3,6 +3,7 @@
 from docutils import nodes
 from docutils.parsers.rst import Directive
 from sphinx.util.docutils import ReferenceRole
+
 from autoclasstoc import utils
 
 

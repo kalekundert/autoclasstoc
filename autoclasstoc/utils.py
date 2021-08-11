@@ -1,8 +1,10 @@
 #!/usr/bin/env python3
 
+from importlib import import_module
+
 from docutils import nodes as _nodes
 from docutils.statemachine import StringList, string2lines
-from importlib import import_module
+
 from .errors import ConfigError
 
 
@@ -57,7 +59,7 @@ def pick_sections(sections, exclude=None):
     """
 
     def _section_from_anything(x):
-        from .sections import Section, SECTIONS
+        from .sections import SECTIONS, Section
 
         if isinstance(x, str):
             try:
@@ -151,6 +153,7 @@ def filter_attrs(attrs, predicate):
     Remove attributes for which the given predicate function returns False.
     """
     from inspect import getdoc
+
     from sphinx.util.docstrings import extract_metadata
 
     return {
