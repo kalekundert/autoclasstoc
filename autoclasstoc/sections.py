@@ -1,7 +1,9 @@
 #!/usr/bin/env python3
 
 import inspect
-from docutils import nodes as _nodes
+
+from errors import ConfigError
+
 from . import utils
 
 SECTIONS = {}
@@ -13,7 +15,7 @@ class Section:
 
     The purpose of this class is to make it easy to customize the sections that
     make up the class TOC.  For example, you might want an "Event Handler"
-    section that includes any method that starts with "on\_".  Or you might
+    section that includes any method that starts with "on\\_".  Or you might
     want to format the links in a table with multiple columns, to save more
     space.
 
