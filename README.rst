@@ -12,6 +12,16 @@ sphinxclasstocr
    :target: https://sphinxclasstocr.readthedocs.io/en/latest/?badge=latest
    :alt: Documentation Status
 
+.. image:: https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit&logoColor=white
+   :target: https://github.com/pre-commit/pre-commit
+   :alt: pre-commit
+
+.. image:: https://img.shields.io/badge/code%20style-black-000000.svg
+    :target: https://github.com/ambv/black
+    :alt: Code style: black
+
+|
+
 **sphinxclasstocr is a fork of this excellent project
 `autoclasstoc <https://github.com/kalekundert/autoclasstoc/>`__.**
 
@@ -55,4 +65,4 @@ be easy to incorporate into any existing project.
 
 See the `complete documentation`__ for more information (including examples).
 
-__ https://autoclasstoc.readthedocs.io/en/latest
+__ https://sphinxclasstocr.readthedocs.io/en/latest/index.html

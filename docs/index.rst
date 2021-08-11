@@ -15,7 +15,6 @@
 
   examples/collections
   examples/pathlib
-  examples/other_projects
 
 .. toctree::
   :caption: Syntax Reference
