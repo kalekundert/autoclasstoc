@@ -2,9 +2,8 @@
 
 import inspect
 
-from errors import ConfigError
-
 from . import utils
+from .errors import ConfigError
 
 SECTIONS = {}
 
