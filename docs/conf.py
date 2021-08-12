@@ -1,14 +1,14 @@
 import os
 import sys
 
-import autoclasstoc
+# import sphinxclasstocr
 
 sys.path.append(os.path.dirname(__file__))
 
 project = u"sphinxclasstocr"
 copyright = u"2020, Kale Kundert"
-version = autoclasstoc.__version__
-release = autoclasstoc.__version__
+# version = sphinxclasstocr.__version__
+# release = sphinxclasstocr.__version__
 
 templates_path = ["_templates"]
 exclude_patterns = ["_build"]
@@ -20,7 +20,7 @@ default_role = "any"
 extensions = [
     "_ext.example",
     "_ext.show_nodes",
-    "autoclasstoc",
+    "sphinxclasstocr",
     "sphinx.ext.autodoc",
     "sphinx.ext.autosectionlabel",
     "sphinx.ext.autosummary",
@@ -44,4 +44,4 @@ html_theme = "sphinx_rtd_theme"
 
 
 def setup(app):
-    app.add_css_file("css/autoclasstoc.css")
+    app.add_css_file("css/sphinxclasstocr.css")

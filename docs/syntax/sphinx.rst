@@ -8,7 +8,7 @@ The following setting can be defined in ``conf.py``:
   The default list of sections to include in class TOCs, in the order they
   should appear in the documentation.  The values in the list can be either
   strings or `Section` classes.  Strings are the same values that can be
-  provided to the section options of the :rst:dir:`autoclasstoc` directive, and
+  provided to the section options of the :rst:dir:`sphinxclasstocr` directive, and
   must refer to the name of a section class.  The following section names are
   available by default:
 

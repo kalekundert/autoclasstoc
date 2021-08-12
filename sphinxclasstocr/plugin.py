@@ -2,14 +2,15 @@
 
 from sphinx.util.docutils import SphinxDirective
 
-from . import ConfigError, __version__, utils
+from . import __version__, utils
+from .errors import ConfigError
 
 
-class AutoClassToc(SphinxDirective):
+class SphinxClassTocr(SphinxDirective):
     """
     Generate a succinct TOC for automatically documented classes.
 
-    This class implements the :rst:dir:`autoclasstoc` directive.  More
+    This class implements the :rst:dir:`sphinxclasstocr` directive.  More
     specifically, it implements the `run` function as expected by docutils.
     However, most of the actual logic is delegated to other classes and
     functions.
@@ -30,7 +31,7 @@ class AutoClassToc(SphinxDirective):
             mod_name, cls_name = utils.pick_class(qual_name, self.env)
             mod, cls = utils.load_class(mod_name, cls_name)
             sections = utils.pick_sections(
-                self.options.get("sections") or self.config.autoclasstoc_sections,
+                self.options.get("sections") or self.config.sphinxclasstocr_sections,
                 exclude=self.options.get("exclude-sections"),
             )
             return utils.make_toc(self.state, cls, sections)
@@ -51,7 +52,7 @@ def load_static_assets(app, config):
     if static_dir not in config.html_static_path:
         config.html_static_path.append(static_dir)
 
-    app.add_css_file("autoclasstoc.css")
+    app.add_css_file("sphinxclasstocr.css")
 
 
 def setup(app):
@@ -66,8 +67,8 @@ def setup(app):
         "private-methods",
     ]
 
-    app.add_config_value("autoclasstoc_sections", default_sections, "env")
-    app.add_directive("autoclasstoc", AutoClassToc)
+    app.add_config_value("sphinxclasstocr_sections", default_sections, "env")
+    app.add_directive("sphinxclasstocr", SphinxClassTocr)
     app.connect("config-inited", load_static_assets)
 
     return {

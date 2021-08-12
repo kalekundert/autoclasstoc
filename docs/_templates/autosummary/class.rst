@@ -8,5 +8,5 @@
   :special-members:
   :private-members:
 
-  .. autoclasstoc::
+  .. sphinxclasstocr::
   .. rubric:: Full Documentation:

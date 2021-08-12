@@ -2,14 +2,14 @@
 Basic Usage
 ***********
 
-Follow these steps to start using :rst:dir:`autoclasstoc` in your project:
+Follow these steps to start using :rst:dir:`sphinxclasstocr` in your project:
 
-1. Install ``autoclasstoc`` from PyPI::
+1. Install ``sphinxclasstocr`` from PyPI::
 
-    $ pip install autoclasstoc
+    $ pip install sphinxclasstocr
 
-2. Enable the ``autoclasstoc`` and :ext:`autosummary` extensions for your
-   Sphinx project.  The latter is required because ``autoclasstoc`` uses it to
+2. Enable the ``sphinxclasstocr`` and :ext:`autosummary` extensions for your
+   Sphinx project.  The latter is required because ``sphinxclasstocr`` uses it to
    create the TOC.  The snippet below also enables :ext:`autodoc` and
    :ext:`viewcode` to demonstrate a typical configuration, but neither of these
    extensions are required:
@@ -19,7 +19,7 @@ Follow these steps to start using :rst:dir:`autoclasstoc` in your project:
 
       extensions = [
               ...
-              'autoclasstoc',
+              'sphinxclasstocr',
               'sphinx.ext.autodoc',
               'sphinx.ext.autosummary',
               'sphinx.ext.viewcode',
@@ -46,7 +46,7 @@ Follow these steps to start using :rst:dir:`autoclasstoc` in your project:
           'exclude-members': '__weakref__',
       }
 
-3. Use the :rst:dir:`autoclasstoc` directive to add a TOC to a class.  Follow
+3. Use the :rst:dir:`sphinxclasstocr` directive to add a TOC to a class.  Follow
    the link for a full description of the directive, but typical usage is
    pretty straight-forward.  For example, consider the ``Example`` class in the
    following snippet:
@@ -54,7 +54,7 @@ Follow these steps to start using :rst:dir:`autoclasstoc` in your project:
    .. literalinclude:: basic_example.py
       :language: python
 
-   We can document this class using :rst:dir:`autoclasstoc` as follows:
+   We can document this class using :rst:dir:`sphinxclasstocr` as follows:
 
    .. example::
 
@@ -64,4 +64,4 @@ Follow these steps to start using :rst:dir:`autoclasstoc` in your project:
           :private-members:
           :inherited-members:
 
-          .. autoclasstoc::
+          .. sphinxclasstocr::

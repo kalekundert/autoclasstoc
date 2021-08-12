@@ -4,7 +4,7 @@ Restructured Text
 
 The following directive can be used in any restructured text file:
 
-.. rst:directive:: .. autoclasstoc:: [qualified class name]
+.. rst:directive:: .. sphinxclasstocr:: [qualified class name]
 
   Create a table of contents (TOC) for the given Python class.
 

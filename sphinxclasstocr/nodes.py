@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 """\
-The :mod:`autoclasstoc` module defines two new *docutils* nodes, which make it
+The :mod:`sphinxclasstocr` module defines two new *docutils* nodes, which make it
 possible to create collapsible content in HTML.
 """
 

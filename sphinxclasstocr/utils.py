@@ -13,7 +13,7 @@ def pick_class(qual_name, env):
     Figure out which class to make the TOC for.
 
     We can either be given this information as an argument, or we can try to
-    figure it out from the context (e.g. the :rst:dir:`autoclass` or
+    figure it out from the context (e.g. the :rst:dir:`sphinxclasstocr` or
     :rst:dir:`py:class` currently being processed).
 
     Arguments:
@@ -65,7 +65,7 @@ def pick_sections(sections, exclude=None):
             try:
                 return SECTIONS[x]
             except KeyError:
-                raise ConfigError(f"no autoclasstoc section with key {x!r}")
+                raise ConfigError(f"no sphinxclasstocr section with key {x!r}")
 
         if issubclass(x, Section):
             return x
@@ -94,9 +94,9 @@ def make_toc(state, cls, sections):
 def make_container():
     """
     Make a container node to identify elements associated with the
-    :rst:dir:`autoclasstoc` directive.
+    :rst:dir:`sphinxclasstocr` directive.
     """
-    return _nodes.container(classes=["autoclasstoc"])
+    return _nodes.container(classes=["sphinxclasstocr"])
 
 
 def make_rubric(title):

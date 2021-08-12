@@ -2,12 +2,6 @@
 sphinxclasstocr
 ***************
 
-.. .. image:: https://img.shields.io/pypi/v/autoclasstoc.svg
-..    :target: https://pypi.python.org/pypi/autoclasstoc
-
-.. .. image:: https://img.shields.io/pypi/pyversions/autoclasstoc.svg
-..    :target: https://pypi.python.org/pypi/autoclasstoc
-
 .. image:: https://readthedocs.org/projects/sphinxclasstocr/badge/?version=latest
    :target: https://sphinxclasstocr.readthedocs.io/en/latest/?badge=latest
    :alt: Documentation Status
@@ -59,7 +53,7 @@ that:
   it easier for the user to grok the functionality provided by the class
   itself.
 
-``autoclasstoc`` provides a new Restructured Text directive that is all of
+``sphinxclasstocr`` provides a new Restructured Text directive that is all of
 these things.  It also works well with ``autodoc`` and ``autogen``, and should
 be easy to incorporate into any existing project.
 

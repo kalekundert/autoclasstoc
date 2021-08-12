@@ -31,7 +31,7 @@ class Section:
     """
     A string that can be used to refer to this section, e.g. in ``conf.py``
     settings such as :confval:`autoclasstoc_sections` and
-    :rst:dir:`autoclasstoc` options such as ``:sections:`` and
+    :rst:dir:`sphinxclasstocr` options such as ``:sections:`` and
     ``:exclude-sections:``.
     """
 
@@ -53,7 +53,7 @@ class Section:
 
         Arguments:
             state (docutils.parsers.rst.states.RSTState): The state object
-                associated with the :rst:dir:`autoclasstoc` directive.  This
+                associated with the :rst:dir:`sphinxclasstocr` directive.  This
                 can be used to evaluate restructured text markup using
                 `nodes_from_rst()`.
             cls (type): The class to make the TOC section for.
@@ -146,7 +146,7 @@ class Section:
         This method is meant to be overridden in subclasses.  The primary
         purpose of the container node is to belong to a CSS class that can then
         be used to identify HTML elements associated with
-        :rst:dir:`autoclasstoc`.
+        :rst:dir:`sphinxclasstocr`.
         """
         return utils.make_container()
 
