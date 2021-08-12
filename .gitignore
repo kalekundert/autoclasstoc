@@ -3,6 +3,7 @@
 # PROJECT FILES
 # vscode
 workspace.code-workspace
+.vscode/
 
 __pycache__/
 *.py[cod]
