@@ -37,5 +37,6 @@ docs = [
 # 'Test Coverage' = 'https://coveralls.io/github/kalekundert/autoclasstoc'
 
 [tool.semantic_release]
+branch = 'main'
 version_variable = 'sphinxclasstocr/__init__.py:__version__'
 build_command = 'python -m pip install flit && flit build'
