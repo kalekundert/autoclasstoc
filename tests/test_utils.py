@@ -2,15 +2,15 @@
 
 import pytest
 
-import autoclasstoc
+import sphinxclasstocr
 
 
-class DummySection1(autoclasstoc.Section):
+class SphinxClassTocr1(sphinxclasstocr.Section):
     key = "dummy-section-1"
     title = "Dummy Section 1:"
 
 
-class DummySection2(autoclasstoc.Section):
+class SphinxClassTocr2(sphinxclasstocr.Section):
     key = "dummy-section-2"
     title = "Dummy Section 2:"
 
@@ -24,64 +24,64 @@ class DummySection2(autoclasstoc.Section):
             [],
         ),
         (
-            [DummySection1],
+            [SphinxClassTocr1],
             [],
-            [DummySection1],
+            [SphinxClassTocr1],
         ),
         (
             ["dummy-section-1"],
             [],
-            [DummySection1],
+            [SphinxClassTocr1],
         ),
         (
-            [DummySection1, DummySection2],
+            [SphinxClassTocr1, SphinxClassTocr2],
             [],
-            [DummySection1, DummySection2],
+            [SphinxClassTocr1, SphinxClassTocr2],
         ),
         (
-            [DummySection1, "dummy-section-2"],
+            [SphinxClassTocr1, "dummy-section-2"],
             [],
-            [DummySection1, DummySection2],
+            [SphinxClassTocr1, SphinxClassTocr2],
         ),
         (
-            ["dummy-section-1", DummySection2],
+            ["dummy-section-1", SphinxClassTocr2],
             [],
-            [DummySection1, DummySection2],
+            [SphinxClassTocr1, SphinxClassTocr2],
         ),
         (
             ["dummy-section-1", "dummy-section-2"],
             [],
-            [DummySection1, DummySection2],
+            [SphinxClassTocr1, SphinxClassTocr2],
         ),
         (
-            [DummySection1, DummySection2],
-            [DummySection1],
-            [DummySection2],
+            [SphinxClassTocr1, SphinxClassTocr2],
+            [SphinxClassTocr1],
+            [SphinxClassTocr2],
         ),
         (
-            [DummySection1, DummySection2],
+            [SphinxClassTocr1, SphinxClassTocr2],
             ["dummy-section-1"],
-            [DummySection2],
+            [SphinxClassTocr2],
         ),
         (
-            [DummySection1, DummySection2],
-            [DummySection2],
-            [DummySection1],
+            [SphinxClassTocr1, SphinxClassTocr2],
+            [SphinxClassTocr2],
+            [SphinxClassTocr1],
         ),
         (
-            [DummySection1, DummySection2],
+            [SphinxClassTocr1, SphinxClassTocr2],
             ["dummy-section-2"],
-            [DummySection1],
+            [SphinxClassTocr1],
         ),
         (
-            [DummySection1],
-            [DummySection2],
-            [DummySection1],
+            [SphinxClassTocr1],
+            [SphinxClassTocr2],
+            [SphinxClassTocr1],
         ),
     ],
 )
 def test_pick_sections(given, exclude, expected):
-    assert autoclasstoc.utils.pick_sections(given, exclude) == expected
+    assert sphinxclasstocr.utils.pick_sections(given, exclude) == expected
 
 
 @pytest.mark.parametrize(
@@ -92,5 +92,5 @@ def test_pick_sections(given, exclude, expected):
     ],
 )
 def test_pick_sections_err(given, exclude, err):
-    with pytest.raises(autoclasstoc.ConfigError, match=err):
-        autoclasstoc.utils.pick_sections(given, exclude)
+    with pytest.raises(sphinxclasstocr.ConfigError, match=err):
+        sphinxclasstocr.utils.pick_sections(given, exclude)

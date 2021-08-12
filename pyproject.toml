@@ -3,7 +3,7 @@ requires = ["flit"]
 build-backend = "flit.buildapi"
 
 [tool.flit.metadata]
-module = "autoclasstoc"
+module = "sphinxclasstocr"
 author = "Mark Sevelj"
 author-email = "mark.sevelj@dunwright.com.au"
 home-page = 'https://github.com/imAsparky/sphinxclasstocr'
@@ -22,7 +22,7 @@ classifiers = [
 tests = [
   'pytest',
   'pytest-cov',
-  'coveralls',
+  # 'coveralls',
 ]
 docs = [
   'sphinx>=3.1',
@@ -37,5 +37,5 @@ docs = [
 # 'Test Coverage' = 'https://coveralls.io/github/kalekundert/autoclasstoc'
 
 [tool.semantic_release]
-version_variable = 'autoclasstoc/__init__.py:__version__'
+version_variable = 'sphinxclasstocr/__init__.py:__version__'
 build_command = 'python -m pip install flit && flit build'

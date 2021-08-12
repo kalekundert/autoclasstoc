@@ -28,7 +28,7 @@ jobs:
 
       - name: Run test suite
         run: |
-          pytest tests --cov autoclasstoc_2
+          pytest tests --cov sphinxclasstocr
   #     - name: Report test coverage
   #       env:
   #         COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_TOKEN }}
