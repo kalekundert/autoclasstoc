@@ -3,7 +3,7 @@ Sphinx Configuration
 ********************
 The following setting can be defined in ``conf.py``:
 
-.. confval:: autoclasstoc_sections
+.. confval:: spinxclasstocr_sections
 
   The default list of sections to include in class TOCs, in the order they
   should appear in the documentation.  The values in the list can be either
