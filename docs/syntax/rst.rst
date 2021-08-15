@@ -30,8 +30,8 @@ The following directive can be used in any restructured text file:
   .. rst:directive:option:: sections
 
       A comma-separated list of sections to include in the class TOC.  If
-      specified, this supercedes the :confval:`autoclasstoc_sections` setting
-      from ``conf.py``.
+      specified, this supercedes the :confval:`sphinxclasstocr_sections`
+      setting from ``conf.py``.
 
   .. rst:directive:option:: exclude-sections
 
