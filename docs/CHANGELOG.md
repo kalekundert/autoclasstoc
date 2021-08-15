@@ -37,6 +37,9 @@ Changes unreleased.
 
 ### Bug Fixes
 
+- toml:
+  - [tool.semantic_release] branch=main  #16 ([160e355](https://github.com/imAsparky/sphinxclasstocr/commit/160e355be66777f5741845f2a096cd62375a546b))
+
 - docs:
   - Cleanup file after docs build ok #12 ([d04c44e](https://github.com/imAsparky/sphinxclasstocr/commit/d04c44e5ed2ff23ec1af33b3e129552cd52b2216))
   - Removed myst-parser from conf  #12 ([2764db4](https://github.com/imAsparky/sphinxclasstocr/commit/2764db4c2c6b7766ec9c7c3a869183526d81328e))
