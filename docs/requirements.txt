@@ -1,5 +1,5 @@
-# git+https://github.com/sphinx-doc/sphinx@master#egg=sphinx==4.0.0
-Sphinx
+git+https://github.com/sphinx-doc/sphinx@master#egg=sphinx==4.0.0
+# Sphinx
 myst-parser
-# sphinxclasstocr
-sphinx_rtd_theme
+# sphinxclasstocr @ git+https://github.com/imAsparky/sphinxclasstocr.git@4627f6807936cdea1b19455faad1c3496976381c
+# sphinx_rtd_theme
