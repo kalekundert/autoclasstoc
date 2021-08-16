@@ -28,7 +28,7 @@ extensions = [
     "sphinx.ext.intersphinx",
     "sphinx.ext.napoleon",
     "sphinx_rtd_theme",
-    "myst_parser",
+    # "myst_parser",
 ]
 
 intersphinx_mapping = {
