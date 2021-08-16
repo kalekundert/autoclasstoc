@@ -12,7 +12,7 @@ available.
   :toctree: api
   :recursive:
 
-  sphinxclasstocr.AutoClassToc
+  sphinxclasstocr.SphinxClassTocr
   sphinxclasstocr.Section
   sphinxclasstocr.PublicMethods
   sphinxclasstocr.PrivateMethods
