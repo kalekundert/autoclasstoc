@@ -1,5 +1,26 @@
 # CHANGELOG
 
+## Unreleased
+
+Changes unreleased.
+
+### Chore
+
+- docs:
+  - pythonx.rst update to sphinxclasstocr #6 ([97a36c2](https://github.com/imAsparky/sphinxclasstocr/commit/97a36c2682e6a853e3e74df0dbf6042b24de502e))
+  - autoclass.css -> sphinxtocr.css #6 ([1f5443c](https://github.com/imAsparky/sphinxclasstocr/commit/1f5443c90d93705a3be18b3f1cbd705f865725dd))
+
+### Bug Fixes
+
+- docs:
+  - requirements for build pinned #20 ([c89209d](https://github.com/imAsparky/sphinxclasstocr/commit/c89209d70168baaa35d9a41e4c402acfed8c1eac))
+  - Build fail myst_parser version  #19 ([734c2a9](https://github.com/imAsparky/sphinxclasstocr/commit/734c2a9ad99064f25ba687f8175c528ce82e8fca))
+
+### Documentation
+
+- typo:
+  - Index.rst TOC indentation error fixed ([53daad7](https://github.com/imAsparky/sphinxclasstocr/commit/53daad7d78bf1baa3c059ae9edb571fe311a6b1f))
+
 ## [v0.0.1](https://github.com/imAsparky/sphinxclasstocr/releases/tag/v0.0.1) - 2021-08-16 03:25:57
 
 *No description*
