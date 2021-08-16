@@ -17,4 +17,4 @@ python:
   version: 3.9
   install:
     - method: pip
-    - requirements: docs/requirements.txt
+      requirements: docs/requirements.txt
