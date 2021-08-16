@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 
 """\
-Add a succinct TOC to auto-documented classes.
+Group Python Class items logically in documentation using Sphinx.
 """
 
-__version__ = "1.2.0"
+__version__ = "0.0.1"
 
 from . import nodes, utils
 from .errors import *
