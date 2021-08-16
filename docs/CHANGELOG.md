@@ -7,6 +7,9 @@ Changes unreleased.
 ### Chore
 
 - docs:
+  - sphinx.rst update to sphinxclasstocr #6 ([8beda22](https://github.com/imAsparky/sphinxclasstocr/commit/8beda225c586733c7f451a943ed48dbdae19f07b))
+  - rst.rst update to sphinxclasstocr #6 ([86acf4c](https://github.com/imAsparky/sphinxclasstocr/commit/86acf4c0cd382009eb491547b30f61fe7462e11f))
+  - autoclasstoc.css -> sphinxclasstocr #6 ([f9beff8](https://github.com/imAsparky/sphinxclasstocr/commit/f9beff83f87b19386dcd9bddf7ad204c88ff429f))
   - autoclasstoc -> sphinxclasstocr #6 ([6321a7e](https://github.com/imAsparky/sphinxclasstocr/commit/6321a7eac7fe679c5765c67a15548d0092b0de0c))
   - Update pyproject.toml #13 ([f0b3877](https://github.com/imAsparky/sphinxclasstocr/commit/f0b387719ba0c1a04958ad236de9f1061f8d2113))
 
