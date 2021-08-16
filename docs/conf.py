@@ -4,6 +4,7 @@ import sys
 # import sphinxclasstocr
 
 sys.path.append(os.path.dirname(__file__))
+sys.path.append(os.path.abspath(".."))
 
 project = u"sphinxclasstocr"
 copyright = u"2020, Kale Kundert"
@@ -28,7 +29,7 @@ extensions = [
     "sphinx.ext.intersphinx",
     "sphinx.ext.napoleon",
     "sphinx_rtd_theme",
-    # "myst_parser",
+    "myst_parser",
 ]
 
 intersphinx_mapping = {
