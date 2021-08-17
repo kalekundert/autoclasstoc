@@ -31,7 +31,7 @@ The following setting can be defined in ``conf.py``:
   The names of any :ref:`custom sections <Custom sections>` that have been
   defined can be used as well.  The default value for this setting is::
 
-    autoclasstoc_sections = [
+    sphinxclasstocr_sections = [
             'public-attrs',
             'public-methods',
             'private-attrs',
