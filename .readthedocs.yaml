@@ -1,22 +1,19 @@
-# Read the Docs configuration file
-# See https://docs.readthedocs.io/en/stable/config-file/v2.html for details
-
-# Required
 version: 2
 
 build:
   image: testing
 
 sphinx:
+  builder: html
   configuration: docs/conf.py
+  # fail_on_warning: true
 
-# How to install the project.  We need to specify to use `pip`, because
-# otherwise RTD may try to directly execute `setup.py`, which doesn't exist.
+formats:
+  - html
+
 python:
-  version: 3.9
+  version: "3.9"
   install:
+    - requirements: docs/requirements.txt
     - method: pip
       path: .
-      requirements: docs/requirements.txt
-      # extra_requirements:
-      #   - docs
