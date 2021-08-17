@@ -34,6 +34,11 @@ extensions = [
 
 intersphinx_mapping = {
     "sphinx": ("https://www.sphinx-doc.org/", None),
+    "python": ("https://docs.python.org/3.9", None),
+    "django": (
+        "https://docs.djangoproject.com/en/3.2",
+        "https://docs.djangoproject.com/en/3.2/_objects",
+    ),
 }
 autodoc_default_options = {
     "exclude-members": "__weakref__,__dict__,__module__",
@@ -41,7 +46,18 @@ autodoc_default_options = {
 autosummary_generate = True
 pygments_style = "monokai"
 pygments_dark_style = "monokai"
-html_theme = "sphinx_rtd_theme"
+html_theme = "furo"
+
+# The name of the Pygments (syntax highlighting) style to use.
+# Available styles ['default', 'emacs', 'friendly', 'colorful',
+# 'autumn', 'murphy', 'manni', 'material', 'monokai', 'perldoc',
+# 'pastie', 'borland', 'trac', 'native', 'fruity', 'bw', 'vim',
+# 'vs', 'tango', 'rrt', 'xcode', 'igor', 'paraiso-light', 'paraiso-dark',
+# 'lovelace', 'algol', 'algol_nu', 'arduino', 'rainbow_dash', 'abap',
+# 'solarized-dark', 'solarized-light', 'sas', 'stata', 'stata-light',
+# 'stata-dark', 'inkpot', 'zenburn', 'gruvbox-dark', 'gruvbox-light']
+pygments_style = "monokai"
+pygments_dark_style = "monokai"
 
 
 def setup(app):
