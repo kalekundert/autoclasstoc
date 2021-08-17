@@ -11,13 +11,6 @@ copyright = u"2020, Kale Kundert"
 # version = sphinxclasstocr.__version__
 # release = sphinxclasstocr.__version__
 
-templates_path = ["_templates"]
-exclude_patterns = ["_build"]
-html_static_path = ["_static"]
-source_suffix = ".rst"
-master_doc = "index"
-default_role = "any"
-
 extensions = [
     "_ext.example",
     "_ext.show_nodes",
@@ -30,7 +23,16 @@ extensions = [
     "sphinx.ext.napoleon",
     "sphinx_rtd_theme",
     "myst_parser",
+    "sphinx_copybutton",
 ]
+
+default_role = "any"
+exclude_patterns = ["_build"]
+html_static_path = ["_static"]
+html_theme = "furo"
+master_doc = "index"
+source_suffix = ".rst"
+templates_path = ["_templates"]
 
 intersphinx_mapping = {
     "sphinx": ("https://www.sphinx-doc.org/", None),
@@ -40,13 +42,6 @@ intersphinx_mapping = {
         "https://docs.djangoproject.com/en/3.2/_objects",
     ),
 }
-autodoc_default_options = {
-    "exclude-members": "__weakref__,__dict__,__module__",
-}
-autosummary_generate = True
-pygments_style = "monokai"
-pygments_dark_style = "monokai"
-html_theme = "furo"
 
 # The name of the Pygments (syntax highlighting) style to use.
 # Available styles ['default', 'emacs', 'friendly', 'colorful',
@@ -58,6 +53,30 @@ html_theme = "furo"
 # 'stata-dark', 'inkpot', 'zenburn', 'gruvbox-dark', 'gruvbox-light']
 pygments_style = "monokai"
 pygments_dark_style = "monokai"
+
+# -- Options for extensions configuration ------------------------------------
+
+# sphinx-copybutton is a lightweight code-block copy button
+# config options are here https://sphinx-copybutton.readthedocs.io/en/latest/
+# This config removes Python Repl + continuation, Bash line prefixes,
+# ipython and qtconsole + continuation, jupyter-console + continuation and preceding line numbers
+copybutton_prompt_text = (
+    r"^\d|^.\d|^\d\d|^\d\d\d|>>> |\.\.\. |\$ |In \[\d*\]: | {2,5}\.\.\.: | {5,8}: "
+)
+copybutton_prompt_is_regexp = True
+
+# datalad download-url http://www.tldp.org/LDP/Bash-Beginners-Guide/Bash-Beginners-Guide.pdf \
+# --dataset . \
+# -m "add beginners guide on bash" \
+# -O books/bash_guide.pdf
+# is correctly pasted with the following setting
+copybutton_line_continuation_character = "\\"
+
+
+autodoc_default_options = {
+    "exclude-members": "__weakref__,__dict__,__module__",
+}
+autosummary_generate = True
 
 
 def setup(app):
