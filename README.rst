@@ -1,6 +1,19 @@
-***************
-sphinxclasstocr
-***************
+=====================
+**sphinx-class-tocr**
+=====================
+
+|
+
+.. image:: docs/_static/imgs/logo/logo-sphinxclasstocr-1280x640.png
+   :alt: sphinxclasstocr
+
+|
+
+|made-with-sphinx-doc|
+
+.. |made-with-sphinx-doc| image:: https://img.shields.io/badge/Made%20with-Sphinx-1f425f.svg
+   :target: https://www.sphinx-doc.org/
+
 
 .. image:: https://readthedocs.org/projects/sphinxclasstocr/badge/?version=latest
    :target: https://sphinxclasstocr.readthedocs.io/en/latest/?badge=latest
@@ -16,47 +29,67 @@ sphinxclasstocr
 
 |
 
-**sphinxclasstocr is a fork of this excellent project
-`autoclasstoc <https://github.com/kalekundert/autoclasstoc/>`__.**
+sphinxclasstocr is a fork of this excellent project
+`autoclasstoc <https://github.com/kalekundert/autoclasstoc/>`__.
 
 *Work is in progress to modify autoclasstoc to meet the needs of our projects.*
 
-Check out the CHANGELOG to see what has been done so far to get ready.
+**An installation package does not exist yet!**
 
-**See the unmodified excellent description of autoclasstoc by the author below.**
+Check out the :doc:`CHANGELOG <CHANGELOG>` to see what has been done so far to
+get ready.
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+-----------
+What is it?
+-----------
+
+A `Sphinx <https://www.sphinx-doc.org/en/master/>`__ plugin to add a TOC like
+grouping capability to
+`sphinx.ext.autodoc <https://www.sphinx-doc.org/en/master/usage/extensions/autodoc.html>`__.
+
+--------------
+How does it?
+--------------
 
 
-It's surprisingly difficult to document large Python classes in a way that's
-easy for users to navigate.  Most projects use the ``autodoc`` Sphinx plugin,
-which simply puts the complete documentation for each class member one after
-another.  While this does fully document the class, it doesn't give the user a
-quick way to see everything the class can do.  This makes classes of even
-moderate complexity difficult to navigate.  It also encourages projects to be
-stingy about which class members to include in the documentation (e.g.
-excluding special methods, inherited methods, private methods, and/or
-undocumented methods), to the further detriment of the user.
+sphinx-class-tocr provides a new Restructured Text directive that gives you the
+flexibility to include or exclude class members, depending on the specific
+needs of your project.
 
-What's needed is for each class to have a succinct table of contents (TOC)
-that:
+To help your end-user, you can
 
-- Is organized into sections that will be meaningful to the user.  Different
-  projects and classes may call for different sections, e.g. public/private
-  methods, methods that share a decorator, methods with a common prefix, etc.
+#. Include every method of a class.
 
-- Includes every method of the class (so that the documentation is complete),
-  while still making it easy for the user to get a sense for what the class
-  does and find what they're looking for.
+#. Organise what you want to include into sections.
 
-- Collapses inherited methods.  Complex classes in particular can inherit a lot
-  of methods from their parent classes, and while these methods should be
-  present in the TOC (since they're part of the class), collapsing them makes
-  it easier for the user to grok the functionality provided by the class
-  itself.
+#. Create *sections* or use the defaults included for a quick setup.
 
-``sphinxclasstocr`` provides a new Restructured Text directive that is all of
-these things.  It also works well with ``autodoc`` and ``autogen``, and should
-be easy to incorporate into any existing project.
+#. Collapse inherited methods to improve readability.
 
-See the `complete documentation`__ for more information (including examples).
+It works well with `sphinx.ext.autodoc <https://www.sphinx-doc.org/en/master/usage/extensions/autodoc.html>`__
+and `sphinx-autogen <https://www.sphinx-doc.org/en/master/man/sphinx-autogen.html>`__.
+
+
+-----------
+Why use it?
+-----------
+
+To improve your user's experience, reading your projects automatically
+generated API documentation, compared to using
+`sphinx.ext.autodoc <https://www.sphinx-doc.org/en/master/usage/extensions/autodoc.html>`__
+alone.
+
+
+---------------
+When to use it?
+---------------
+
+sphinx-class-tocr can be incorporated into any new or existing project.
+
+
+
+See the `documentation`__ for more information, how to's and examples.
 
 __ https://sphinxclasstocr.readthedocs.io/en/latest/index.html

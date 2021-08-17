@@ -1,5 +1,5 @@
 .. include:: ../README.rst
-  :end-before: See the `complete documentation`__
+  :end-before: See the `documentation`__
 
 .. toctree::
   :caption: Getting started
