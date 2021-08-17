@@ -1,4 +1,10 @@
+
+.. image:: _static/imgs/logo/logo-sphinxclasstocr-1280x640.png
+   :alt: sphinxclasstocr
+
+
 .. include:: ../README.rst
+  :start-after:  :alt: sphinxclasstocr
   :end-before: See the `documentation`__
 
 .. toctree::
