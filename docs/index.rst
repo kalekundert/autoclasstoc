@@ -1,3 +1,6 @@
+=====================
+**sphinx-class-tocr**
+=====================
 
 .. image:: _static/imgs/logo/logo-sphinxclasstocr-1280x640.png
    :alt: sphinxclasstocr

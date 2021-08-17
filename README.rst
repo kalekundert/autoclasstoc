@@ -49,6 +49,18 @@ A `Sphinx <https://www.sphinx-doc.org/en/master/>`__ plugin to add a TOC like
 grouping capability to
 `sphinx.ext.autodoc <https://www.sphinx-doc.org/en/master/usage/extensions/autodoc.html>`__.
 
+
+
+-----------
+Why use it?
+-----------
+
+To improve your user's experience, reading your projects automatically
+generated API documentation, compared to using
+`sphinx.ext.autodoc <https://www.sphinx-doc.org/en/master/usage/extensions/autodoc.html>`__
+alone.
+
+
 --------------
 How does it?
 --------------
@@ -70,16 +82,6 @@ To help your end-user, you can
 
 It works well with `sphinx.ext.autodoc <https://www.sphinx-doc.org/en/master/usage/extensions/autodoc.html>`__
 and `sphinx-autogen <https://www.sphinx-doc.org/en/master/man/sphinx-autogen.html>`__.
-
-
------------
-Why use it?
------------
-
-To improve your user's experience, reading your projects automatically
-generated API documentation, compared to using
-`sphinx.ext.autodoc <https://www.sphinx-doc.org/en/master/usage/extensions/autodoc.html>`__
-alone.
 
 
 ---------------
