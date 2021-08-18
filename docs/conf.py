@@ -21,12 +21,11 @@ extensions = [
     "sphinx.ext.viewcode",
     "sphinx.ext.intersphinx",
     "sphinx.ext.napoleon",
-    "sphinx_rtd_theme",
     "myst_parser",
     "sphinx_copybutton",
 ]
 
-default_role = "any"
+# default_role = "any"
 exclude_patterns = ["_build"]
 html_static_path = ["_static"]
 html_theme = "furo"
