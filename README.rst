@@ -99,3 +99,8 @@ sphinx-class-tocr can be incorporated into any new or existing project.
 See the `documentation`__ for more information, how to's and examples.
 
 __ https://sphinxclasstocr.readthedocs.io/en/latest/index.html
+
+
+.. image:: https://api.codacy.com/project/badge/Grade/5fd017190b9e4a6ca9381474c0342ef6
+   :alt: Codacy Badge
+   :target: https://app.codacy.com/gh/imAsparky/sphinxclasstocr?utm_source=github.com&utm_medium=referral&utm_content=imAsparky/sphinxclasstocr&utm_campaign=Badge_Grade_Settings
