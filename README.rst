@@ -24,8 +24,12 @@
    :alt: pre-commit
 
 .. image:: https://img.shields.io/badge/code%20style-black-000000.svg
-    :target: https://github.com/ambv/black
-    :alt: Code style: black
+   :target: https://github.com/ambv/black
+   :alt: Code style: black
+
+.. image:: https://app.codacy.com/project/badge/Grade/f4388ecc9b5a480183897378e1a840ce
+   :target: https://www.codacy.com/gh/imAsparky/sphinxclasstocr/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=imAsparky/sphinxclasstocr&amp;utm_campaign=Badge_Grade
+   :alt: Code Quality
 
 |
 
