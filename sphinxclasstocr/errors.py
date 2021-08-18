@@ -2,10 +2,12 @@
 
 
 class SphinxClassTocrError(Exception):
+
+    """Base exception for sphinxclasstocr"""
+
     pass
 
 
 class ConfigError(SphinxClassTocrError):
-    """Raise a configuration error for :rst:dir:`sphinxclasstocr`."""
 
-    pass
+    """Raise a configuration error for :rst:dir:`sphinxclasstocr`."""

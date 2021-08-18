@@ -2,18 +2,18 @@
 
 from sphinx.util.docutils import SphinxDirective
 
-from . import __version__, utils
-from .errors import ConfigError
+from . import ConfigError, __version__, utils
 
 
 class SphinxClassTocr(SphinxDirective):
-    """
-    Generate a succinct TOC for automatically documented classes.
+
+    """Group Python Class items logically in documentation using Sphinx.
 
     This class implements the :rst:dir:`sphinxclasstocr` directive.  More
     specifically, it implements the `run` function as expected by docutils.
     However, most of the actual logic is delegated to other classes and
     functions.
+
     """
 
     optional_arguments = 1
@@ -23,9 +23,7 @@ class SphinxClassTocr(SphinxDirective):
     }
 
     def run(self):
-        """
-        Create the nodes that will represent the class TOC.
-        """
+        """Create the nodes that will represent the class TOC."""
         try:
             qual_name = self.arguments[0] if self.arguments else None
             mod_name, cls_name = utils.pick_class(qual_name, self.env)
@@ -41,9 +39,7 @@ class SphinxClassTocr(SphinxDirective):
 
 
 def load_static_assets(app, config):
-    """
-    Add some rules for the spacing around <details> elements in class TOCs.
-    """
+    """Add some rules for the spacing around <details> elements in class TOCs."""
     from pathlib import Path
 
     static_dir = Path(__file__).parent / "_static"

@@ -1,9 +1,7 @@
 #!/usr/bin/env python3
 
-"""\
-
-The :mod:`sphinxclasstocr` module defines two new *docutils* nodes, which make
-it possible to create collapsible content in HTML.
+"""The :mod:`sphinxclasstocr` module defines two new *docutils* nodes, which
+make it possible to create collapsible content in HTML.
 
 """
 
@@ -12,8 +10,7 @@ from docutils.nodes import Element, General, TextElement
 
 class details(General, Element):
 
-    """\
-    A node that can be expanded or collapsed by the user.
+    """A node that can be expanded or collapsed by the user.
 
     This is rendered as a ``<details>`` element in HTML.  It is not currently
     compatible with non-HTML output formats.
@@ -21,7 +18,6 @@ class details(General, Element):
     """
 
     def __init__(self, open_by_default=False):
-
         """Init open_by_default"""
 
         super().__init__()
@@ -42,11 +38,12 @@ class details(General, Element):
 
 
 class details_summary(General, TextElement):
-    """
-    The summary text to display when a `details` node is collapsed.
+
+    """The summary text to display when a `details` node is collapsed.
 
     This is rendered as a ``<summary>`` element in HTML.  It is not currently
     compatible with non-HTML output formats.
+
     """
 
     def visit_html(visitor, node):
@@ -59,9 +56,7 @@ class details_summary(General, TextElement):
 
 
 def setup(app):
-    """
-    Configure Sphinx to use the `details` and `details_summary` nodes.
-    """
+    """Configure Sphinx to use the `details` and `details_summary` nodes."""
     app.add_node(
         details,
         html=details.html,

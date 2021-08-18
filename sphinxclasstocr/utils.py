@@ -9,8 +9,8 @@ from .errors import ConfigError
 
 
 def pick_class(qual_name, env):
-    """
-    Figure out which class to make the TOC for.
+
+    """Figure out which class to make the TOC for.
 
     We can either be given this information as an argument, or we can try to
     figure it out from the context (e.g. the :rst:dir:`sphinxclasstocr` or
@@ -40,17 +40,14 @@ def pick_class(qual_name, env):
 
 
 def load_class(mod_name, cls_name):
-    """
-    Import the given class from the given module.
-    """
+    """Import the given class from the given module."""
     mod = import_module(mod_name)
     cls = getattr(mod, cls_name)
     return mod, cls
 
 
 def pick_sections(sections, exclude=None):
-    """
-    Determine which sections to include in the class TOC.
+    """Determine which sections to include in the class TOC.
 
     The return value will be a list in the same order as *sections*, but with
     any sections from *exclude* removed.  Both arguments can specify sections
@@ -78,9 +75,7 @@ def pick_sections(sections, exclude=None):
 
 
 def make_toc(state, cls, sections):
-    """
-    Create the class TOC.
-    """
+    """Create the class TOC."""
     n = []
     for section_cls in sections:
         section = section_cls(state, cls)
@@ -92,24 +87,20 @@ def make_toc(state, cls, sections):
 
 
 def make_container():
-    """
-    Make a container node to identify elements associated with the
+    """Make a container node to identify elements associated with the
     :rst:dir:`sphinxclasstocr` directive.
     """
     return _nodes.container(classes=["sphinxclasstocr"])
 
 
 def make_rubric(title):
-    """
-    Make an informal header.
-    """
+    """Make an informal header."""
     return _nodes.rubric(title, title)
 
 
 def make_inherited_details(state, parent, open_by_default=False):
-    """
-    Make a collapsible node to contain information about inherited attributes.
-    """
+    """Make a collapsible node to contain information about inherited
+    attributes."""
     from .nodes import details, details_summary
 
     s = details_summary()
@@ -123,11 +114,11 @@ def make_inherited_details(state, parent, open_by_default=False):
 
 
 def make_links(state, attrs):
-    """
-    Make links to the given class attributes.
+    """Make links to the given class attributes.
 
     More specifically, the links are made using the :rst:dir:`autosummary`
     directive.
+
     """
     assert attrs
     return nodes_from_rst(
@@ -162,8 +153,7 @@ def filter_attrs(attrs, predicate):
 
 
 def nodes_from_rst(state, rst):
-    """
-    Create nodes from the given restructured text.
+    """Create nodes from the given restructured text.
 
     The *rst* argument can either be any of the following types:
 
@@ -186,8 +176,7 @@ def nodes_from_rst(state, rst):
 
 
 def strip_p(nodes):
-    """
-    Remove any top-level paragraph nodes.
+    """Remove any top-level paragraph nodes.
 
     Parsing a simple string like "Hello world" with `nodes_from_rst` will
     return text wrapped in a paragraph.  If this paragraph is not desired (e.g.
@@ -200,7 +189,5 @@ def strip_p(nodes):
 
 
 def comma_separated_list(x):
-    """
-    Parse a restructured text option as a comma-separated list of strings.
-    """
+    """Parse a restructured text option as a comma-separated list of strings."""
     return x.split(",")
