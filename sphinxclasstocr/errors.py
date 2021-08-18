@@ -6,8 +6,6 @@ class SphinxClassTocrError(Exception):
 
 
 class ConfigError(SphinxClassTocrError):
-    """
-    Indicate an configuration error affecting :rst:dir:`sphinxclasstocr`.
-    """
+    """Raise a configuration error for :rst:dir:`sphinxclasstocr`."""
 
     pass
