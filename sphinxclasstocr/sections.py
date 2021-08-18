@@ -9,8 +9,8 @@ SECTIONS = {}
 
 
 class Section:
-
-    """Format a specific section in a class TOC, e.g. "Public Methods".
+    """
+    Format a specific section in a class TOC, e.g. "Public Methods".
 
     The purpose of this class is to make it easy to customize the sections that
     make up the class TOC.  For example, you might want an "Event Handler"
@@ -48,8 +48,7 @@ class Section:
     """
 
     def __init__(self, state, cls):
-        """
-        Create a section for a specific class.
+        """Create a section for a specific class.
 
         Arguments:
             state (docutils.parsers.rst.states.RSTState): The state object

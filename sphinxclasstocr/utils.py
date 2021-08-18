@@ -9,7 +9,6 @@ from .errors import ConfigError
 
 
 def pick_class(qual_name, env):
-
     """Figure out which class to make the TOC for.
 
     We can either be given this information as an argument, or we can try to
@@ -87,7 +86,8 @@ def make_toc(state, cls, sections):
 
 
 def make_container():
-    """Make a container node to identify elements associated with the
+    """
+    Make a container node to identify elements associated with the
     :rst:dir:`sphinxclasstocr` directive.
     """
     return _nodes.container(classes=["sphinxclasstocr"])
@@ -99,8 +99,10 @@ def make_rubric(title):
 
 
 def make_inherited_details(state, parent, open_by_default=False):
-    """Make a collapsible node to contain information about inherited
-    attributes."""
+    """
+    Make a collapsible node to contain information about inherited
+    attributes.
+    """
     from .nodes import details, details_summary
 
     s = details_summary()
@@ -118,7 +120,6 @@ def make_links(state, attrs):
 
     More specifically, the links are made using the :rst:dir:`autosummary`
     directive.
-
     """
     assert attrs
     return nodes_from_rst(

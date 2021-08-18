@@ -6,14 +6,12 @@ from . import ConfigError, __version__, utils
 
 
 class SphinxClassTocr(SphinxDirective):
-
     """Group Python Class items logically in documentation using Sphinx.
 
     This class implements the :rst:dir:`sphinxclasstocr` directive.  More
     specifically, it implements the `run` function as expected by docutils.
     However, most of the actual logic is delegated to other classes and
     functions.
-
     """
 
     optional_arguments = 1
