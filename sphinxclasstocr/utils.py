@@ -60,8 +60,6 @@ def pick_sections(sections, exclude=None):
     def _section_from_anything(x):
         from .sections import SECTIONS, Section
 
-        type(x)
-
         if isinstance(x, str):
             try:
                 return SECTIONS[x]
@@ -72,7 +70,7 @@ def pick_sections(sections, exclude=None):
             return x
 
         raise ConfigError(
-            f"Must be type(sphinxclasstocr.Section), {str(type(x))} was supplied."
+            f"Must be type(sphinxclasstocr.Section), type({str(type(x))}) was supplied"
         )
 
     sections = [_section_from_anything(x) for x in sections]
