@@ -14,10 +14,12 @@
 .. |made-with-sphinx-doc| image:: https://img.shields.io/badge/Made%20with-Sphinx-1f425f.svg
    :target: https://www.sphinx-doc.org/
 
+.. image:: https://coveralls.io/repos/github/imAsparky/sphinxclasstocr/badge.svg?branch=main
+   :target: https://coveralls.io/github/imAsparky/sphinxclasstocr?branch=main
 
-.. image:: https://readthedocs.org/projects/sphinxclasstocr/badge/?version=latest
-   :target: https://sphinxclasstocr.readthedocs.io/en/latest/?badge=latest
-   :alt: Documentation Status
+.. image:: https://app.codacy.com/project/badge/Grade/f4388ecc9b5a480183897378e1a840ce
+   :target: https://www.codacy.com/gh/imAsparky/sphinxclasstocr/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=imAsparky/sphinxclasstocr&amp;utm_campaign=Badge_Grade
+   :alt: Code Quality
 
 .. image:: https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit&logoColor=white
    :target: https://github.com/pre-commit/pre-commit
@@ -27,9 +29,9 @@
    :target: https://github.com/ambv/black
    :alt: Code style: black
 
-.. image:: https://app.codacy.com/project/badge/Grade/f4388ecc9b5a480183897378e1a840ce
-   :target: https://www.codacy.com/gh/imAsparky/sphinxclasstocr/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=imAsparky/sphinxclasstocr&amp;utm_campaign=Badge_Grade
-   :alt: Code Quality
+.. image:: https://readthedocs.org/projects/sphinxclasstocr/badge/?version=latest
+   :target: https://sphinxclasstocr.readthedocs.io/en/latest/?badge=latest
+   :alt: Documentation Status
 
 |
 
