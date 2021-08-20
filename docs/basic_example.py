@@ -1,7 +1,11 @@
+"""A class used for showing examples"""
+
+
 class Parent:
+    """Example Class"""
+
     def inherited_method(self):
         """Duis lacus metus, euismod ut viverra sit amet, pulvinar sed urna."""
-        pass
 
 
 class Example(Parent):
@@ -16,7 +20,6 @@ class Example(Parent):
 
     def __init__(self):
         """Vivamus sed enim quis dui pulvinar pharetra."""
-        pass
 
     def documented_method(self):
         """
@@ -27,11 +30,9 @@ class Example(Parent):
         blandit tempus. Nam lectus justo, adipiscing vitae ultricies egestas,
         porta nec diam. Aenean ac neque tortor.
         """
-        pass
 
     def undocumented_method(self):
         pass
 
     def _private_method(self):
         """Cras tempus lacus nec leo ultrices suscipit."""
-        pass

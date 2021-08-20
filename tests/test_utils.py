@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
+"""sphinxclasstocr.utils Test Suite"""
 
 import pytest
-from _pytest.fixtures import fixture
 
 from sphinxclasstocr import utils
 from sphinxclasstocr.errors import ConfigError
@@ -9,11 +9,15 @@ from sphinxclasstocr.sections import Section
 
 
 class SphinxClassTocr1(Section):
+    """First test class"""
+
     key = "dummy-section-1"
     title = "Dummy Section 1:"
 
 
 class SphinxClassTocr2(Section):
+    """Second test classs"""
+
     key = "dummy-section-2"
     title = "Dummy Section 2:"
 

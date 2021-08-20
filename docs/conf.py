@@ -1,7 +1,7 @@
+"""Sphinx Configuration"""
+
 import os
 import sys
-
-# import sphinxclasstocr
 
 sys.path.append(os.path.dirname(__file__))
 sys.path.append(os.path.abspath(".."))
@@ -79,4 +79,5 @@ autosummary_generate = True
 
 
 def setup(app):
+    """Add sphinxclasstocr css file to _static"""
     app.add_css_file("css/sphinxclasstocr.css")

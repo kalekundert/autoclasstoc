@@ -2,13 +2,17 @@
 
 """A group of functions to build sphinxclastocr groups.
 """
+
 import inspect
 from importlib import import_module
 
 from docutils import nodes as _nodes
 from docutils.statemachine import StringList, string2lines
+from sphinx.util.docstrings import extract_metadata
 
 from .errors import ConfigError
+from .nodes import Details, DetailsSummary
+from .sections import SECTIONS, Section
 
 
 def pick_class(qual_name, env):
@@ -57,37 +61,39 @@ def pick_sections(sections, exclude=None):
     classes.  All names will be converted to classes in the return value.
     """
 
-    def _section_from_anything(x):
-        from .sections import SECTIONS, Section
+    def _section_from_anything(anything):
+        # from .sections import SECTIONS, Section
 
-        if isinstance(x, str):
+        if isinstance(anything, str):
             try:
-                return SECTIONS[x]
-            except KeyError:
-                raise ConfigError(f"no sphinxclasstocr section with key {x!r}")
+                return SECTIONS[anything]
+            except KeyError as key_error:
+                raise ConfigError(
+                    f"no sphinxclasstocr section with key {anything!r}"
+                ) from key_error
 
-        if inspect.isclass(x) and issubclass(x, Section):
-            return x
+        if inspect.isclass(anything) and issubclass(anything, Section):
+            return anything
 
         raise ConfigError(
-            f"Must be type(sphinxclasstocr.Section), type({str(type(x))}) was supplied"
+            f"Must be type(sphinxclasstocr.Section), type({str(type(anything))}) was supplied"
         )
 
-    sections = [_section_from_anything(x) for x in sections]
-    exclude = {_section_from_anything(x) for x in exclude or []}
+    sections = [_section_from_anything(anything) for anything in sections]
+    exclude = {_section_from_anything(anything) for anything in exclude or []}
     return [x for x in sections if x not in exclude]
 
 
 def make_toc(state, cls, sections):
     """Create the class TOC."""
-    n = []
+    _toc = []
     for section_cls in sections:
         section = section_cls(state, cls)
         section.check()
-        n += section.format()
+        _toc += section.format()
 
-    n.append(_nodes.transition())
-    return n
+    _toc.append(_nodes.transition())
+    return _toc
 
 
 def make_container():
@@ -108,16 +114,15 @@ def make_inherited_details(state, parent, open_by_default=False):
     Make a collapsible node to contain information about inherited
     attributes.
     """
-    from .nodes import details, details_summary
 
-    s = details_summary()
-    s += strip_p(
+    _details_summary = DetailsSummary()
+    _details_summary += strip_p(
         nodes_from_rst(state, f"Inherited from :py:class:`{parent.__qualname__}`")
     )
 
-    d = details(open_by_default)
-    d += s
-    return d
+    _details = Details(open_by_default)
+    _details += _details_summary
+    return _details
 
 
 def make_links(state, attrs):
@@ -149,12 +154,11 @@ def filter_attrs(attrs, predicate):
     """
     Remove attributes for which the given predicate function returns False.
     """
-    from inspect import getdoc
-
-    from sphinx.util.docstrings import extract_metadata
 
     return {
-        k: v for k, v in attrs.items() if predicate(k, v, extract_metadata(getdoc(v)))
+        k: v
+        for k, v in attrs.items()
+        if predicate(k, v, extract_metadata(inspect.getdoc(v)))
     }
 
 
@@ -194,6 +198,6 @@ def strip_p(nodes):
     return nodes
 
 
-def comma_separated_list(x):
+def comma_separated_list(parse_me):
     """Parse a restructured text option as a comma-separated list of strings."""
-    return x.split(",")
+    return parse_me.split(",")

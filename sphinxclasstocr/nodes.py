@@ -8,7 +8,7 @@ make it possible to create collapsible content in HTML.
 from docutils.nodes import Element, General, TextElement
 
 
-class details(General, Element):
+class Details(General, Element):
     """A node that can be expanded or collapsed by the user.
 
     This is rendered as a ``<details>`` element in HTML.  It is not currently
@@ -21,6 +21,7 @@ class details(General, Element):
         self["open"] = open_by_default
 
     def visit_html(visitor, node):
+        """Expand or collapse"""
         atts = {"class": " ".join(node["classes"])}
         parts = ["details"] + [f'{k}="{v}"' for k, v in atts.items() if v]
         if node["open"]:
@@ -29,12 +30,13 @@ class details(General, Element):
         visitor.body.append(f"<{' '.join(parts)}>")
 
     def depart_html(visitor, node):
+        """Add closing details tag"""
         visitor.body.append("</details>")
 
     html = visit_html, depart_html
 
 
-class details_summary(General, TextElement):
+class DetailsSummary(General, TextElement):
     """The summary text to display when a `details` node is collapsed.
 
     This is rendered as a ``<summary>`` element in HTML.  It is not currently
@@ -42,9 +44,11 @@ class details_summary(General, TextElement):
     """
 
     def visit_html(visitor, node):
+        """Visit HTML append summary tag"""
         visitor.body.append("<summary>")
 
     def depart_html(visitor, node):
+        """Visit HTML append summary closing tag"""
         visitor.body.append("</summary>")
 
     html = visit_html, depart_html
@@ -53,10 +57,10 @@ class details_summary(General, TextElement):
 def setup(app):
     """Configure Sphinx to use the `details` and `details_summary` nodes."""
     app.add_node(
-        details,
-        html=details.html,
+        Details,
+        html=Details.html,
     )
     app.add_node(
-        details_summary,
-        html=details_summary.html,
+        DetailsSummary,
+        html=DetailsSummary.html,
     )

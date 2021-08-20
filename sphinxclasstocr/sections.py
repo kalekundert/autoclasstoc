@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+"""sphinxclasstocr Sections building tools"""
 
 import inspect
 
@@ -30,7 +31,7 @@ class Section:
     key = None
     """
     A string that can be used to refer to this section, e.g. in ``conf.py``
-    settings such as :confval:`autoclasstoc_sections` and
+    settings such as :confval:`sphinxclasstocr_sections` and
     :rst:dir:`sphinxclasstocr` options such as ``:sections:`` and
     ``:exclude-sections:``.
     """
@@ -109,9 +110,9 @@ class Section:
             if not attrs:
                 continue
 
-            d = self._make_inherited_details(parent)
-            d += self._make_links(attrs)
-            wrapper += d
+            _details = self._make_inherited_details(parent)
+            _details += self._make_links(attrs)
+            wrapper += _details
 
         return [wrapper]
 

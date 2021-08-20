@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+"""Errors for sphinxclasstocr"""
 
 
 class SphinxClassTocrError(Exception):

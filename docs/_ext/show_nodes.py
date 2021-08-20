@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+"""Show the nodes debugging tool to pretty print nodes"""
 
 from docutils import nodes
 from docutils.parsers.rst import Directive
@@ -22,6 +23,7 @@ class ShowNodesDirective(Directive):
     has_content = True
 
     def run(self):
+        """Run node printing"""
         wrapper = nodes.paragraph()
         self.state.nested_parse(self.content, self.content_offset, wrapper)
 
@@ -32,4 +34,5 @@ class ShowNodesDirective(Directive):
 
 
 def setup(app):
+    """Add directive"""
     app.add_directive("shownodes", ShowNodesDirective)

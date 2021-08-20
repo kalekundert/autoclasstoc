@@ -1,8 +1,11 @@
 #!/usr/bin/env python3
+"""Plugin to Sphinx"""
+
+from pathlib import Path
 
 from sphinx.util.docutils import SphinxDirective
 
-from . import ConfigError, __version__, utils
+from . import ConfigError, __version__, nodes, utils
 
 
 class SphinxClassTocr(SphinxDirective):
@@ -38,7 +41,6 @@ class SphinxClassTocr(SphinxDirective):
 
 def load_static_assets(app, config):
     """Add some rules for the spacing around <details> elements in class TOCs."""
-    from pathlib import Path
 
     static_dir = Path(__file__).parent / "_static"
     static_dir = str(static_dir.resolve())
@@ -50,7 +52,7 @@ def load_static_assets(app, config):
 
 
 def setup(app):
-    from . import nodes
+    """Setup sphinxclasstocr"""
 
     nodes.setup(app)
 
