@@ -6,17 +6,18 @@ Changes unreleased.
 
 ### Chore
 
+- codequal:
+  - pre-commit pylint error fixes #26 ([8f3b013](https://github.com/imAsparky/sphinxclasstocr/commit/8f3b013b665d941304b61e4d469b3af082ef6cf5))
+  - Codacy suggestions #26 ([4cd7e77](https://github.com/imAsparky/sphinxclasstocr/commit/4cd7e77a7f64acf2b110ac35bd292f57f837fb90))
+  - Codacy suggestions #26 ([1a52acb](https://github.com/imAsparky/sphinxclasstocr/commit/1a52acbcb4b7d2ad5c3e95c5958c8f53f9efcafe))
+  - Codacy suggestions #26 ([37f18b7](https://github.com/imAsparky/sphinxclasstocr/commit/37f18b7755582b797eca6881466f0e4c25db6583))
+  - Codacy suggestions #26 ([019a07b](https://github.com/imAsparky/sphinxclasstocr/commit/019a07b4fb8be9eb38ce3e6c3a2a40c46a660f12))
+
 - docs:
   - Fix local html build errors #29 ([009b826](https://github.com/imAsparky/sphinxclasstocr/commit/009b826179a1e013d54b085928e220135e904de0))
   - sphinx.rst auto -> sphinxclasstocr #6 ([4c3ff4c](https://github.com/imAsparky/sphinxclasstocr/commit/4c3ff4c968ecdc74e03ddb6d1f507eafee81861e))
   - pythonx.rst update to sphinxclasstocr #6 ([97a36c2](https://github.com/imAsparky/sphinxclasstocr/commit/97a36c2682e6a853e3e74df0dbf6042b24de502e))
   - autoclass.css -> sphinxtocr.css #6 ([1f5443c](https://github.com/imAsparky/sphinxclasstocr/commit/1f5443c90d93705a3be18b3f1cbd705f865725dd))
-
-- codequal:
-  - Codacy suggestions #26 ([4cd7e77](https://github.com/imAsparky/sphinxclasstocr/commit/4cd7e77a7f64acf2b110ac35bd292f57f837fb90))
-  - Codacy suggestions #26 ([1a52acb](https://github.com/imAsparky/sphinxclasstocr/commit/1a52acbcb4b7d2ad5c3e95c5958c8f53f9efcafe))
-  - Codacy suggestions #26 ([37f18b7](https://github.com/imAsparky/sphinxclasstocr/commit/37f18b7755582b797eca6881466f0e4c25db6583))
-  - Codacy suggestions #26 ([019a07b](https://github.com/imAsparky/sphinxclasstocr/commit/019a07b4fb8be9eb38ce3e6c3a2a40c46a660f12))
 
 ### Feature
 
@@ -24,6 +25,9 @@ Changes unreleased.
   - Added code example copy button #23 ([4ed490e](https://github.com/imAsparky/sphinxclasstocr/commit/4ed490eac112a3c06f2c6eda98fefcab3b081376))
 
 ### Bug Fixes
+
+- utils:
+  - Fix ConfigError "f" string #31 ([d5a1eea](https://github.com/imAsparky/sphinxclasstocr/commit/d5a1eeafd988bf195c0a75850bd3cd01cc258a6e))
 
 - docs:
   - requirements for build pinned #20 ([c89209d](https://github.com/imAsparky/sphinxclasstocr/commit/c89209d70168baaa35d9a41e4c402acfed8c1eac))
@@ -41,6 +45,11 @@ Changes unreleased.
 
 - typo:
   - Index.rst TOC indentation error fixed ([53daad7](https://github.com/imAsparky/sphinxclasstocr/commit/53daad7d78bf1baa3c059ae9edb571fe311a6b1f))
+
+### Tests
+
+- utils:
+  - Added test paramaters #28 ([369dc2e](https://github.com/imAsparky/sphinxclasstocr/commit/369dc2e7ac7ea9f309a03ff858f6d37bbda5bdab))
 
 ## [v0.0.1](https://github.com/imAsparky/sphinxclasstocr/releases/tag/v0.0.1) - 2021-08-16 03:25:57
 
