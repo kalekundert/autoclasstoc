@@ -1,16 +1,19 @@
 #!/usr/bin/env python3
 
 import pytest
+from _pytest.fixtures import fixture
 
-import sphinxclasstocr
+from sphinxclasstocr import utils
+from sphinxclasstocr.errors import ConfigError
+from sphinxclasstocr.sections import Section
 
 
-class SphinxClassTocr1(sphinxclasstocr.Section):
+class SphinxClassTocr1(Section):
     key = "dummy-section-1"
     title = "Dummy Section 1:"
 
 
-class SphinxClassTocr2(sphinxclasstocr.Section):
+class SphinxClassTocr2(Section):
     key = "dummy-section-2"
     title = "Dummy Section 2:"
 
@@ -81,16 +84,22 @@ class SphinxClassTocr2(sphinxclasstocr.Section):
     ],
 )
 def test_pick_sections(given, exclude, expected):
-    assert sphinxclasstocr.utils.pick_sections(given, exclude) == expected
+    assert utils.pick_sections(given, exclude) == expected
 
 
 @pytest.mark.parametrize(
     "given, exclude, err",
     [
         (["unknown-section"], [], "unknown-section"),
+        (
+            [3],
+            ["unknown-section"],
+            "Must be type(sphinxclasstocr.Section), type(<class 'int'>) was supplied",
+        ),
         ([], ["unknown-section"], "unknown-section"),
     ],
 )
 def test_pick_sections_err(given, exclude, err):
-    with pytest.raises(sphinxclasstocr.ConfigError, match=err):
-        sphinxclasstocr.utils.pick_sections(given, exclude)
+    with pytest.raises(ConfigError) as err_msg:
+        utils.pick_sections(given, exclude)
+    assert err in str(err_msg.value)
