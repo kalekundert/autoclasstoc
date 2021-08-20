@@ -1,5 +1,8 @@
 #!/usr/bin/env python3
 
+"""A group of functions to build sphinxclastocr groups.
+"""
+import inspect
 from importlib import import_module
 
 from docutils import nodes as _nodes
@@ -57,16 +60,20 @@ def pick_sections(sections, exclude=None):
     def _section_from_anything(x):
         from .sections import SECTIONS, Section
 
+        type(x)
+
         if isinstance(x, str):
             try:
                 return SECTIONS[x]
             except KeyError:
                 raise ConfigError(f"no sphinxclasstocr section with key {x!r}")
 
-        if issubclass(x, Section):
+        if inspect.isclass(x) and issubclass(x, Section):
             return x
 
-        raise ConfigError("cannot interpret {x!r} as a section")
+        raise ConfigError(
+            f"Must be type(sphinxclasstocr.Section), {str(type(x))} was supplied."
+        )
 
     sections = [_section_from_anything(x) for x in sections]
     exclude = {_section_from_anything(x) for x in exclude or []}
