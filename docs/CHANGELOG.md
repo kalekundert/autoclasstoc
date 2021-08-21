@@ -21,10 +21,17 @@ Changes unreleased.
 
 ### Feature
 
+- test:
+  - Include Coveralls in CD build #32 ([eaf4c56](https://github.com/imAsparky/sphinxclasstocr/commit/eaf4c56994b30585d86a35cd148d4f321de6f6ab))
+  - Coverage by Coveralls added #32 ([f035dc5](https://github.com/imAsparky/sphinxclasstocr/commit/f035dc5077e01a52ec80ac9e53f14809eba0eb24))
+
 - docs:
   - Added code example copy button #23 ([4ed490e](https://github.com/imAsparky/sphinxclasstocr/commit/4ed490eac112a3c06f2c6eda98fefcab3b081376))
 
 ### Bug Fixes
+
+- test:
+  - coveralls-python added to CD build  #32 ([623b029](https://github.com/imAsparky/sphinxclasstocr/commit/623b029fd2eb270dd054c6fd30fbce47a5b738dd))
 
 - utils:
   - Fix ConfigError "f" string #31 ([d5a1eea](https://github.com/imAsparky/sphinxclasstocr/commit/d5a1eeafd988bf195c0a75850bd3cd01cc258a6e))
