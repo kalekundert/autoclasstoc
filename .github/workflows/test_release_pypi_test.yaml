@@ -3,8 +3,8 @@
 name: Test and Release PyPi Test
 
 on:
-    push:
-        branches: [main]
+    # push:
+    #     branches: [main]
 
     workflow_dispatch:
 
@@ -29,27 +29,33 @@ jobs:
             - name: test with tox
               run: tox
 
-            - name: Build and publish to pypi
-              uses: JRubics/poetry-publish@v1.8
-              with:
-                  python_version: "3.8"
-                  poetry_version: "==1.1.8" # (PIP version specifier syntax)
-                  pypi_token: ${{ secrets.TEST_PYPI_TOKEN}}
-                  # build_format: "sdist"
-                  repository_name: "testpypi"
-                  repository_url: "https://test.pypi.org/legacy/"
-                  ignore_dev_requirements:
-                      "yes"
+        release:
+            name: Release to PyPI
+            runs-on: ubuntu-latest
+            if: github.ref == 'refs/heads/master'
+            needs: [test]
 
-                      # - name: Build wheels and source tarball
-            #   run: |
-            #       poetry version $(poetry version --short)-dev.$GITHUB_RUN_NUMBER
-            #       poetry version --short
-            #       poetry build
-            # - name: publish to Test PyPI
-            #   uses: pypa/gh-action-pypi-publish@master
-            #   with:
-            #       user: __token__
-            #       password: ${{ secrets.TEST_PYPI_TOKEN}}
-            #       repository_url: https://test.pypi.org/legacy/
-            #       skip_existing: true
+            steps:
+                - uses: actions/checkout@v2
+                  with:
+                      # Make sure the whole repository history is present, so that
+                      # python-semantic-release can decide if a new release is needed.
+                      fetch-depth: 0
+
+                - uses: relekang/python-semantic-release@master
+                  with:
+                      github_token: ${{ secrets.GITHUB_TOKEN }}
+                      pypi_token: ${{ secrets.TEST_PYPI_TOKEN }}
+
+                # - name: Build wheels and source tarball
+                #   run: |
+                #       poetry version $(poetry version --short)-dev.$GITHUB_RUN_NUMBER
+                #       poetry version --short
+                #       poetry build
+                # - name: publish to Test PyPI
+                #   uses: pypa/gh-action-pypi-publish@master
+                #   with:
+                #       user: __token__
+                #       password: ${{ secrets.TEST_PYPI_TOKEN}}
+                #       repository_url: https://test.pypi.org/legacy/
+                #       skip_existing: true
