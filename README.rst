@@ -42,7 +42,7 @@ sphinxclasstocr is a fork of this excellent project
 
 **An installation package does not exist yet!**
 
-Check out the :doc:`CHANGELOG <CHANGELOG>` to see what has been done so far to
+Check out the CHANGELOG to see what has been done so far to
 get ready.
 
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
