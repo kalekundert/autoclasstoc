@@ -1,21 +1,17 @@
-[build-system]
-requires = ['flit_core >=3.2,<4']
-build-backend = 'flit_core.buildapi'
-
-[project]
+[tool.poetry]
 name = 'sphinxclasstocr'
-# summary ='Group Python Class items logically in documentation using Sphinx.'
-
-maintainers = [
-  {name = 'Mark Sevelj', email = 'marksdaspark@gmail.com'}
+description ='Group Python Class items logically in documentation using Sphinx.'
+version = "0.1.0"
+authors = ["Mark Sevelj <mark.sevelj@dunwright.com.au>"]
+maintainers = ["Mark Sevelj <mark.sevelj@dunwright.com.au>"]
+license = "MIT"
+readme = "README.rst"
+homepage  = "https://github.com/imAsparky/sphinxclasstocr"
+documentation = "https://sphinxclasstocr.readthedocs.io/en/latest/"
+keywords = ['sphinx tools',
+            'sphinx TOC',
+            'documentation tools',
 ]
-
-authors = [
-    {name = 'Mark Sevelj', email = 'marksdaspark@gmail.com'},
-    {name = 'Kale Kundert', email = 'kale@thekunderts.net'}
-]
-readme = 'README.rst'
-
 classifiers = [
     'Development Status :: 2 - Pre-Alpha',
     'Framework :: Sphinx :: Extension',
@@ -26,34 +22,110 @@ classifiers = [
     'Topic :: Documentation :: Sphinx',
 ]
 
-dynamic = ['version', 'description']
-
-requires-python = '>=3.6'
-
-dependencies = [
-    'sphinx>=3.1',
-    'docutils',
+include = [
+  '{{cookiecutter.project_slug}}/**/*',
+  'cookiecutter.json',
 ]
 
-keywords = ['sphinx tools',
-            'sphinx TOC',
-            'documentation tools',
-]
-
-[project.urls]
-
-Documentation = 'https://sphinxclasstocr.readthedocs.io/en/latest/'
-Source = 'https://github.com/imAsparky/sphinxclasstocr'
-Bug-Tracker = 'https://github.com/imAsparky/sphinxclasstocr/issues'
+[tool.poetry.dependencies]
+python = ">=3.6.2,<4.0"
+furo = "^2021.8.17-beta.43"
+myst-parser = "^0.15.1"
+Sphinx = "^4.1.2"
+sphinx-copybutton = "^0.4.0"
 
 
-[project.optional-dependencies]
-testing = [
-    'pytest >=6',
-    'pytest-cov >=2',
-    'coverage==5.5',
-    'coveralls==3.2.0',
-]
-documenting = [
-    'sphinx >=3.1',
-]
+
+[tool.poetry.dev-dependencies]
+black = "^21.7b0"
+bump2version = "^1.0.1"
+cookiecutter = "^1.7.3"
+coverage = "^5.5"
+pre-commit = "^2.14.0"
+pytest = "^6.2.4"
+pytest-cookies = "^0.6.1"
+pytest-cov = "^2.12.1"
+Sphinx = "^4.1.2"
+tox = "^3.24.3"
+twine = "^3.4.2"
+watchdog = "^2.1.5"
+
+[tool.pytest.ini_options]
+testpaths = "tests/"
+
+[tool.black]
+line-length = 79
+include = '\.pyi?$'
+exclude = '''
+/(
+    buck-out
+  | _build
+  | build
+  | dist
+  | \.eggs
+  | \.git
+  | \.hg
+  | \.mypy_cache
+  | \.tox
+  | \.venv
+)/
+'''
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+
+
+# [project]
+# name = 'sphinxclasstocr'
+# # summary ='Group Python Class items logically in documentation using Sphinx.'
+
+# maintainers = [
+#   {name = 'Mark Sevelj', email = 'marksdaspark@gmail.com'}
+# ]
+
+# authors = [
+#     {name = 'Mark Sevelj', email = 'marksdaspark@gmail.com'},
+#     {name = 'Kale Kundert', email = 'kale@thekunderts.net'}
+# ]
+# readme = 'README.rst'
+
+# classifiers = [
+#     'Development Status :: 2 - Pre-Alpha',
+#     'Framework :: Sphinx :: Extension',
+#     'Intended Audience :: Developers',
+#     'License :: OSI Approved :: MIT License',
+#     'Operating System :: OS Independent',
+#     'Programming Language :: Python :: 3',
+#     'Topic :: Documentation :: Sphinx',
+# ]
+
+# dynamic = ['version', 'description']
+
+# requires-python = '>=3.6'
+
+# dependencies = [
+#     'sphinx>=3.1',
+#     'docutils',
+# ]
+
+
+
+# [project.urls]
+
+# Documentation = 'https://sphinxclasstocr.readthedocs.io/en/latest/'
+# Source = 'https://github.com/imAsparky/sphinxclasstocr'
+# Bug-Tracker = 'https://github.com/imAsparky/sphinxclasstocr/issues'
+
+
+# [project.optional-dependencies]
+# testing = [
+#     'pytest >=6',
+#     'pytest-cov >=2',
+#     'coverage==5.5',
+#     'coveralls==3.2.0',
+# ]
+# documenting = [
+#     'sphinx >=3.1',
+# ]
