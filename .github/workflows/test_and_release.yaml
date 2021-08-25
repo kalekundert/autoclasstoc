@@ -1,73 +1,73 @@
 name: Test and release
 
 on:
-  push:
-    branches:
-      - main
-  pull_request:
-    branches:
-      - main
-  workflow_dispatch:
+    # push:
+    #   branches:
+    #     - main
+    # pull_request:
+    #   branches:
+    #     - main
+    workflow_dispatch:
 
 jobs:
-  test:
-    name: Test
-    runs-on: ubuntu-latest
+    test:
+        name: Test
+        runs-on: ubuntu-latest
 
-    strategy:
-      matrix:
-        python-version: [3.6, 3.7, 3.8, 3.9]
+        strategy:
+            matrix:
+                python-version: [3.6, 3.7, 3.8, 3.9]
 
-    steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-python@v2
-        with:
-          python-version: ${{ matrix.python-version }}
+        steps:
+            - uses: actions/checkout@v2
+            - uses: actions/setup-python@v2
+              with:
+                  python-version: ${{ matrix.python-version }}
 
-      - name: Install test dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install '.[testing]'
+            - name: Install test dependencies
+              run: |
+                  python -m pip install --upgrade pip
+                  pip install '.[testing]'
 
-      - name: Test ${{ matrix.python-version }}
-        run: |
-          pytest tests --cov sphinxclasstocr
+            - name: Test ${{ matrix.python-version }}
+              run: |
+                  pytest tests --cov sphinxclasstocr
 
-      - name: Upload coverage data to coveralls.io
-        run: coveralls --service=github
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          COVERALLS_FLAG_NAME: Python:${{ matrix.python-version }}
-          COVERALLS_PARALLEL: true
+            - name: Upload coverage data to coveralls.io
+              run: coveralls --service=github
+              env:
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+                  COVERALLS_FLAG_NAME: Python:${{ matrix.python-version }}
+                  COVERALLS_PARALLEL: true
 
-  coveralls:
-    name: Indicate completion to coveralls.io
-    needs: test
-    runs-on: ubuntu-latest
-    container: python:3-slim
-    steps:
-      - name: Finished
-        run: |
-          pip3 install --upgrade pip
-          pip3 install --upgrade coveralls
-          coveralls --service=github --finish
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    coveralls:
+        name: Indicate completion to coveralls.io
+        needs: test
+        runs-on: ubuntu-latest
+        container: python:3-slim
+        steps:
+            - name: Finished
+              run: |
+                  pip3 install --upgrade pip
+                  pip3 install --upgrade coveralls
+                  coveralls --service=github --finish
+              env:
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-  # release:
-  #   name: Release to PyPI
-  #   runs-on: ubuntu-latest
-  #   if: github.ref == 'refs/heads/master'
-  #   needs: [test]
+    # release:
+    #   name: Release to PyPI
+    #   runs-on: ubuntu-latest
+    #   if: github.ref == 'refs/heads/master'
+    #   needs: [test]
 
-  #   steps:
-  #     - uses: actions/checkout@v2
-  #       with:
-  #         # Make sure the whole repository history is present, so that
-  #         # python-semantic-release can decide if a new release is needed.
-  #         fetch-depth: 0
+    #   steps:
+    #     - uses: actions/checkout@v2
+    #       with:
+    #         # Make sure the whole repository history is present, so that
+    #         # python-semantic-release can decide if a new release is needed.
+    #         fetch-depth: 0
 
-  #     - uses: relekang/python-semantic-release@master
-  #       with:
-  #         github_token: ${{ secrets.GITHUB_TOKEN }}
-  #         pypi_token: ${{ secrets.PYPI_TOKEN }}
+    #     - uses: relekang/python-semantic-release@master
+    #       with:
+    #         github_token: ${{ secrets.GITHUB_TOKEN }}
+    #         pypi_token: ${{ secrets.PYPI_TOKEN }}

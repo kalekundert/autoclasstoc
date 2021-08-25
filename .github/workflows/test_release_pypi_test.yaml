@@ -25,19 +25,31 @@ jobs:
             - name: Install dependencies
               run: |
                   python -m pip install --upgrade pip
-                  pip install poetry tox tox-gh-actions
+                  pip install tox tox-gh-actions
             - name: test with tox
               run: tox
 
-            - name: Build wheels and source tarball
-              run: |
-                  poetry version $(poetry version --short)-dev.$GITHUB_RUN_NUMBER
-                  poetry version --short
-                  poetry build
-            - name: publish to Test PyPI
-              uses: pypa/gh-action-pypi-publish@master
+            - name: Build and publish to pypi
+              uses: JRubics/poetry-publish@v1.8
               with:
-                  user: __token__
-                  password: ${{ secrets.TEST_PYPI_TOKEN}}
-                  repository_url: https://test.pypi.org/legacy/
-                  skip_existing: true
+                  python_version: "3.8"
+                  poetry_version: "==1.1.8" # (PIP version specifier syntax)
+                  pypi_token: ${{ secrets.TEST_PYPI_TOKEN}}
+                  # build_format: "sdist"
+                  repository_name: "testpypi"
+                  repository_url: "https://test.pypi.org/legacy/"
+                  ignore_dev_requirements:
+                      "yes"
+
+                      # - name: Build wheels and source tarball
+            #   run: |
+            #       poetry version $(poetry version --short)-dev.$GITHUB_RUN_NUMBER
+            #       poetry version --short
+            #       poetry build
+            # - name: publish to Test PyPI
+            #   uses: pypa/gh-action-pypi-publish@master
+            #   with:
+            #       user: __token__
+            #       password: ${{ secrets.TEST_PYPI_TOKEN}}
+            #       repository_url: https://test.pypi.org/legacy/
+            #       skip_existing: true
