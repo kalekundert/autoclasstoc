@@ -2,8 +2,8 @@ on:
     push:
         # branches: [main]
 
-        tags:
-            - dev-*
+    tags:
+        - dev-*
 
     workflow_dispatch:
 
@@ -13,8 +13,8 @@ jobs:
 
         steps:
             - uses: actions/checkout@v2
-                with:
-                    fetch-depth: 0
+              with:
+                  fetch-depth: 0
             - uses: actions/setup-python@v2
 
             - name: Install dependencies
@@ -39,10 +39,11 @@ jobs:
                   password: ${{ secrets.TEST_PYPI_TOKEN}}
                   repository_url: https://test.pypi.org/legacy/
                   skip_existing: true
+
             - name: Release Drafter
               uses: release-drafter/release-drafter@v5
-                with:
-                    config-name: release-drafter.yaml
-                    disable-autolabeler: true
-                    env:
-                        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+              with:
+                  config-name: release-drafter.yaml
+                  disable-autolabeler: true
+              env:
+                  GITHUB_TOKEN: ${{ secrets.TEST_PYPI_TOKEN}}
