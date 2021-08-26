@@ -58,6 +58,8 @@ testpaths = "tests/"
 
 [tool.semantic_release]
 version_toml = "pyproject.toml:tool.poetry.version"
+branch = "main"
+
 
 [tool.black]
 line-length = 79
