@@ -13,7 +13,7 @@ categories:
     - title: "🧰 Maintenance"
       label: "chore"
 change-template: "- $TITLE @$AUTHOR (#$NUMBER)"
-change-title-escapes: '\<*_&'
+# change-title-escapes: '\<*_&'
 version-resolver:
     major:
         labels:
