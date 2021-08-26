@@ -21,7 +21,11 @@ Changes unreleased.
 
 ### Feature
 
+- poetry:
+  - Added poetry for builds #34 ([cf1d84f](https://github.com/imAsparky/sphinxclasstocr/commit/cf1d84fe3a9ccb2dadbc7d045a3028458c2e9358))
+
 - test:
+  - Deploy to PyPi test workflow added #34 ([160eb95](https://github.com/imAsparky/sphinxclasstocr/commit/160eb95a82230bdbe198dd32d2b931a4a3317447))
   - Include Coveralls in CD build #32 ([eaf4c56](https://github.com/imAsparky/sphinxclasstocr/commit/eaf4c56994b30585d86a35cd148d4f321de6f6ab))
   - Coverage by Coveralls added #32 ([f035dc5](https://github.com/imAsparky/sphinxclasstocr/commit/f035dc5077e01a52ec80ac9e53f14809eba0eb24))
 
@@ -29,6 +33,9 @@ Changes unreleased.
   - Added code example copy button #23 ([4ed490e](https://github.com/imAsparky/sphinxclasstocr/commit/4ed490eac112a3c06f2c6eda98fefcab3b081376))
 
 ### Bug Fixes
+
+- deploy:
+  - README edited unknown role :doc: #35 ([f34a5ea](https://github.com/imAsparky/sphinxclasstocr/commit/f34a5ea12e6a3d90baa73557a9ba40c1eadce406))
 
 - test:
   - coveralls-python added to CD build  #32 ([623b029](https://github.com/imAsparky/sphinxclasstocr/commit/623b029fd2eb270dd054c6fd30fbce47a5b738dd))
