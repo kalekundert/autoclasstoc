@@ -20,7 +20,7 @@ jobs:
             - name: Install dependencies
               run: |
                   python -m pip install --upgrade pip
-                  pip install poetry tox tox-gh-actions
+                  pip install poetry tox tox-gh-actions semantic-release
             - name: test with tox
               run: poetry run tox
 
