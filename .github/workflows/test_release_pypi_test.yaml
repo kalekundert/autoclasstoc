@@ -7,7 +7,7 @@ on:
         # branches: [main]
 
         tags:
-            - dev:*
+            - dev-*
 
     workflow_dispatch:
 
