@@ -18,7 +18,6 @@ jobs:
 
         steps:
             - uses: actions/checkout@v2
-              token: ${{ secrets.GITHUB_REPO_UPDATES }}
               with:
                   fetch-depth: 0
 
