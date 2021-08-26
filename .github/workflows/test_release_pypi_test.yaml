@@ -4,35 +4,46 @@ name: Test and Release PyPi Test
 
 on:
     push:
-        # branches: [main]
-
         tags:
-            - dev-*
-
-    workflow_dispatch:
+            - "*"
+        workflow_dispatch:
 
 jobs:
-    release:
+    build:
         runs-on: ubuntu-latest
-        concurrency: release
-
         steps:
-            - uses: actions/checkout@v2
-              with:
-                  fetch-depth: 0
+            - name: Checkout
+              uses: actions/checkout@v2
 
-            - name: Python Semantic Release
-              uses: relekang/python-semantic-release@master
+            - name: Release
+              uses: docker://antonyurchenko/git-release:latest
+              env:
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+                  PRE_RELEASE: "true"
+                  RELEASE_NAME_SUFFIX: " (dev-testing)"
               with:
-                  pypi_username: __token__
-                  github_token: ${{ secrets.GITHUB_REPO_UPDATES }}
-                  pypi_token: ${{ secrets.TEST_PYPI_TOKEN }}
+                  args: |
+                      darwin-amd64.zip
+                      linux-amd64.zip
+                      windows-amd64.zip
+
+# on:
+#     push:
+#         # branches: [main]
+
+#         tags:
+#             - dev-*
+
+#     workflow_dispatch:
+
 # jobs:
 #     publish_dev_build:
 #         runs-on: ubuntu-latest
 
 #         steps:
 #             - uses: actions/checkout@v2
+#                 with:
+#                     fetch-depth: 0
 #             - uses: actions/setup-python@v2
 
 #             - name: Install dependencies
