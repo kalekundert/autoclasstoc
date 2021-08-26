@@ -1,26 +1,26 @@
 name: Auto-generate CHANGELOG-DOCS
 on:
-  # release:
-  #   types: [created, edited]
-  schedule:
-    - cron: "0 14 * * *"
-  # push:
-  #   branches:
-  #     - main
-  workflow_dispatch:
+    # release:
+    #   types: [created, edited]
+    schedule:
+        - cron: "0 14 * * *"
+    # push:
+    #   branches:
+    #     - main
+    workflow_dispatch:
 
 jobs:
-  generate-changelog:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-        with:
-          fetch-depth: 0
+    generate-changelog:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v2
+              with:
+                  fetch-depth: 0
 
-      - uses: BobAnkh/auto-generate-changelog@master
-        with:
-          REPO_NAME: "imAsparky/sphinxclasstocr"
-          ACCESS_TOKEN: ${{secrets.GITHUB_TOKEN}}
-          PATH: "/docs/CHANGELOG.md"
-          COMMIT_MESSAGE: "docs(CHANGELOG): update release notes:docs"
-          TYPE: "chore:Chore,feat:Feature,fix:Bug Fixes,docs:Documentation,perf:Performance Improvements,refactor:Refactor,style:Styling,test:Tests"
+            - uses: BobAnkh/auto-generate-changelog@master
+              with:
+                  REPO_NAME: "imAsparky/sphinxclasstocr"
+                  ACCESS_TOKEN: ${{secrets.CHANGELOG_UPDATE}}
+                  PATH: "/docs/CHANGELOG.md"
+                  COMMIT_MESSAGE: "docs(CHANGELOG): update release notes:docs"
+                  TYPE: "chore:Chore,feat:Feature,fix:Bug Fixes,docs:Documentation,perf:Performance Improvements,refactor:Refactor,style:Styling,test:Tests"
