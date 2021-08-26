@@ -1,7 +1,7 @@
 [tool.poetry]
 name = 'sphinxclasstocr'
 description ='Group Python Class items logically in documentation using Sphinx.'
-version = "0.2.1"
+version = "0.2.2"
 authors = ["Mark Sevelj <mark.sevelj@dunwright.com.au>"]
 maintainers = ["Mark Sevelj <mark.sevelj@dunwright.com.au>"]
 license = "MIT"
@@ -65,6 +65,7 @@ version_pattern = "README.rst:VERSION (\\d+\\.\\d+\\.\\d+)"
 patch_emoji = ":ambulance:"
 minor_emoji = ":chart_with_upwards_trend:"
 major_emoji = ":boom:"
+build_command = "poetry build"
 
 
 [tool.black]
