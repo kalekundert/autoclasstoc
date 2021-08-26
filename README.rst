@@ -2,6 +2,8 @@
 **sphinx-class-tocr**
 =====================
 
+VERSION {version}
+
 |
 
 .. image:: docs/_static/imgs/logo/logo-sphinxclasstocr-1280x640.png

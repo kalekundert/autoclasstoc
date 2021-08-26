@@ -1,7 +1,7 @@
 [tool.poetry]
 name = 'sphinxclasstocr'
 description ='Group Python Class items logically in documentation using Sphinx.'
-version = "0.2.0"
+version = "0.2.1"
 authors = ["Mark Sevelj <mark.sevelj@dunwright.com.au>"]
 maintainers = ["Mark Sevelj <mark.sevelj@dunwright.com.au>"]
 license = "MIT"
@@ -59,6 +59,12 @@ testpaths = "tests/"
 [tool.semantic_release]
 version_toml = "pyproject.toml:tool.poetry.version"
 branch = "main"
+major_on_zero = "false"
+patch_without_tag = "true"
+version_pattern = "README.rst:VERSION (\\d+\\.\\d+\\.\\d+)"
+patch_emoji = ":ambulance:"
+minor_emoji = ":chart_with_upwards_trend:"
+major_emoji = ":boom:"
 
 
 [tool.black]
