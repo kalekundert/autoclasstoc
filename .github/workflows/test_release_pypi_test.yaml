@@ -3,8 +3,11 @@
 name: Test and Release PyPi Test
 
 on:
-    # push:
-    #     branches: [main]
+    push:
+        branches: [main]
+
+        tags:
+            - dev-*
 
     workflow_dispatch:
 
