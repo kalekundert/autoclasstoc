@@ -6,7 +6,7 @@ authors = ["Mark Sevelj <mark.sevelj@dunwright.com.au>"]
 maintainers = ["Mark Sevelj <mark.sevelj@dunwright.com.au>"]
 license = "MIT"
 readme = "README.rst"
-homepage  = "https://github.com/imAsparky/sphinxclasstocr"
+homepage  = "https://github.com/imAsparky/sphinx-class-tocr"
 documentation = "https://sphinxclasstocr.readthedocs.io/en/latest/"
 keywords = ['sphinx tools',
             'sphinx TOC',
@@ -33,6 +33,8 @@ furo = "^2021.8.17-beta.43"
 myst-parser = "^0.15.1"
 Sphinx = "^4.1.2"
 sphinx-copybutton = "^0.4.0"
+bump2version = "^1.0.1"
+
 
 
 
@@ -42,6 +44,7 @@ bump2version = "^1.0.1"
 cookiecutter = "^1.7.3"
 coverage = "^5.5"
 pre-commit = "^2.14.0"
+python-semantic-release = "^7.19.1"
 pytest = "^6.2.4"
 pytest-cookies = "^0.6.1"
 pytest-cov = "^2.12.1"
@@ -52,6 +55,9 @@ watchdog = "^2.1.5"
 
 [tool.pytest.ini_options]
 testpaths = "tests/"
+
+[tool.semantic_release]
+version_toml = "pyproject.toml:tool.poetry.version"
 
 [tool.black]
 line-length = 79
@@ -74,58 +80,3 @@ exclude = '''
 [build-system]
 requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
-
-
-
-# [project]
-# name = 'sphinxclasstocr'
-# # summary ='Group Python Class items logically in documentation using Sphinx.'
-
-# maintainers = [
-#   {name = 'Mark Sevelj', email = 'marksdaspark@gmail.com'}
-# ]
-
-# authors = [
-#     {name = 'Mark Sevelj', email = 'marksdaspark@gmail.com'},
-#     {name = 'Kale Kundert', email = 'kale@thekunderts.net'}
-# ]
-# readme = 'README.rst'
-
-# classifiers = [
-#     'Development Status :: 2 - Pre-Alpha',
-#     'Framework :: Sphinx :: Extension',
-#     'Intended Audience :: Developers',
-#     'License :: OSI Approved :: MIT License',
-#     'Operating System :: OS Independent',
-#     'Programming Language :: Python :: 3',
-#     'Topic :: Documentation :: Sphinx',
-# ]
-
-# dynamic = ['version', 'description']
-
-# requires-python = '>=3.6'
-
-# dependencies = [
-#     'sphinx>=3.1',
-#     'docutils',
-# ]
-
-
-
-# [project.urls]
-
-# Documentation = 'https://sphinxclasstocr.readthedocs.io/en/latest/'
-# Source = 'https://github.com/imAsparky/sphinxclasstocr'
-# Bug-Tracker = 'https://github.com/imAsparky/sphinxclasstocr/issues'
-
-
-# [project.optional-dependencies]
-# testing = [
-#     'pytest >=6',
-#     'pytest-cov >=2',
-#     'coverage==5.5',
-#     'coveralls==3.2.0',
-# ]
-# documenting = [
-#     'sphinx >=3.1',
-# ]
