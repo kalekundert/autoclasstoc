@@ -23,4 +23,6 @@ jobs:
                   export PATH=$PATH:$HOME/.poetry/bin
                   poetry install
                   poetry update
-                  poetry run tox
+
+            - name: Run tox tests
+              run: poetry run tox
