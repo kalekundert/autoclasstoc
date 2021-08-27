@@ -27,11 +27,12 @@ jobs:
             - name: Run tox tests
               run: poetry run tox
 
-    update_version:
-        needs: testing
-        steps:
             - name: Print current version
               run: poetry run semantic-release print-version --current
 
             - name: Print new version
               run: poetry run semantic-release print-version
+
+    # update_version:
+    #     needs: testing
+    #     steps:
