@@ -30,7 +30,8 @@ jobs:
     update_version:
         needs: testing
         steps:
-            name: Update version number
-            run: |
-                poetry run semantic-release print-version --current
-                poetry run semantic-release print-version
+            - name: Print current version
+              run: poetry run semantic-release print-version --current
+
+            - name: Print new version
+              run: poetry run semantic-release print-version
