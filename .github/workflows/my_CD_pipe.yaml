@@ -39,14 +39,14 @@ jobs:
               run: echo "::set-output name=version::$(poetry run semantic-release print-version)"
               id: version
 
-            - name: release
+            - name: create_release
               uses: actions/create-release@v1
               id: create_release
               with:
                   draft: false
                   prerelease: false
                   release_name: ${{ steps.version.outputs.version }}
-                  tag_name: ${{ github.ref }}
+                  tag_name: ${{ steps.version.outputs.version }}
               env:
                   GITHUB_TOKEN: ${{secrets.CHANGELOG_UPDATE}}
 
