@@ -1,8 +1,8 @@
 # CHANGELOG
 
-## Unreleased
+## [v0.2.3](https://github.com/imAsparky/sphinx-class-tocr/releases/tag/v0.2.3) - 2021-08-27 04:58:36
 
-Changes unreleased.
+*No description*
 
 ### Chore
 
