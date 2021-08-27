@@ -26,3 +26,9 @@ jobs:
 
             - name: Run tox tests
               run: poetry run tox
+
+    update_version:
+        needs: testing
+        run: |
+            poetry run semantic-release print-version --current
+            poetry run semantic-release print-version
