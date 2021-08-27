@@ -33,6 +33,21 @@ jobs:
             - name: Print new version
               run: poetry run semantic-release print-version
 
+            - name: Print poetry version
+              run: poetry version --short
+
+            - name: Bump version
+              run: poetry run semantic-release version
+
+            - name: Print current version after bump
+              run: poetry run semantic-release print-version --current
+
+            - name: Print new version after bump
+              run: poetry run semantic-release print-version
+
+            - name: Print poetry version after bump
+              run: poetry version --short
+
     # update_version:
     #     needs: testing
     #     steps:
