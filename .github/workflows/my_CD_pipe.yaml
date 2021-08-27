@@ -22,10 +22,9 @@ jobs:
                   curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/install-poetry.py | python -
                   export PATH=$PATH:$HOME/.poetry/bin
                   poetry install
-                  poetry update
 
-            - name: Run tox tests
-              run: poetry run tox
+            # - name: Run tox tests
+            #   run: poetry run tox
 
             - name: Print current version
               run: poetry run semantic-release print-version --current
@@ -39,3 +38,11 @@ jobs:
             - name: version
               run: echo "::set-output name=version::$(poetry run semantic-release print-version)"
               id: version
+
+            - name: Create the release
+              run: |
+                  curl \
+                  -X POST \
+                  -H "Accept: application/vnd.github.v3+json" \
+                  https://api.github.com/repos/imAsparky/sphinx-class-tocr/releases \
+                  -d '{"tag_name":"$(version)"}'
