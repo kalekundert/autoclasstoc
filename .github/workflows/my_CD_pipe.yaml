@@ -13,8 +13,6 @@ jobs:
 
         steps:
             - uses: actions/checkout@v2
-              env: ${{secrets.CHANGELOG_UPDATE}}
-
               with:
                   fetch-depth: 0
             - uses: actions/setup-python@v2
