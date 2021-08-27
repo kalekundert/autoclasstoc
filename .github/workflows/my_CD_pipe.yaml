@@ -29,6 +29,7 @@ jobs:
 
     update_version:
         needs: testing
-        run: |
-            poetry run semantic-release print-version --current
-            poetry run semantic-release print-version
+        steps:
+            run: |
+                poetry run semantic-release print-version --current
+                poetry run semantic-release print-version
