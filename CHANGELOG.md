@@ -1,5 +1,10 @@
 <!--next-version-placeholder-->
 
+## v0.2.3 (2021-08-27)
+### Documentation
+* **CHANGELOG:** Update release notes:repo ([`29041bc`](https://github.com/imAsparky/sphinx-class-tocr/commit/29041bc60ff40a15ad2dabc8ba1d86f8eb4f6d34))
+* **CHANGELOG:** Update release notes:docs ([`d062212`](https://github.com/imAsparky/sphinx-class-tocr/commit/d062212c77949dce08443051f54174633f77dd23))
+
 # CHANGELOG
 
 ## Unreleased
