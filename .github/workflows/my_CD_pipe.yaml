@@ -44,5 +44,5 @@ jobs:
                   curl \
                   -X POST \
                   -H "Accept: application/vnd.github.v3+json" \
-                  https://api.github.com/repos/imAsparky/sphinx-class-tocr/releases \
-                  -d '{"tag_name":"$(version)"}'
+                  https://github.com/imAsparky/sphinx-class-tocr/releases \
+                  -d '{"tag_name":"testme"}'
