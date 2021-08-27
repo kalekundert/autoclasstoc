@@ -1,10 +1,13 @@
 # CHANGELOG
 
-## Unreleased
+## [v0.2.3](https://github.com/imAsparky/sphinx-class-tocr/releases/tag/v0.2.3) - 2021-08-27 04:58:36
 
-Changes unreleased.
+*No description*
 
 ### Chore
+
+- poetry:
+  - update packages and lock ([95a5eb8](https://github.com/imAsparky/sphinx-class-tocr/commit/95a5eb836bbf6502ef0353223f2d6e56b0d32984))
 
 - codequal:
   - pre-commit pylint error fixes #26 ([8f3b013](https://github.com/imAsparky/sphinx-class-tocr/commit/8f3b013b665d941304b61e4d469b3af082ef6cf5))
@@ -34,6 +37,11 @@ Changes unreleased.
 
 ### Bug Fixes
 
+- docs:
+  - add github PAT for CHANGELOG build #36 ([43a9453](https://github.com/imAsparky/sphinx-class-tocr/commit/43a9453d78acb0c0b57f3c528b8078a375c6a29d))
+  - requirements for build pinned #20 ([c89209d](https://github.com/imAsparky/sphinx-class-tocr/commit/c89209d70168baaa35d9a41e4c402acfed8c1eac))
+  - Build fail myst_parser version  #19 ([734c2a9](https://github.com/imAsparky/sphinx-class-tocr/commit/734c2a9ad99064f25ba687f8175c528ce82e8fca))
+
 - deploy:
   - README edited unknown role :doc: #35 ([f34a5ea](https://github.com/imAsparky/sphinx-class-tocr/commit/f34a5ea12e6a3d90baa73557a9ba40c1eadce406))
 
@@ -42,10 +50,6 @@ Changes unreleased.
 
 - utils:
   - Fix ConfigError "f" string #31 ([d5a1eea](https://github.com/imAsparky/sphinx-class-tocr/commit/d5a1eeafd988bf195c0a75850bd3cd01cc258a6e))
-
-- docs:
-  - requirements for build pinned #20 ([c89209d](https://github.com/imAsparky/sphinx-class-tocr/commit/c89209d70168baaa35d9a41e4c402acfed8c1eac))
-  - Build fail myst_parser version  #19 ([734c2a9](https://github.com/imAsparky/sphinx-class-tocr/commit/734c2a9ad99064f25ba687f8175c528ce82e8fca))
 
 ### Documentation
 
