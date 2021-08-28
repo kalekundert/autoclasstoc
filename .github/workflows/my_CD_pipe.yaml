@@ -1,75 +1,80 @@
 name: Continous Deployment
 
 on:
-    push:
-        branches:
-            - main
+  push:
+    branches:
+      - main
 
-    workflow_dispatch:
+  workflow_dispatch:
 
 jobs:
-    testing:
-        runs-on: ubuntu-latest
+  testing:
+    runs-on: ubuntu-latest
 
-        steps:
-            - uses: actions/checkout@v2
-              with:
-                  fetch-depth: 0
-            - uses: actions/setup-python@v2
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v2
 
-            - name: Install Poetry deps
-              run: |
-                  curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/install-poetry.py | python -
-                  export PATH=$PATH:$HOME/.poetry/bin
-                  poetry install
+      - name: add github globals
+        run: |
+          git config --global user.name CD Pipeline
+          git config --global user.email cd.pipeline@github.action.com
 
-            # - name: Run tox tests
-            #   run: poetry run tox
+      - name: Install Poetry deps
+        run: |
+          curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/install-poetry.py | python -
+          export PATH=$PATH:$HOME/.poetry/bin
+          poetry install
 
-            - name: Print current version
-              run: poetry run semantic-release print-version --current
+      # - name: Run tox tests
+      #   run: poetry run tox
 
-            - name: Print new version
-              run: poetry run semantic-release print-version
+      - name: Print current version
+        run: poetry run semantic-release print-version --current
 
-            - name: Update version number
-              env:
-                  GITHUB_TOKEN: ${{secrets.CHANGELOG_UPDATE}}
-              run: poetry run semantic-release version
+      - name: Print new version
+        run: poetry run semantic-release print-version
 
-            - name: Print poetry version
-              run: poetry version --short
+      - name: Update version number
+        env:
+          GITHUB_TOKEN: ${{secrets.CHANGELOG_UPDATE}}
+        run: poetry run semantic-release version
 
-            - name: version
-              run: echo "::set-output name=version::$(poetry run semantic-release print-version)"
-              id: version
+      - name: Print poetry version
+        run: poetry version --short
 
-            - name: create_release
-              uses: actions/create-release@v1
-              id: create_release
-              with:
-                  draft: false
-                  prerelease: false
-                  release_name: ${{ steps.version.outputs.version }}
-                  tag_name: ${{ steps.version.outputs.version }}
-              env:
-                  GITHUB_TOKEN: ${{secrets.CHANGELOG_UPDATE}}
+      - name: version
+        run: echo "::set-output name=version::$(poetry run semantic-release print-version)"
+        id: version
 
-            - name: update changelog
-              uses: BobAnkh/auto-generate-changelog@master
-              with:
-                  REPO_NAME: "imAsparky/sphinxclasstocr"
-                  ACCESS_TOKEN: ${{secrets.CHANGELOG_UPDATE}}
-                  PATH: "CHANGELOG.md"
-                  COMMIT_MESSAGE: "docs(CHANGELOG): update release notes:docs"
-                  TYPE: "chore:Chore,feat:Feature,fix:Bug Fixes,docs:Documentation,perf:Performance Improvements,refactor:Refactor,style:Styling,test:Tests"
+      - name: create_release
+        uses: actions/create-release@v1
+        id: create_release
+        with:
+          draft: false
+          prerelease: false
+          release_name: ${{ steps.version.outputs.version }}
+          tag_name: ${{ steps.version.outputs.version }}
+        env:
+          GITHUB_TOKEN: ${{secrets.CHANGELOG_UPDATE}}
 
-            - name: add release notes
-              uses: actions/upload-release-asset@v1
-              env:
-                  GITHUB_TOKEN: ${{secrets.CHANGELOG_UPDATE}}
-              with:
-                  upload_url: ${{ steps.create_release.outputs.body }}
-                  asset_path: ./CHANGELOG.md
-                  asset_name: Changelog
-                  asset_content_type: document/md
+      - name: update changelog
+        uses: BobAnkh/auto-generate-changelog@master
+        with:
+          REPO_NAME: "imAsparky/sphinxclasstocr"
+          ACCESS_TOKEN: ${{secrets.CHANGELOG_UPDATE}}
+          PATH: "CHANGELOG.md"
+          COMMIT_MESSAGE: "docs(CHANGELOG): update release notes:docs"
+          TYPE: "chore:Chore,feat:Feature,fix:Bug Fixes,docs:Documentation,perf:Performance Improvements,refactor:Refactor,style:Styling,test:Tests"
+
+      - name: add release notes
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{secrets.CHANGELOG_UPDATE}}
+        with:
+          upload_url: ${{ steps.create_release.outputs.body }}
+          asset_path: ./CHANGELOG.md
+          asset_name: Changelog
+          asset_content_type: document/md
