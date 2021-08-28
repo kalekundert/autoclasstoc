@@ -46,7 +46,7 @@ jobs:
               run: poetry version --short
 
             - name: version
-              run: echo "::set-output name=version::$(poetry --version)"
+              run: echo "::set-output name=version::$(poetry version --short)"
               id: version
 
             - name: create_release
