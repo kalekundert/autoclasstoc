@@ -69,7 +69,17 @@ jobs:
                   COMMIT_MESSAGE: "docs(CHANGELOG): update release notes:v${{ steps.version.outputs.version }}"
                   TYPE: "chore:Chore,feat:Feature,fix:Bug Fixes,docs:Documentation,perf:Performance Improvements,refactor:Refactor,style:Styling,test:Tests"
 
-            # - name: add release notes
+            - name: commit version change
+              run: |
+                  git add pyproject.toml
+                  git commit -m "chore(ver): bump to v${{ steps.version.outputs.version }}"
+                  git push
+
+
+
+
+
+                    # - name: add release notes
             #   uses: actions/upload-release-asset@v1
             #   env:
             #       GITHUB_TOKEN: ${{secrets.CHANGELOG_UPDATE}}
