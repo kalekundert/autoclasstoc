@@ -32,6 +32,12 @@ jobs:
             - name: Print new version
               run: poetry run semantic-release print-version
 
+            - name: Update version number
+              with:
+                  run: poetry run semantic-release version
+              env:
+                  GITHUB_TOKEN: ${{secrets.CHANGELOG_UPDATE}}
+
             - name: Print poetry version
               run: poetry version --short
 
