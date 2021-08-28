@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## [refs/heads/main](https://github.com/imAsparky/sphinx-class-tocr/releases/tag/refs/heads/main) - 2021-08-27 22:36:50
+## [0.2.4](https://github.com/imAsparky/sphinx-class-tocr/releases/tag/0.2.4) - 2021-08-27 22:58:17
 
 *No description*
 
