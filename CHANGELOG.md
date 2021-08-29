@@ -132,6 +132,91 @@
 - review:
   - Check and run after name change #15 ([d07948e](https://github.com/imAsparky/sphinx-class-tocr/commit/d07948e1d28065f06b15db6bbd6283139b5513c3))
 
+### In Progress
+
+- CD:
+  - create-release and BobAnkh re-instated #37 ([d88f5e9](https://github.com/imAsparky/sphinx-class-tocr/commit/d88f5e91278bdb4c5373db478b0ecae2d06ea69f))
+  - added semantic-release settings to test #37 ([90b96e7](https://github.com/imAsparky/sphinx-class-tocr/commit/90b96e7fa8a387f5e386ab6240b5b3e9ecba7062))
+  - change semantic-release config to test #37 ([2e582b9](https://github.com/imAsparky/sphinx-class-tocr/commit/2e582b93d7b702e1e139b90e3e97781daeca9268))
+  - only needed git push for pyproject.toml #37 ([5d26788](https://github.com/imAsparky/sphinx-class-tocr/commit/5d26788b27b4307c5042c5e8e6f28c09329db322))
+  - add commit and push pyproject #37 ([4ca9eb5](https://github.com/imAsparky/sphinx-class-tocr/commit/4ca9eb50edb6ac3aea859c99a148e88632d7e7aa))
+  - fix typo in version generation #37 ([e809256](https://github.com/imAsparky/sphinx-class-tocr/commit/e809256de51d97e856e222abc6dfd688b7c8ec58))
+  - improve versioning and reset pyproj ver #37 ([6b19090](https://github.com/imAsparky/sphinx-class-tocr/commit/6b190903944e01e2d82989060039bf47f7caa5cc))
+  - add github globals #37 ([1a756f6](https://github.com/imAsparky/sphinx-class-tocr/commit/1a756f6e5787e1585db9c86c5e9c88b7cb3f401b))
+  - fixed GH invalid workflow #37 ([2eab8c5](https://github.com/imAsparky/sphinx-class-tocr/commit/2eab8c5226f9c7010be5a39a1115a45feba2459c))
+  - test semantic-release version #37 ([66426fd](https://github.com/imAsparky/sphinx-class-tocr/commit/66426fd517c958ed107f41b30beb79ff89752b53))
+  - added a version variable #37 ([96b16f1](https://github.com/imAsparky/sphinx-class-tocr/commit/96b16f1d2aab267196bf0d86c987087d59bca267))
+  - add bump version & print to test it #37 ([af72798](https://github.com/imAsparky/sphinx-class-tocr/commit/af72798e74744e23c8fb6e0f7117f18bd2975053))
+  - moved semantic release into testing #37 ([a0bca0f](https://github.com/imAsparky/sphinx-class-tocr/commit/a0bca0f92a8ec47009d450481e2a27df62231787))
+  - fix GH action name syntax #37 ([f6c1fd0](https://github.com/imAsparky/sphinx-class-tocr/commit/f6c1fd031b8d62735a35a84a11c8eb678c0c1dce))
+  - add name to run step #37 ([f8abb9a](https://github.com/imAsparky/sphinx-class-tocr/commit/f8abb9afe41c4392e79b13e97d0519c968f3c8a7))
+  - added steps to workflow #37 ([b3ad5fc](https://github.com/imAsparky/sphinx-class-tocr/commit/b3ad5fcb7d655c4980155e3e99433c5305079969))
+  - added semantic-release print-version #37 ([0c72105](https://github.com/imAsparky/sphinx-class-tocr/commit/0c721056e5638a453f6bd3fee0f0c0bcf5dad965))
+  - move tox test command to try it out #37 ([4c5c59f](https://github.com/imAsparky/sphinx-class-tocr/commit/4c5c59f33bddda77eb3a0eaba2e77f0c1b484aaa))
+  - added tox-gh-actions to deps #37 ([0123e86](https://github.com/imAsparky/sphinx-class-tocr/commit/0123e86d98b1eccf1fc0dbd38007f6c8be38745d))
+  - added new poetry curl path  #37 ([5e23333](https://github.com/imAsparky/sphinx-class-tocr/commit/5e23333285f14d2bdf445afa4a1b5bdb4406a662))
+  - added poetry into PATH #37 ([d993c57](https://github.com/imAsparky/sphinx-class-tocr/commit/d993c57c9ecd7c70714fe106edf37a285d2364e3))
+  - added poetry source #37 ([d2fe6c8](https://github.com/imAsparky/sphinx-class-tocr/commit/d2fe6c85863609287e670331a8e43b2e00d051bb))
+  - create new yaml with tests #37 ([2f1975b](https://github.com/imAsparky/sphinx-class-tocr/commit/2f1975b21d94c769fef298e7b2b12cf7730d32b7))
+
+- deploy:
+  - changed tag name in create-release #37 ([6ea6222](https://github.com/imAsparky/sphinx-class-tocr/commit/6ea62221c81d668f702d90dee0529d1b12c4a5d6))
+  - add changelog update #37 ([a64fd82](https://github.com/imAsparky/sphinx-class-tocr/commit/a64fd8246473c2a43ca2405696c7d96d0f8606fb))
+  - fix another yaml error #37 ([2c75d27](https://github.com/imAsparky/sphinx-class-tocr/commit/2c75d27811c6b5e763dfbd6b3eb44f653dfea950))
+  - fix yaml error #37 ([5eb5343](https://github.com/imAsparky/sphinx-class-tocr/commit/5eb53438cf92b7483f4ad4628a2f4ee7e87d6a4a))
+  - added create-release@v1 GH action #37 ([d65a43a](https://github.com/imAsparky/sphinx-class-tocr/commit/d65a43a5cd9a8f2c625e125bd589b4ab29975167))
+  - change GH release url #37 ([a3d62c4](https://github.com/imAsparky/sphinx-class-tocr/commit/a3d62c4f02588d283ed5589d9bb4232227aa1ed9))
+  - test action create release #37 ([2e9859a](https://github.com/imAsparky/sphinx-class-tocr/commit/2e9859a12178e92e871a16e5f8b07384f34da987))
+  - testing relekang sem-rel again #34 ([6b6d091](https://github.com/imAsparky/sphinx-class-tocr/commit/6b6d091231f91611f6bac658caf4f037e744beb5))
+  - added semantic-release to installs #34 ([35d7cfd](https://github.com/imAsparky/sphinx-class-tocr/commit/35d7cfd623b007f12878f5c333110d5c63ce895d))
+  - fix mapping error ([5138de3](https://github.com/imAsparky/sphinx-class-tocr/commit/5138de32120b1607e501160ed2ad7d9dd57aa856))
+  - fix yaml mapping error #34 ([2eae396](https://github.com/imAsparky/sphinx-class-tocr/commit/2eae3962fe8f2027b160a85cdb9255a4aa83d1bf))
+  - remove change-title-escapes #34 ([f9b7889](https://github.com/imAsparky/sphinx-class-tocr/commit/f9b788951dd9f8898ad28fa242f814514e4acd7b))
+  - testing release drafter #34 ([25af828](https://github.com/imAsparky/sphinx-class-tocr/commit/25af828809282740ecdb48815708cd10b4cc1c8f))
+  - testing antonyurchenko/git-release #34 ([1fddffa](https://github.com/imAsparky/sphinx-class-tocr/commit/1fddffa72f987412efef5b8e8ecec1bb472d42ff))
+  - fix relkang invalid input #34 ([4c77c6a](https://github.com/imAsparky/sphinx-class-tocr/commit/4c77c6a78b8262b332b47e7b3b6254144b3df305))
+  - Change branch to main #34 ([8810a55](https://github.com/imAsparky/sphinx-class-tocr/commit/8810a55a32dc8dabfd478914dc0acb5a71024aa0))
+  - Fix workflow unexpected value #34 ([0775fcf](https://github.com/imAsparky/sphinx-class-tocr/commit/0775fcf1a2d8efda7826f3f353ef95efd9474ab4))
+  - test relekang/python-semantic #34 ([9c215ad](https://github.com/imAsparky/sphinx-class-tocr/commit/9c215ad6613f3c1f4a96033ad9588f66247b2493))
+  - Revert on:push:tag  #34 ([9057eb8](https://github.com/imAsparky/sphinx-class-tocr/commit/9057eb8b04b4061f0c423b4974d8f331cf2baef9))
+  - Change tag id for deploy build #34 ([9378e70](https://github.com/imAsparky/sphinx-class-tocr/commit/9378e70925199ebabdaeed117cc682b239183ef0))
+  - Removed on:push:branches #34 ([e7667da](https://github.com/imAsparky/sphinx-class-tocr/commit/e7667da9d3ddb02f7eee8d69306fc015c8b237ae))
+  - Added on:tags to workflow #34 ([a92cd3b](https://github.com/imAsparky/sphinx-class-tocr/commit/a92cd3b8a97a5ae968e194b9357e232ac0a7b52a))
+  - Tidy up test_release workflow #34 ([def7efb](https://github.com/imAsparky/sphinx-class-tocr/commit/def7efb81cf14d93c421f29e92242327b3735786))
+  - More testing #34 ([e56b90d](https://github.com/imAsparky/sphinx-class-tocr/commit/e56b90d75719f5343d9b970b577873f34fea790c))
+  - Fix tox run command #34 ([16ccfbb](https://github.com/imAsparky/sphinx-class-tocr/commit/16ccfbb83145d8e17253600d3b9732d9db116123))
+  - Fix tox now isolated_build = True #34 ([c530a57](https://github.com/imAsparky/sphinx-class-tocr/commit/c530a57ff81d41f907922f4b4741e64146b0a410))
+  - Update tox and back to Poetry Build #34 ([60f22f2](https://github.com/imAsparky/sphinx-class-tocr/commit/60f22f237934c55c2ff8c189b7a049ab8b10a980))
+  - Test JRubics/poetry-publish@v1.8 #34 ([882c7ed](https://github.com/imAsparky/sphinx-class-tocr/commit/882c7ed5b0107280704218a8529607c45bb6ae56))
+
+- test:
+  - Fix typo in CD build yaml file #32 ([57380af](https://github.com/imAsparky/sphinx-class-tocr/commit/57380afad99bd4c52f03fd36e03b9fe787338804))
+  - Fix typo in CD build yaml file #32 ([9f576c7](https://github.com/imAsparky/sphinx-class-tocr/commit/9f576c73c617d1c49ffd33123b2ed4397f9639af))
+
+- typo:
+  - Remove typo used for testing #31 ([51a0cbe](https://github.com/imAsparky/sphinx-class-tocr/commit/51a0cbeea04df9a9f02a3e307ebe3ccf940c2927))
+
+- docs:
+  - readthedocs.yaml formats removed #20 ([e4c91f2](https://github.com/imAsparky/sphinx-class-tocr/commit/e4c91f273d5ca94a5b07501fb63b06cfb9966bb9))
+  - readthedocs.yaml re-written #20 ([a3e5b91](https://github.com/imAsparky/sphinx-class-tocr/commit/a3e5b91141cc6ffb12612ec5c24b291d9d10dc01))
+  - readthedocs.yaml is now explicit #20 ([47cc5ab](https://github.com/imAsparky/sphinx-class-tocr/commit/47cc5abf102e576ff4bca81e2d6526032ddb3bdf))
+  - myst_parser removed from build #19 ([b2a5d09](https://github.com/imAsparky/sphinx-class-tocr/commit/b2a5d098b7dd5755024eb46c463d5110589a38a7))
+  - Revert req.txt & rtd.yaml original  #19 ([b5005a0](https://github.com/imAsparky/sphinx-class-tocr/commit/b5005a0d0e501bf67b628c97d88466b9e82e7952))
+  - Added path to .readthedocs.yaml #19 ([33c828a](https://github.com/imAsparky/sphinx-class-tocr/commit/33c828ae75fcd5f6a8ef977b44818284596285bd))
+  - Added to build requirements #19 ([c3e8b1d](https://github.com/imAsparky/sphinx-class-tocr/commit/c3e8b1d7df8c47768c458b589755b69ddafc95e7))
+  - sphinxclasstocr removed requ.txt #19 ([4627f68](https://github.com/imAsparky/sphinx-class-tocr/commit/4627f6807936cdea1b19455faad1c3496976381c))
+  - .readthedocs.yaml typo fixed #19 ([6173dd0](https://github.com/imAsparky/sphinx-class-tocr/commit/6173dd0a7e39605dea23b8b9329e4d5f7d571243))
+  - .readthedocs.yaml format fixed #19 ([6b9f5d2](https://github.com/imAsparky/sphinx-class-tocr/commit/6b9f5d2c43b73d5399368661c279beca57c39611))
+  - Removed readthedocs pinned versions #12 ([84ea671](https://github.com/imAsparky/sphinx-class-tocr/commit/84ea6719a4f4961fb974b97bd627d4e1975ff491))
+  - Add missing packages to requirements #12 ([fd325d2](https://github.com/imAsparky/sphinx-class-tocr/commit/fd325d23b5d7c02415a8b1e54c7ef672e60168b9))
+  - Pinned sphinx in docs requirements #12 ([620f860](https://github.com/imAsparky/sphinx-class-tocr/commit/620f86006eaba67a2c59baff96e598948c7b5043))
+  - Update .readthedocs.yaml #12 ([08a6470](https://github.com/imAsparky/sphinx-class-tocr/commit/08a64707dd6264ec46df40f959bc6d891e1a3240))
+  - Added mystparser to conf #12 ([fcb9c80](https://github.com/imAsparky/sphinx-class-tocr/commit/fcb9c80c4dcddcea3c828a528a344ed9cce10b97))
+
+- toml:
+  - Changed back to original config #16 ([65174a3](https://github.com/imAsparky/sphinx-class-tocr/commit/65174a3761b65f773d71b2bfc8fff09b6bab4998))
+  - Tweak version variable for a test ([39b00e3](https://github.com/imAsparky/sphinx-class-tocr/commit/39b00e3bf85f6ded8c82fa4e0e0b254c7ca1e5be))
+
 ## [v0.0.0](https://github.com/imAsparky/sphinx-class-tocr/releases/tag/v0.0.0) - 2020-06-23 14:53:47
 
 I deleted the release numbers from autoclasstoc, and the final release, v1.2.0,  was re-tagged to v0.0.0.
