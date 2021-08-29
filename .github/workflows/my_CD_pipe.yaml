@@ -9,7 +9,7 @@ on:
 
 jobs:
     testing:
-        if: ${{"docs(CHANGELOG):" !in  git log --format=%B --max-count=1}}
+        if: contains(git log --format=%B --max-count=1, "docs(CHANGELOG):")
         runs-on: ubuntu-latest
 
         steps:
