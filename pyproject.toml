@@ -1,7 +1,7 @@
 [tool.poetry]
 name = 'sphinxclasstocr'
 description ='Group Python Class items logically in documentation using Sphinx.'
-version = "0.0.9"
+version = "0.0.10"
 authors = ['Mark Sevelj <mark.sevelj@dunwright.com.au>']
 maintainers = ['Mark Sevelj <mark.sevelj@dunwright.com.au>']
 license = 'MIT'
