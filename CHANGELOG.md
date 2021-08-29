@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## [v0.0.17](https://github.com/imAsparky/sphinx-class-tocr/releases/tag/v0.0.17) - 2021-08-29 14:35:55
+
+*No description*
+
 ## [v0.0.16](https://github.com/imAsparky/sphinx-class-tocr/releases/tag/v0.0.16) - 2021-08-29 14:34:02
 
 *No description*
