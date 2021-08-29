@@ -70,6 +70,7 @@ patch_emoji = ':ambulance:'
 minor_emoji = ':chart_with_upwards_trend:'
 major_emoji = ':boom:'
 build_command = 'poetry build'
+commit_message = 'docs(CHANGELOG): update release notes:{version}'
 
 
 [tool.black]
