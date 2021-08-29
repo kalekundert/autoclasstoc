@@ -51,25 +51,25 @@ jobs:
               run: echo "::set-output name=version::$(poetry version --short)"
               id: version
 
-            # - name: create_release
-            #   uses: actions/create-release@v1
-            #   id: create_release
-            #   with:
-            #       draft: false
-            #       prerelease: false
-            #       release_name: v${{ steps.version.outputs.version }}
-            #       tag_name: v${{ steps.version.outputs.version }}
-            #   env:
-            #       GITHUB_TOKEN: ${{secrets.CHANGELOG_UPDATE}}
+            - name: create_release
+              uses: actions/create-release@v1
+              id: create_release
+              with:
+                  draft: false
+                  prerelease: false
+                  release_name: v${{ steps.version.outputs.version }}
+                  tag_name: v${{ steps.version.outputs.version }}
+              env:
+                  GITHUB_TOKEN: ${{secrets.CHANGELOG_UPDATE}}
 
-            # - name: update changelog
-            #   uses: BobAnkh/auto-generate-changelog@master
-            #   with:
-            #       REPO_NAME: "imAsparky/sphinxclasstocr"
-            #       ACCESS_TOKEN: ${{secrets.CHANGELOG_UPDATE}}
-            #       PATH: "CHANGELOG.md"
-            #       COMMIT_MESSAGE: "docs(CHANGELOG): update release notes:v${{ steps.version.outputs.version }}"
-            #       TYPE: "chore:Chore,feat:Feature,fix:Bug Fixes,docs:Documentation,perf:Performance Improvements,refactor:Refactor,style:Styling,test:Tests"
+            - name: update changelog
+              uses: BobAnkh/auto-generate-changelog@master
+              with:
+                  REPO_NAME: "imAsparky/sphinxclasstocr"
+                  ACCESS_TOKEN: ${{secrets.CHANGELOG_UPDATE}}
+                  PATH: "CHANGELOG.md"
+                  COMMIT_MESSAGE: "docs(CHANGELOG): update release notes:v${{ steps.version.outputs.version }}"
+                  TYPE: "chore:Chore,feat:Feature,fix:Bug Fixes,docs:Documentation,perf:Performance Improvements,refactor:Refactor,style:Styling,test:Tests"
 
             # - name: add release notes
             #   uses: actions/upload-release-asset@v1
