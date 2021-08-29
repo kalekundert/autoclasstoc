@@ -1,7 +1,5 @@
 name: Continous Deployment
 
-if: ${{"docs(CHANGELOG):" !in  git log --format=%B --max-count=1}}
-
 on:
     push:
         branches:
@@ -11,6 +9,7 @@ on:
 
 jobs:
     testing:
+        if: ${{"docs(CHANGELOG):" !in  git log --format=%B --max-count=1}}
         runs-on: ubuntu-latest
 
         steps:
