@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## [v0.0.2](https://github.com/imAsparky/sphinx-class-tocr/releases/tag/v0.0.2) - 2021-08-28 22:55:15
+## [v0.0.4](https://github.com/imAsparky/sphinx-class-tocr/releases/tag/v0.0.4) - 2021-08-29 03:27:27
 
 *No description*
 
@@ -12,6 +12,11 @@
   - sphinx.rst auto -> sphinxclasstocr #6 ([4c3ff4c](https://github.com/imAsparky/sphinx-class-tocr/commit/4c3ff4c968ecdc74e03ddb6d1f507eafee81861e))
   - pythonx.rst update to sphinxclasstocr #6 ([97a36c2](https://github.com/imAsparky/sphinx-class-tocr/commit/97a36c2682e6a853e3e74df0dbf6042b24de502e))
   - autoclass.css -> sphinxtocr.css #6 ([1f5443c](https://github.com/imAsparky/sphinx-class-tocr/commit/1f5443c90d93705a3be18b3f1cbd705f865725dd))
+  - sphinx.rst update to sphinxclasstocr #6 ([8beda22](https://github.com/imAsparky/sphinx-class-tocr/commit/8beda225c586733c7f451a943ed48dbdae19f07b))
+  - rst.rst update to sphinxclasstocr #6 ([86acf4c](https://github.com/imAsparky/sphinx-class-tocr/commit/86acf4c0cd382009eb491547b30f61fe7462e11f))
+  - autoclasstoc.css -> sphinxclasstocr #6 ([f9beff8](https://github.com/imAsparky/sphinx-class-tocr/commit/f9beff83f87b19386dcd9bddf7ad204c88ff429f))
+  - autoclasstoc -> sphinxclasstocr #6 ([6321a7e](https://github.com/imAsparky/sphinx-class-tocr/commit/6321a7eac7fe679c5765c67a15548d0092b0de0c))
+  - Update pyproject.toml #13 ([f0b3877](https://github.com/imAsparky/sphinx-class-tocr/commit/f0b387719ba0c1a04958ad236de9f1061f8d2113))
 
 - poetry:
   - update packages and lock ([95a5eb8](https://github.com/imAsparky/sphinx-class-tocr/commit/95a5eb836bbf6502ef0353223f2d6e56b0d32984))
@@ -23,72 +28,12 @@
   - Codacy suggestions #26 ([37f18b7](https://github.com/imAsparky/sphinx-class-tocr/commit/37f18b7755582b797eca6881466f0e4c25db6583))
   - Codacy suggestions #26 ([019a07b](https://github.com/imAsparky/sphinx-class-tocr/commit/019a07b4fb8be9eb38ce3e6c3a2a40c46a660f12))
 
-### Feature
-
-- poetry:
-  - Added poetry for builds #34 ([cf1d84f](https://github.com/imAsparky/sphinx-class-tocr/commit/cf1d84fe3a9ccb2dadbc7d045a3028458c2e9358))
-
-- test:
-  - Deploy to PyPi test workflow added #34 ([160eb95](https://github.com/imAsparky/sphinx-class-tocr/commit/160eb95a82230bdbe198dd32d2b931a4a3317447))
-  - Include Coveralls in CD build #32 ([eaf4c56](https://github.com/imAsparky/sphinx-class-tocr/commit/eaf4c56994b30585d86a35cd148d4f321de6f6ab))
-  - Coverage by Coveralls added #32 ([f035dc5](https://github.com/imAsparky/sphinx-class-tocr/commit/f035dc5077e01a52ec80ac9e53f14809eba0eb24))
-
-- docs:
-  - Added code example copy button #23 ([4ed490e](https://github.com/imAsparky/sphinx-class-tocr/commit/4ed490eac112a3c06f2c6eda98fefcab3b081376))
-
-### Bug Fixes
-
-- docs:
-  - add github PAT for CHANGELOG build #36 ([43a9453](https://github.com/imAsparky/sphinx-class-tocr/commit/43a9453d78acb0c0b57f3c528b8078a375c6a29d))
-  - requirements for build pinned #20 ([c89209d](https://github.com/imAsparky/sphinx-class-tocr/commit/c89209d70168baaa35d9a41e4c402acfed8c1eac))
-  - Build fail myst_parser version  #19 ([734c2a9](https://github.com/imAsparky/sphinx-class-tocr/commit/734c2a9ad99064f25ba687f8175c528ce82e8fca))
-
-- deploy:
-  - README edited unknown role :doc: #35 ([f34a5ea](https://github.com/imAsparky/sphinx-class-tocr/commit/f34a5ea12e6a3d90baa73557a9ba40c1eadce406))
-
-- test:
-  - coveralls-python added to CD build  #32 ([623b029](https://github.com/imAsparky/sphinx-class-tocr/commit/623b029fd2eb270dd054c6fd30fbce47a5b738dd))
-
-- utils:
-  - Fix ConfigError "f" string #31 ([d5a1eea](https://github.com/imAsparky/sphinx-class-tocr/commit/d5a1eeafd988bf195c0a75850bd3cd01cc258a6e))
-
-### Documentation
-
-- update:
-  - Add index label and fix README #24 ([e72fc0a](https://github.com/imAsparky/sphinx-class-tocr/commit/e72fc0adfcd5a8bc3a735ea1babe100feaa85fda))
-  - Fixed index.rst logo linking #22 ([6b7a3ca](https://github.com/imAsparky/sphinx-class-tocr/commit/6b7a3ca2fe967bda60f557a6ebbb4c283fbd887a))
-  - README.rst #24 ([e330282](https://github.com/imAsparky/sphinx-class-tocr/commit/e3302821473bca206446c7a357c8d9a7cbd726d1))
-
-- theme:
-  - Replace RTD theme with Furo theme #21 ([4530405](https://github.com/imAsparky/sphinx-class-tocr/commit/4530405130c8b842aabb797534acd9a935fb384a))
-
-- typo:
-  - Index.rst TOC indentation error fixed ([53daad7](https://github.com/imAsparky/sphinx-class-tocr/commit/53daad7d78bf1baa3c059ae9edb571fe311a6b1f))
-
-### Tests
-
-- utils:
-  - Added test paramaters #28 ([369dc2e](https://github.com/imAsparky/sphinx-class-tocr/commit/369dc2e7ac7ea9f309a03ff858f6d37bbda5bdab))
-
-## [v0.0.1](https://github.com/imAsparky/sphinx-class-tocr/releases/tag/v0.0.1) - 2021-08-16 03:25:57
-
-Allow testing of changes made to date.
-
-### Chore
-
 - tags:
   - Update __init__ to latest version #18 ([c85333b](https://github.com/imAsparky/sphinx-class-tocr/commit/c85333b7e5e569fc64a1ee7b33b58dcfabd678a1))
 
 - toml:
   - Test_&_release fix pyproj reference #17 ([889bdac](https://github.com/imAsparky/sphinx-class-tocr/commit/889bdac442ecc2d414858eb94e6a4055b01b8574))
   - Update pyproject to PEP621 #17 ([b53de0f](https://github.com/imAsparky/sphinx-class-tocr/commit/b53de0f46547a96e8d8db337ba3135c0566e8156))
-
-- docs:
-  - sphinx.rst update to sphinxclasstocr #6 ([8beda22](https://github.com/imAsparky/sphinx-class-tocr/commit/8beda225c586733c7f451a943ed48dbdae19f07b))
-  - rst.rst update to sphinxclasstocr #6 ([86acf4c](https://github.com/imAsparky/sphinx-class-tocr/commit/86acf4c0cd382009eb491547b30f61fe7462e11f))
-  - autoclasstoc.css -> sphinxclasstocr #6 ([f9beff8](https://github.com/imAsparky/sphinx-class-tocr/commit/f9beff83f87b19386dcd9bddf7ad204c88ff429f))
-  - autoclasstoc -> sphinxclasstocr #6 ([6321a7e](https://github.com/imAsparky/sphinx-class-tocr/commit/6321a7eac7fe679c5765c67a15548d0092b0de0c))
-  - Update pyproject.toml #13 ([f0b3877](https://github.com/imAsparky/sphinx-class-tocr/commit/f0b387719ba0c1a04958ad236de9f1061f8d2113))
 
 - git:
   - Add vscode to .gitignore ([211b3a3](https://github.com/imAsparky/sphinx-class-tocr/commit/211b3a384c5d621d47f87fabb31a67bb2ab6b883))
@@ -115,29 +60,66 @@ Allow testing of changes made to date.
 - yaml:
   - Standardise from to yaml #8 ([85f3f2e](https://github.com/imAsparky/sphinx-class-tocr/commit/85f3f2e6ec927f19e5ec1e96a97a517a94919b5c))
 
-### Bug Fixes
+### Feature
 
-- toml:
-  - [tool.semantic_release] branch=main  #16 ([160e355](https://github.com/imAsparky/sphinx-class-tocr/commit/160e355be66777f5741845f2a096cd62375a546b))
+- poetry:
+  - Added poetry for builds #34 ([cf1d84f](https://github.com/imAsparky/sphinx-class-tocr/commit/cf1d84fe3a9ccb2dadbc7d045a3028458c2e9358))
+
+- test:
+  - Deploy to PyPi test workflow added #34 ([160eb95](https://github.com/imAsparky/sphinx-class-tocr/commit/160eb95a82230bdbe198dd32d2b931a4a3317447))
+  - Include Coveralls in CD build #32 ([eaf4c56](https://github.com/imAsparky/sphinx-class-tocr/commit/eaf4c56994b30585d86a35cd148d4f321de6f6ab))
+  - Coverage by Coveralls added #32 ([f035dc5](https://github.com/imAsparky/sphinx-class-tocr/commit/f035dc5077e01a52ec80ac9e53f14809eba0eb24))
 
 - docs:
+  - Added code example copy button #23 ([4ed490e](https://github.com/imAsparky/sphinx-class-tocr/commit/4ed490eac112a3c06f2c6eda98fefcab3b081376))
+
+### Bug Fixes
+
+- docs:
+  - add github PAT for CHANGELOG build #36 ([43a9453](https://github.com/imAsparky/sphinx-class-tocr/commit/43a9453d78acb0c0b57f3c528b8078a375c6a29d))
+  - requirements for build pinned #20 ([c89209d](https://github.com/imAsparky/sphinx-class-tocr/commit/c89209d70168baaa35d9a41e4c402acfed8c1eac))
+  - Build fail myst_parser version  #19 ([734c2a9](https://github.com/imAsparky/sphinx-class-tocr/commit/734c2a9ad99064f25ba687f8175c528ce82e8fca))
   - Cleanup file after docs build ok #12 ([d04c44e](https://github.com/imAsparky/sphinx-class-tocr/commit/d04c44e5ed2ff23ec1af33b3e129552cd52b2216))
   - Removed myst-parser from conf  #12 ([2764db4](https://github.com/imAsparky/sphinx-class-tocr/commit/2764db4c2c6b7766ec9c7c3a869183526d81328e))
   - Added missing package to requ.txt #12 ([7bfd881](https://github.com/imAsparky/sphinx-class-tocr/commit/7bfd881d65a5d439755d5bf9bedf7e35b36e57da))
 
+- deploy:
+  - README edited unknown role :doc: #35 ([f34a5ea](https://github.com/imAsparky/sphinx-class-tocr/commit/f34a5ea12e6a3d90baa73557a9ba40c1eadce406))
+
+- test:
+  - coveralls-python added to CD build  #32 ([623b029](https://github.com/imAsparky/sphinx-class-tocr/commit/623b029fd2eb270dd054c6fd30fbce47a5b738dd))
+
+- utils:
+  - Fix ConfigError "f" string #31 ([d5a1eea](https://github.com/imAsparky/sphinx-class-tocr/commit/d5a1eeafd988bf195c0a75850bd3cd01cc258a6e))
+
+- toml:
+  - [tool.semantic_release] branch=main  #16 ([160e355](https://github.com/imAsparky/sphinx-class-tocr/commit/160e355be66777f5741845f2a096cd62375a546b))
+
 ### Documentation
+
+- update:
+  - Add index label and fix README #24 ([e72fc0a](https://github.com/imAsparky/sphinx-class-tocr/commit/e72fc0adfcd5a8bc3a735ea1babe100feaa85fda))
+  - Fixed index.rst logo linking #22 ([6b7a3ca](https://github.com/imAsparky/sphinx-class-tocr/commit/6b7a3ca2fe967bda60f557a6ebbb4c283fbd887a))
+  - README.rst #24 ([e330282](https://github.com/imAsparky/sphinx-class-tocr/commit/e3302821473bca206446c7a357c8d9a7cbd726d1))
+
+- theme:
+  - Replace RTD theme with Furo theme #21 ([4530405](https://github.com/imAsparky/sphinx-class-tocr/commit/4530405130c8b842aabb797534acd9a935fb384a))
+
+- typo:
+  - Index.rst TOC indentation error fixed ([53daad7](https://github.com/imAsparky/sphinx-class-tocr/commit/53daad7d78bf1baa3c059ae9edb571fe311a6b1f))
+  - README.rst fix typo ([7e4a07b](https://github.com/imAsparky/sphinx-class-tocr/commit/7e4a07b46f3fe37362623a5eb42165ff5be9a9d1))
 
 - docs:
   - Remove non relevant material #14 ([b654147](https://github.com/imAsparky/sphinx-class-tocr/commit/b654147e368e6e76be7c6cdfe9c2b7d404735680))
   - Modified for readthedocs #10 ([ebd218f](https://github.com/imAsparky/sphinx-class-tocr/commit/ebd218fc7ba1cc3fc4f9449adc120ad4ac48aca6))
 
-- typo:
-  - README.rst fix typo ([7e4a07b](https://github.com/imAsparky/sphinx-class-tocr/commit/7e4a07b46f3fe37362623a5eb42165ff5be9a9d1))
-
 - README:
   - Minimal update for this project #9 ([069434f](https://github.com/imAsparky/sphinx-class-tocr/commit/069434f3012051cf3c712e44363c705b2b864078))
 
 ### Tests
+
+- utils:
+  - Added test paramaters #28 ([369dc2e](https://github.com/imAsparky/sphinx-class-tocr/commit/369dc2e7ac7ea9f309a03ff858f6d37bbda5bdab))
 
 - review:
   - Check and run after name change #15 ([d07948e](https://github.com/imAsparky/sphinx-class-tocr/commit/d07948e1d28065f06b15db6bbd6283139b5513c3))
