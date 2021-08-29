@@ -71,7 +71,8 @@ minor_emoji = ':chart_with_upwards_trend:'
 major_emoji = ':boom:'
 build_command = 'poetry build'
 commit_message = 'docs(CHANGELOG): update release notes:{version}'
-
+upload_to_pypi = 'false'
+upload_to_release = 'true'
 
 [tool.black]
 line-length = 79
