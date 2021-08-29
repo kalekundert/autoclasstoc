@@ -9,13 +9,13 @@ on:
 
 jobs:
     testing:
-        if: contains(git log --format=%B --max-count=1, "docs(CHANGELOG):")
         runs-on: ubuntu-latest
 
         steps:
             - uses: actions/checkout@v2
               with:
                   fetch-depth: 0
+              if: contains(git log --format=%B --max-count=1, "docs(CHANGELOG):")
             - uses: actions/setup-python@v2
 
             - name: add github globals
@@ -31,6 +31,11 @@ jobs:
 
             # - name: Run tox tests
             #   run: poetry run tox
+
+            - name: Extract Branch Name
+              run: |
+                  echo "BRANCH=$(echo ${GITHUB_REF##*/})" >> $GITHUB_ENV
+                  echo "We are on branch " BRANCH
 
             - name: Print current version
               run: poetry run semantic-release print-version --current
