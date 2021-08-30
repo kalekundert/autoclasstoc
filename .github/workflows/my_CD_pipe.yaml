@@ -37,29 +37,25 @@ jobs:
           echo "BRANCH=$(echo ${GITHUB_REF##*/})" >> $GITHUB_ENV
           echo "We are on branch " BRANCH
 
-    update_version:
-      needs: testing
+      - name: Print current version
+        run: poetry run semantic-release print-version --current
 
-      steps:
-        - name: Print current version
-          run: poetry run semantic-release print-version --current
+      - name: Print new version
+        run: poetry run semantic-release print-version
 
-        - name: Print new version
-          run: poetry run semantic-release print-version
+      - name: Update version number
+        env:
+          GITHUB_TOKEN: ${{secrets.CHANGELOG_UPDATE}}
+        run: |
+          poetry run semantic-release version
+          git push
 
-        - name: Update version number
-          env:
-            GITHUB_TOKEN: ${{secrets.CHANGELOG_UPDATE}}
-          run: |
-            poetry run semantic-release version
-            git push
+      - name: Print poetry version
+        run: poetry version --short
 
-        - name: Print poetry version
-          run: poetry version --short
-
-        - name: version
-          run: echo "::set-output name=version::$(poetry version --short)"
-          id: version
+      - name: version
+        run: echo "::set-output name=version::$(poetry version --short)"
+        id: version
 
   # create release:
   #   needs: update_version
