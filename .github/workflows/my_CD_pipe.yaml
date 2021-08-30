@@ -1,78 +1,86 @@
 name: Continous Deployment
 
 on:
-    push:
-        branches:
-            - main
+  push:
+    branches:
+      - main
 
-    workflow_dispatch:
+  workflow_dispatch:
 
 jobs:
-    testing:
-        runs-on: ubuntu-latest
+  testing:
+    runs-on: ubuntu-latest
 
-        steps:
-            - uses: actions/checkout@v2
-              with:
-                  fetch-depth: 0
-              if: contains(git log --format=%B --max-count=1, "docs(CHANGELOG):")
-            - uses: actions/setup-python@v2
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+        if: contains(git log --format=%B --max-count=1, "docs(CHANGELOG):")
+      - uses: actions/setup-python@v2
 
-            - name: add github globals
-              run: |
-                  git config --global user.name Continous Deployment
-                  git config --global user.email continous.deployment@github.action.com
+      - name: add github globals
+        run: |
+          git config --global user.name Continous Deployment
+          git config --global user.email continous.deployment@github.action.com
 
-            - name: Install Poetry deps
-              run: |
-                  curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/install-poetry.py | python -
-                  export PATH=$PATH:$HOME/.poetry/bin
-                  poetry install
+      - name: Install Poetry deps
+        run: |
+          curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/install-poetry.py | python -
+          export PATH=$PATH:$HOME/.poetry/bin
+          poetry install
 
-            # - name: Run tox tests
-            #   run: poetry run tox
+      - name: Run tox tests
+        run: poetry run tox
 
-            - name: Extract Branch Name
-              run: |
-                  echo "BRANCH=$(echo ${GITHUB_REF##*/})" >> $GITHUB_ENV
-                  echo "We are on branch " BRANCH
+      - name: Extract Branch Name
+        run: |
+          echo "BRANCH=$(echo ${GITHUB_REF##*/})" >> $GITHUB_ENV
+          echo "We are on branch " BRANCH
 
-            - name: Print current version
-              run: poetry run semantic-release print-version --current
+  update_version:
+    needs: testing
 
-            - name: Print new version
-              run: poetry run semantic-release print-version
+    steps:
+      - name: Print current version
+        run: poetry run semantic-release print-version --current
 
-            - name: Update version number
-              env:
-                  GITHUB_TOKEN: ${{secrets.CHANGELOG_UPDATE}}
-              run: |
-                  poetry run semantic-release version
-                  git push
+      - name: Print new version
+        run: poetry run semantic-release print-version
 
-            - name: Print poetry version
-              run: poetry version --short
+      - name: Update version number
+        env:
+          GITHUB_TOKEN: ${{secrets.CHANGELOG_UPDATE}}
+        run: |
+          poetry run semantic-release version
+          git push
 
-            - name: version
-              run: echo "::set-output name=version::$(poetry version --short)"
-              id: version
+      - name: Print poetry version
+        run: poetry version --short
 
-            - name: create_release
-              uses: actions/create-release@v1
-              id: create_release
-              with:
-                  draft: false
-                  prerelease: false
-                  release_name: v${{ steps.version.outputs.version }}
-                  tag_name: v${{ steps.version.outputs.version }}
-              env:
-                  GITHUB_TOKEN: ${{secrets.CHANGELOG_UPDATE}}
+      - name: version
+        run: echo "::set-output name=version::$(poetry version --short)"
+        id: version
 
-            # - name: update changelog
-            #   uses: BobAnkh/auto-generate-changelog@master
-            #   with:
-            #       REPO_NAME: "imAsparky/sphinxclasstocr"
-            #       ACCESS_TOKEN: ${{secrets.CHANGELOG_UPDATE}}
-            #       PATH: "CHANGELOG.md"
-            #       COMMIT_MESSAGE: "docs(CHANGELOG): update release notes:v${{ steps.version.outputs.version }}"
-            #       TYPE: "chore:Chore,feat:Feature,fix:Bug Fixes,docs:Documentation,perf:Performance Improvements,refactor:Refactor,style:Styling,test:Tests"
+  create release:
+    needs: update_version
+
+    steps:
+      - name: create_release
+        uses: actions/create-release@v1
+        id: create_release
+        with:
+          draft: false
+          prerelease: false
+          release_name: v${{ steps.version.outputs.version }}
+          tag_name: v${{ steps.version.outputs.version }}
+        env:
+          GITHUB_TOKEN: ${{secrets.CHANGELOG_UPDATE}}
+
+  #     # - name: update changelog
+  #     #   uses: BobAnkh/auto-generate-changelog@master
+  #     #   with:
+  #     #       REPO_NAME: "imAsparky/sphinxclasstocr"
+  #     #       ACCESS_TOKEN: ${{secrets.CHANGELOG_UPDATE}}
+  #     #       PATH: "CHANGELOG.md"
+  #     #       COMMIT_MESSAGE: "docs(CHANGELOG): update release notes:v${{ steps.version.outputs.version }}"
+  #     #       TYPE: "chore:Chore,feat:Feature,fix:Bug Fixes,docs:Documentation,perf:Performance Improvements,refactor:Refactor,style:Styling,test:Tests"
