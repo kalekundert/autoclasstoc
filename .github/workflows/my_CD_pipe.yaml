@@ -15,7 +15,7 @@ jobs:
       - uses: actions/checkout@v2
         with:
           fetch-depth: 0
-        if: contains(git log --format=%B --max-count=1, "docs(CHANGELOG):")
+        # if: contains(git log --format=%B --max-count=1, "docs(CHANGELOG):")
       - uses: actions/setup-python@v2
 
       - name: add github globals
@@ -37,44 +37,44 @@ jobs:
           echo "BRANCH=$(echo ${GITHUB_REF##*/})" >> $GITHUB_ENV
           echo "We are on branch " BRANCH
 
-  update_version:
-    needs: testing
+    update_version:
+      needs: testing
 
-    steps:
-      - name: Print current version
-        run: poetry run semantic-release print-version --current
+      steps:
+        - name: Print current version
+          run: poetry run semantic-release print-version --current
 
-      - name: Print new version
-        run: poetry run semantic-release print-version
+        - name: Print new version
+          run: poetry run semantic-release print-version
 
-      - name: Update version number
-        env:
-          GITHUB_TOKEN: ${{secrets.CHANGELOG_UPDATE}}
-        run: |
-          poetry run semantic-release version
-          git push
+        - name: Update version number
+          env:
+            GITHUB_TOKEN: ${{secrets.CHANGELOG_UPDATE}}
+          run: |
+            poetry run semantic-release version
+            git push
 
-      - name: Print poetry version
-        run: poetry version --short
+        - name: Print poetry version
+          run: poetry version --short
 
-      - name: version
-        run: echo "::set-output name=version::$(poetry version --short)"
-        id: version
+        - name: version
+          run: echo "::set-output name=version::$(poetry version --short)"
+          id: version
 
-  create release:
-    needs: update_version
+  # create release:
+  #   needs: update_version
 
-    steps:
-      - name: create_release
-        uses: actions/create-release@v1
-        id: create_release
-        with:
-          draft: false
-          prerelease: false
-          release_name: v${{ steps.version.outputs.version }}
-          tag_name: v${{ steps.version.outputs.version }}
-        env:
-          GITHUB_TOKEN: ${{secrets.CHANGELOG_UPDATE}}
+  #   steps:
+  #     - name: create_release
+  #       uses: actions/create-release@v1
+  #       id: create_release
+  #       with:
+  #         draft: false
+  #         prerelease: false
+  #         release_name: v${{ steps.version.outputs.version }}
+  #         tag_name: v${{ steps.version.outputs.version }}
+  #       env:
+  #         GITHUB_TOKEN: ${{secrets.CHANGELOG_UPDATE}}
 
   #     # - name: update changelog
   #     #   uses: BobAnkh/auto-generate-changelog@master
