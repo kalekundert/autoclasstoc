@@ -1,8 +1,56 @@
 # CHANGELOG
 
-## Unreleased
+## [v0.0.19](https://github.com/imAsparky/sphinx-class-tocr/releases/tag/v0.0.19) - 2021-08-29 14:40:36
 
-Changes unreleased.
+*No description*
+
+## [v0.0.18](https://github.com/imAsparky/sphinx-class-tocr/releases/tag/v0.0.18) - 2021-08-29 14:38:23
+
+*No description*
+
+## [v0.0.17](https://github.com/imAsparky/sphinx-class-tocr/releases/tag/v0.0.17) - 2021-08-29 14:35:55
+
+*No description*
+
+## [v0.0.16](https://github.com/imAsparky/sphinx-class-tocr/releases/tag/v0.0.16) - 2021-08-29 14:34:02
+
+*No description*
+
+## [v0.0.15](https://github.com/imAsparky/sphinx-class-tocr/releases/tag/v0.0.15) - 2021-08-29 14:31:42
+
+*No description*
+
+## [v0.0.14](https://github.com/imAsparky/sphinx-class-tocr/releases/tag/v0.0.14) - 2021-08-29 14:29:31
+
+*No description*
+
+## [v0.0.13](https://github.com/imAsparky/sphinx-class-tocr/releases/tag/v0.0.13) - 2021-08-29 14:27:27
+
+*No description*
+
+## [v0.0.12](https://github.com/imAsparky/sphinx-class-tocr/releases/tag/v0.0.12) - 2021-08-29 14:25:08
+
+*No description*
+
+## [v0.0.11](https://github.com/imAsparky/sphinx-class-tocr/releases/tag/v0.0.11) - 2021-08-29 14:23:11
+
+*No description*
+
+## [v0.0.10](https://github.com/imAsparky/sphinx-class-tocr/releases/tag/v0.0.10) - 2021-08-29 14:20:56
+
+*No description*
+
+## [v0.0.9](https://github.com/imAsparky/sphinx-class-tocr/releases/tag/v0.0.9) - 2021-08-29 14:18:21
+
+*No description*
+
+## [v0.0.8](https://github.com/imAsparky/sphinx-class-tocr/releases/tag/v0.0.8) - 2021-08-29 14:15:44
+
+*No description*
+
+## [v0.0.7](https://github.com/imAsparky/sphinx-class-tocr/releases/tag/v0.0.7) - 2021-08-29 14:13:25
+
+*No description*
 
 ### Chore
 
