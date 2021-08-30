@@ -32,10 +32,10 @@ jobs:
       - name: Run tox tests
         run: poetry run tox
 
-      - name: Extract Branch Name
-        run: |
-          echo "BRANCH=$(echo ${GITHUB_REF##*/})" >> $GITHUB_ENV
-          echo "We are on branch " ${{BRANCH}}
+      # - name: Extract Branch Name
+      #   run: |
+      #     echo "BRANCH=$(echo ${GITHUB_REF##*/})" >> $GITHUB_ENV
+      #     echo "We are on branch " ${{BRANCH}}
 
       - name: Print current version
         run: poetry run semantic-release print-version --current
