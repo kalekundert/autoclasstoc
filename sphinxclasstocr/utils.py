@@ -32,7 +32,9 @@ def pick_class(qual_name, env):
     if qual_name:
         mod_name, cls_name = qual_name.rsplit(".", 1)
     else:
-        cls_name = env.temp_data.get("autodoc:class") or env.ref_context.get("py:class")
+        cls_name = env.temp_data.get("autodoc:class") or env.ref_context.get(
+            "py:class"
+        )
         mod_name = env.temp_data.get("autodoc:module") or env.ref_context.get(
             "py:module"
         )
@@ -117,7 +119,9 @@ def make_inherited_details(state, parent, open_by_default=False):
 
     _details_summary = DetailsSummary()
     _details_summary += strip_p(
-        nodes_from_rst(state, f"Inherited from :py:class:`{parent.__qualname__}`")
+        nodes_from_rst(
+            state, f"Inherited from :py:class:`{parent.__qualname__}`"
+        )
     )
 
     _details = Details(open_by_default)
@@ -147,7 +151,11 @@ def find_inherited_attrs(cls):
     Return a dictionary mapping parent classes to the attributes inherited from
     those classes.
     """
-    return {base: base.__dict__ for base in cls.__mro__ if base not in (cls, object)}
+    return {
+        base: base.__dict__
+        for base in cls.__mro__
+        if base not in (cls, object)
+    }
 
 
 def filter_attrs(attrs, predicate):

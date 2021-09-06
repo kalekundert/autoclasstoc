@@ -30,7 +30,8 @@ class SphinxClassTocr(SphinxDirective):
             mod_name, cls_name = utils.pick_class(qual_name, self.env)
             mod, cls = utils.load_class(mod_name, cls_name)
             sections = utils.pick_sections(
-                self.options.get("sections") or self.config.sphinxclasstocr_sections,
+                self.options.get("sections")
+                or self.config.sphinxclasstocr_sections,
                 exclude=self.options.get("exclude-sections"),
             )
             return utils.make_toc(self.state, cls, sections)

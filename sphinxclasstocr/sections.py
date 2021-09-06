@@ -73,9 +73,13 @@ class Section:
         e.g. if it doesn't have a title specified.
         """
         if not self.key:
-            raise ConfigError(f"no key specified for {self.__class__.__name__!r}")
+            raise ConfigError(
+                f"no key specified for {self.__class__.__name__!r}"
+            )
         if not self.title:
-            raise ConfigError(f"no title specified for {self.__class__.__name__!r}")
+            raise ConfigError(
+                f"no title specified for {self.__class__.__name__!r}"
+            )
 
     def format(self):
         """
