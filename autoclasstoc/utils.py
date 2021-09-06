@@ -65,7 +65,7 @@ def pick_sections(sections, exclude=None):
         if issubclass(x, Section):
             return x
 
-        raise ConfigError("cannot interpret {x!r} as a section")
+        raise ConfigError(f"cannot interpret {x!r} as a section")
 
     sections = [
             _section_from_anything(x)
