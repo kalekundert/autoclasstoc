@@ -1,5 +1,17 @@
 default_stages: [commit]
 fail_fast: true
+exclude: "conf.py"
+
+ci:
+    autofix_commit_msg: |
+        chore(pre-commit): Auto fixes from pre-commit.com hooks
+
+        for more information, see https://pre-commit.ci
+    autofix_prs: true
+    autoupdate_commit_msg: "chore(pre-commit): Weekly pre-commit autoupdate"
+    autoupdate_schedule: weekly
+    skip: []
+    submodules: false
 
 repos:
     - repo: https://github.com/pre-commit/pre-commit-hooks
