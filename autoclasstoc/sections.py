@@ -12,7 +12,7 @@ class Section:
 
     The purpose of this class is to make it easy to customize the sections that 
     make up the class TOC.  For example, you might want an "Event Handler" 
-    section that includes any method that starts with "on\_".  Or you might 
+    section that includes any method that starts with "on\\_".  Or you might 
     want to format the links in a table with multiple columns, to save more 
     space.  
 
