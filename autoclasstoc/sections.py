@@ -1,5 +1,3 @@
-#!/usr/bin/env python3
-
 import inspect
 from docutils import nodes as _nodes
 from . import utils

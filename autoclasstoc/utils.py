@@ -1,5 +1,3 @@
-#!/usr/bin/env python3
-
 from docutils import nodes as _nodes
 from docutils.statemachine import StringList, string2lines
 from importlib import import_module

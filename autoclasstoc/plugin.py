@@ -1,5 +1,3 @@
-#!/usr/bin/env python3
-
 from sphinx.util.docutils import SphinxDirective
 from . import utils, __version__, ConfigError
 
