@@ -246,6 +246,14 @@ class PublicMethods(Section):
         )
 
 
+class PublicMethodsWithoutDunders(PublicMethods):
+    """
+    Include a "Public Methods" section in the class TOC.
+    """
+    key = 'public-methods-without-dunders'
+    exclude_pattern = '__'
+
+
 class PrivateMethods(Section):
     """
     Include a "Private Methods" section in the class TOC.
