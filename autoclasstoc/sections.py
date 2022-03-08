@@ -129,9 +129,7 @@ class Section:
         :attr:`~.exclude_pattern`
         """
         if self.exclude_pattern:
-            return any(
-                re.search(p, name)
-                for p in self.exclude_pattern)
+            return any(re.search(p, name) for p in self.exclude_pattern)
 
     def predicate(self, name, attr, meta):
         """
