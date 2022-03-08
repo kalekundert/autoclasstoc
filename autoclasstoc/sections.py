@@ -131,6 +131,8 @@ class Section:
         """
         if exclude_pattern:
             return any(re.search(p, name) for p in exclude_pattern)
+        else:
+            return False
 
     def predicate(self, name, attr, meta):
         """
