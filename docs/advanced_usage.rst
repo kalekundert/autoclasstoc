@@ -143,6 +143,52 @@ Finally, we need to specify that our new sections should be used by default
           'private-methods',
   ]
 
+Based on pattern
+----------------
+Categorizing attributes based on some pattern in their names is convenient, 
+because it doesn't require making any changes or annotations to the code 
+itself. For this example, we'll make a custom "Public Methods" section that 
+will consist of public methods but excluding all "dunders" methods , e.g.  
+:meth:`__init__()`.
+
+The first step is to define a new `PublicSection` subclass with the following 
+attributes:
+
+- :attr:`~autoclasstoc.Section.key`: used to include or exclude the section 
+  from class TOCs.
+
+- :attr:`~autoclasstoc.Section.exclude_pattern`:  used for regex matching of 
+  the name for exclusion
+
+.. code-block::
+  :caption: conf.py
+
+  from autoclasstoc import PublicSection, is_method
+
+  class PublicMethodsWithoutDunders(PublicSection):
+      exclude_pattern = '__'
+      key = 'public-methods-without-dunders'
+
+
+No more is necessary because the `PublicSection` (and all other `Section` 
+subclasses) check for possible `exclude_pattern`. Note here, that 
+`exclude_pattern` can also be a list of strings.
+
+Finally, we need to specify that our new sections should be used by default 
+(and what order they should go in):
+
+.. code-block::
+  :caption: conf.py
+
+  autoclasstoc_sections = [
+          'public-methods-without-dunders',
+          'private-methods',
+  ]
+
+This class we just created (`PublicMethodsWithoutDunders`) is already within 
+:rst:dir:`autoclasstoc`. It can be used with the key 
+`public-methods-without-dunders` in the `autoclasstoc_sections` variable.
+
 Based on decorator
 ------------------
 A more explicit way to categorize methods is to use a decorator to label 
