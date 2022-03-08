@@ -27,7 +27,7 @@ def test_ExcludeSection1():
     cls = ExcludeSection1('state', 'cls')
 
     for key, item in names.items():
-        assert item == cls.check_for_pattern(key)
+        assert item == cls.exclude_if_match(cls.exclude_pattern, key)
 
 
 def test_ExcludeSection2():
@@ -43,4 +43,4 @@ def test_ExcludeSection2():
 
     cls = ExcludeSection2('state', 'cls')
     for key, item in names.items():
-        assert item == cls.check_for_pattern(key)
+        assert item == cls.exclude_if_match(cls.exclude_pattern, key)
