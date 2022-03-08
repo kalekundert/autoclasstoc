@@ -6,6 +6,7 @@ from . import utils
 
 SECTIONS = {}
 
+
 class Section:
     """
     Format a specific section in a class TOC, e.g. "Public Methods".
@@ -32,7 +33,7 @@ class Section:
     :rst:dir:`autoclasstoc` options such as ``:sections:`` and 
     ``:exclude-sections:``.
     """
-    
+
     title = None
     """
     The text that will be used to label this section.
@@ -76,9 +77,11 @@ class Section:
         e.g. if it doesn't have a title specified.
         """
         if not self.key:
-            raise ConfigError(f"no key specified for {self.__class__.__name__!r}")
+            raise ConfigError(
+                f"no key specified for {self.__class__.__name__!r}")
         if not self.title:
-            raise ConfigError(f"no title specified for {self.__class__.__name__!r}")
+            raise ConfigError(
+                f"no title specified for {self.__class__.__name__!r}")
 
     def format(self):
         """
@@ -93,8 +96,8 @@ class Section:
 
         attrs = self._filter_attrs(self._find_attrs())
         inherited_attrs = {
-                parent: self._filter_attrs(attrs)
-                for parent, attrs in self._find_inherited_attrs().items()
+            parent: self._filter_attrs(attrs)
+            for parent, attrs in self._find_inherited_attrs().items()
         }
 
         if not attrs and not any(inherited_attrs.values()):
@@ -212,7 +215,7 @@ class Section:
     def _find_attrs(self):
         """
         Return all attributes associated with this class.
-        
+
         These attributes will subsequently be filtered to remove any that 
         aren't relevant to this section, so there is no need to do any 
         filtering here.  The return value should be a name-to-attribute 
@@ -230,6 +233,7 @@ class Section:
         class types to :attr:`__dict__` style dictionaries.
         """
         return utils.find_inherited_attrs(self.cls)
+
 
 class PublicMethods(Section):
     """
@@ -327,6 +331,7 @@ def is_method(name, attr):
         inspect.ismethoddescriptor(attr),
     ])
 
+
 def is_data_attr(name, attr, exclude_special=True):
     """
     Return true if the given attribute is a data attribute, e.g. not a method 
@@ -346,6 +351,7 @@ def is_data_attr(name, attr, exclude_special=True):
         not inspect.ismethoddescriptor(attr),
     ])
 
+
 def is_public(name):
     """
     Return true if the given name is public.
@@ -356,6 +362,7 @@ def is_public(name):
     """
     return not name.startswith('_') or is_special(name)
 
+
 def is_private(name):
     """
     Return true if the given name is private.
@@ -365,6 +372,7 @@ def is_private(name):
     """
     return not is_public(name)
 
+
 def is_special(name):
     """
     Return True if the name starts and ends with a double-underscore.
@@ -372,4 +380,3 @@ def is_special(name):
     Such names typically have special meaning to Python, e.g. :meth:`__init__`.
     """
     return name.startswith('__') and name.endswith('__')
-

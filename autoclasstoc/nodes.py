@@ -7,6 +7,7 @@ possible to create collapsible content in HTML.
 
 from docutils.nodes import General, Element, TextElement
 
+
 class details(General, Element):
     """
     A node that can be expanded or collapsed by the user.
@@ -21,12 +22,12 @@ class details(General, Element):
 
     def visit_html(visitor, node):
         atts = {
-                'class': ' '.join(node['classes'])
+            'class': ' '.join(node['classes'])
         }
         parts = ['details'] + [
-                f'{k}="{v}"'
-                for k, v in atts.items()
-                if v
+            f'{k}="{v}"'
+            for k, v in atts.items()
+            if v
         ]
         if node['open']:
             parts += 'open'
@@ -37,6 +38,7 @@ class details(General, Element):
         visitor.body.append('</details>')
 
     html = visit_html, depart_html
+
 
 class details_summary(General, TextElement):
     """
@@ -54,16 +56,16 @@ class details_summary(General, TextElement):
 
     html = visit_html, depart_html
 
+
 def setup(app):
     """
     Configure Sphinx to use the `details` and `details_summary` nodes.
     """
     app.add_node(
-            details,
-            html=details.html,
+        details,
+        html=details.html,
     )
     app.add_node(
-            details_summary,
-            html=details_summary.html,
+        details_summary,
+        html=details_summary.html,
     )
-
