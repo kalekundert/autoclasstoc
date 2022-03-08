@@ -3,6 +3,7 @@
 import inspect
 from docutils import nodes as _nodes
 from . import utils
+import re
 
 SECTIONS = {}
 
@@ -127,11 +128,10 @@ class Section:
         Return true if the given :attr:`name` matches the 
         :attr:`~.exclude_pattern`
         """
-        if exclude_pattern:
+        if self.exclude_pattern:
             return any(
-                re.match(p, name)
-                for p in always_iterable(self.exclude_pattern)
-            )
+                re.search(p, name)
+                for p in self.exclude_pattern)
 
     def predicate(self, name, attr, meta):
         """
