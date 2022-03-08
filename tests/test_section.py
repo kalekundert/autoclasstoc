@@ -84,4 +84,4 @@ def test_ExcludeSection4():
     }
     cls = ExcludeSection4('state', 'cls')
     for key, item in names.items():
-        assert False == cls.exclude_if_match(cls.exclude_pattern, key)
+        assert None == cls.exclude_if_match(cls.exclude_pattern, key)

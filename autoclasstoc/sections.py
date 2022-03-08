@@ -129,10 +129,10 @@ class Section:
         Return true if the given :attr:`name` matches the 
         :attr:`~.exclude_pattern`
         """
-        if exclude_pattern:
-            return any(re.search(p, name) for p in exclude_pattern)
-        else:
-            return False
+        return (
+            exclude_pattern and
+            any(re.search(p, name) for p in exclude_pattern)
+        )
 
     def predicate(self, name, attr, meta):
         """
