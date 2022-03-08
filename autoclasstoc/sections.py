@@ -45,6 +45,11 @@ class Section:
     Whether or not to include inherited attributes in this section.
     """
 
+    exclude_pattern = None
+    """
+    Whether to exclude attributes where the name of it matches the pattern
+    """
+
     def __init__(self, state, cls):
         """
         Create a section for a specific class.
@@ -113,6 +118,17 @@ class Section:
             wrapper += d
 
         return [wrapper]
+
+    def check_for_pattern(self, name):
+        """
+        Return true if the given :attr:`name` matches the 
+        :attr:`~.exclude_pattern`
+        """
+        if exclude_pattern:
+            return any(
+                re.match(p, name)
+                for p in always_iterable(self.exclude_pattern)
+            )
 
     def predicate(self, name, attr, meta):
         """
@@ -223,7 +239,11 @@ class PublicMethods(Section):
     title = "Public Methods:"
 
     def predicate(self, name, attr, meta):
-        return is_method(name, attr) and is_public(name)
+        return (
+            self.check_for_pattern(name) and
+            is_method(name, attr) and
+            is_public(name)
+        )
 
 
 class PrivateMethods(Section):
@@ -234,7 +254,12 @@ class PrivateMethods(Section):
     title = "Private Methods:"
 
     def predicate(self, name, attr, meta):
-        return is_method(name, attr) and is_private(name)
+        return (
+            self.check_for_pattern(name) and
+            is_method(name, attr) and
+            is_private(name)
+        )
+
 
 class PublicDataAttrs(Section):
     """
@@ -248,7 +273,12 @@ class PublicDataAttrs(Section):
     title = "Public Data Attributes:"
 
     def predicate(self, name, attr, meta):
-        return is_data_attr(name, attr) and is_public(name)
+        return (
+            self.check_for_pattern(name) and
+            is_data_attr(name, attr) and
+            is_public(name)
+        )
+
 
 class PrivateDataAttrs(Section):
     """
@@ -262,7 +292,12 @@ class PrivateDataAttrs(Section):
     title = "Private Data Attributes:"
 
     def predicate(self, name, attr, meta):
-        return is_data_attr(name, attr) and is_private(name)
+        return (
+            self.check_for_pattern(name) and
+            is_data_attr(name, attr) and
+            is_private(name)
+        )
+
 
 class InnerClasses(Section):
     """
@@ -272,7 +307,8 @@ class InnerClasses(Section):
     title = "Inner Classes:"
 
     def predicate(self, name, attr, meta):
-        return inspect.isclass(attr)
+        return self.check_for_pattern(name) and inspect.isclass(attr)
+
 
 def is_method(name, attr):
     """
