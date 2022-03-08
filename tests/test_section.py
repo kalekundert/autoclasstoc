@@ -16,6 +16,12 @@ class ExcludeSection2(autoclasstoc.Section):
     exclude_pattern = ['__', 'on']
 
 
+class ExcludeSection3(ExcludeSection2):
+
+    def predicate(self, name, attr, meta):
+        return not self.exclude_if_match(self.exclude_pattern, name)
+
+
 def test_ExcludeSection1():
     names = {
         '__init__': True,
@@ -44,3 +50,18 @@ def test_ExcludeSection2():
     cls = ExcludeSection2('state', 'cls')
     for key, item in names.items():
         assert item == cls.exclude_if_match(cls.exclude_pattern, key)
+
+
+def test_ExcludeSection3():
+    names = {
+        '__init__': True,
+        '__len__': True,
+        'foo': False,
+        'bar': False,
+        't__t': True,
+        'on_off': True,
+        'out': False
+    }
+    cls = ExcludeSection3('state', 'cls')
+    for key, item in names.items():
+        assert not item == cls.predicate(key, 'attr', 'meta')
