@@ -230,6 +230,11 @@ class Section:
 class PublicMethods(Section):
     """
     Include a "Public Methods" section in the class TOC.
+
+    Note that dunder methods are included in this section, because they usually 
+    correspond to syntax that is part of the class's public interface (e.g. the 
+    constructor and various operators).  If you want to exclude dunder methods, 
+    use `PublicMethodsWithoutDunders`.
     """
     key = 'public-methods'
     title = "Public Methods:"
@@ -238,7 +243,7 @@ class PublicMethods(Section):
         return (
             super().predicate(name, attr, meta) and
             is_method(name, attr) and
-            is_public(name)
+            (is_public(name) or is_special(name))
         )
 
 
@@ -327,19 +332,11 @@ def is_method(name, attr):
     ])
 
 
-def is_data_attr(name, attr, exclude_special=True):
+def is_data_attr(name, attr):
     """
     Return true if the given attribute is a data attribute, e.g. not a method 
     or an inner class.  Many data attributes are properties.
-
-    By default, attributes with double-underscore names (e.g. :attr:`__dict__`) 
-    are not considered data attributes.  Unlike special methods, these "special 
-    attributes" are very rarely relevant to users of a class.  This behavior 
-    can be disabled by toggling the *exclude_special* argument.
     """
-    if exclude_special and is_special(name):
-        return False
-
     return all([
         not inspect.isclass(attr),
         not inspect.isfunction(attr),
@@ -352,10 +349,9 @@ def is_public(name):
     Return true if the given name is public.
 
     Specifically, a name is public if it either doesn't start with an 
-    underscore, or if it starts and ends with two underscores (i.e. a "special"
-    method).
+    underscore.
     """
-    return not name.startswith('_') or is_special(name)
+    return not name.startswith('_')
 
 
 def is_private(name):
@@ -365,7 +361,7 @@ def is_private(name):
     A name is private if it starts with an underscore, but does not start and 
     end with two underscores (i.e. not a special method).
     """
-    return not is_public(name)
+    return not is_public(name) and not is_special(name)
 
 
 def is_special(name):

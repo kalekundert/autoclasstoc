@@ -9,12 +9,7 @@ with_autoclasstoc = pff.Namespace('from autoclasstoc import *')
 class MockObj:
     data_attr = None
     _private_data_attr = None
-
-    class InnerClass:
-        pass
-    
-    def __init__(self):
-        pass
+    __special_attr__ = None
 
     def method(self):
         pass
@@ -22,6 +17,15 @@ class MockObj:
     def _private_method(self):
         pass
 
+    def __special_method__(self):
+        pass
+
+    class InnerClass:
+        pass
+    
+    class _PrivateInnerClass:
+        pass
+    
 class EmptyObj:
     pass
 

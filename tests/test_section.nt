@@ -8,12 +8,14 @@ test_section_predicate:
       >     pass
 
     expected:
-      - __init__
       - data_attr
       - method
       - _private_data_attr
       - _private_method
+      - __special_attr__
+      - __special_method__
       - InnerClass
+      - _PrivateInnerClass
   -
     id: section-exclude-str
     section:
@@ -37,8 +39,8 @@ test_section_predicate:
     id: public-methods
     section: MockSection = PublicMethods
     expected:
-      - __init__
       - method
+      - __special_method__
   -
     id: public-methods-without-dunders
     section: MockSection = PublicMethodsWithoutDunders
@@ -64,3 +66,4 @@ test_section_predicate:
     section: MockSection = InnerClasses
     expected:
       - InnerClass
+      - _PrivateInnerClass
