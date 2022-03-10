@@ -12,6 +12,7 @@ requires-python = "~=3.6"
 requires = [
   'sphinx>=3.0',
   'docutils',
+  'more_itertools',
 ]
 classifiers = [
   'Programming Language :: Python :: 3',
@@ -22,6 +23,7 @@ classifiers = [
 tests = [
   'pytest',
   'pytest-cov',
+  'parametrize_from_file',
   'coveralls',
 ]
 docs = [

@@ -2,6 +2,7 @@
 
 import inspect
 from docutils import nodes as _nodes
+from more_itertools import always_iterable
 from . import utils
 import re
 
@@ -49,7 +50,8 @@ class Section:
 
     exclude_pattern = None
     """
-    Whether to exclude attributes where the name of it matches the pattern
+    A regular expression (or list of regular expressions) matching attribute 
+    names that should be excluded from this section.
     """
 
     def __init__(self, state, cls):
@@ -123,17 +125,6 @@ class Section:
 
         return [wrapper]
 
-    @staticmethod
-    def exclude_if_match(exclude_pattern, name):
-        """
-        Return true if the given :attr:`name` matches the 
-        :attr:`~.exclude_pattern`
-        """
-        return (
-            exclude_pattern and
-            any(re.search(p, name) for p in exclude_pattern)
-        )
-
     def predicate(self, name, attr, meta):
         """
         Return true if the given attribute should be included in this section.
@@ -155,7 +146,7 @@ class Section:
             `is_private`
             `is_special`
         """
-        raise NotImplementedError
+        return not does_match(name, self.exclude_pattern)
 
     def _make_container(self):
         """
@@ -245,7 +236,7 @@ class PublicMethods(Section):
 
     def predicate(self, name, attr, meta):
         return (
-            not self.exclude_if_match(self.exclude_pattern, name) and
+            super().predicate(name, attr, meta) and
             is_method(name, attr) and
             is_public(name)
         )
@@ -268,7 +259,7 @@ class PrivateMethods(Section):
 
     def predicate(self, name, attr, meta):
         return (
-            not self.exclude_if_match(self.exclude_pattern, name) and
+            super().predicate(name, attr, meta) and
             is_method(name, attr) and
             is_private(name)
         )
@@ -287,7 +278,7 @@ class PublicDataAttrs(Section):
 
     def predicate(self, name, attr, meta):
         return (
-            not self.exclude_if_match(self.exclude_pattern, name) and
+            super().predicate(name, attr, meta) and
             is_data_attr(name, attr) and
             is_public(name)
         )
@@ -306,7 +297,7 @@ class PrivateDataAttrs(Section):
 
     def predicate(self, name, attr, meta):
         return (
-            not self.exclude_if_match(self.exclude_pattern, name) and
+            super().predicate(name, attr, meta) and
             is_data_attr(name, attr) and
             is_private(name)
         )
@@ -321,7 +312,7 @@ class InnerClasses(Section):
 
     def predicate(self, name, attr, meta):
         return (
-            not self.exclude_if_match(self.exclude_pattern, name) and
+            super().predicate(name, attr, meta) and
             inspect.isclass(attr)
         )
 
@@ -384,3 +375,18 @@ def is_special(name):
     Such names typically have special meaning to Python, e.g. :meth:`__init__`.
     """
     return name.startswith('__') and name.endswith('__')
+
+
+def does_match(name, pattern, **kwargs):
+    """
+    Return true if the name matches the given pattern.
+
+    Under the hood, `re.match` is used to find the pattern.  This means that 
+    the match must start at the beginning of the name.  If you want to match an 
+    internal pattern, the pattern must start with ``.*``.
+    """
+    return pattern and any(
+            re.match(p, name, **kwargs)
+            for p in always_iterable(pattern)
+    )
+

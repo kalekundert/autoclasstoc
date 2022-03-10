@@ -1,0 +1,66 @@
+test_section_predicate:
+  # These predicates are evaluated in the context of the `MockObj` class 
+  # defined in the test script.
+  -
+    id: section
+    section:
+      > class MockSection(Section):
+      >     pass
+
+    expected:
+      - __init__
+      - data_attr
+      - method
+      - _private_data_attr
+      - _private_method
+      - InnerClass
+  -
+    id: section-exclude-str
+    section:
+      > class MockSection(Section):
+      >     exclude_pattern = '_'
+
+    expected:
+      - data_attr
+      - method
+      - InnerClass
+  -
+    id: section-exclude-list
+    section:
+      > class MockSection(Section):
+      >     exclude_pattern = ['_', 'Inner']
+
+    expected:
+      - data_attr
+      - method
+  -
+    id: public-methods
+    section: MockSection = PublicMethods
+    expected:
+      - __init__
+      - method
+  -
+    id: public-methods-without-dunders
+    section: MockSection = PublicMethodsWithoutDunders
+    expected:
+      - method
+  -
+    id: private-methods
+    section: MockSection = PrivateMethods
+    expected:
+      - _private_method
+  -
+    id: public-data-attrs
+    section: MockSection = PublicDataAttrs
+    expected:
+      - data_attr
+  -
+    id: private-data-attrs
+    section: MockSection = PrivateDataAttrs
+    expected:
+      - _private_data_attr
+  -
+    id: inner-classes
+    section: MockSection = InnerClasses
+    expected:
+      - InnerClass

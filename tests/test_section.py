@@ -2,86 +2,76 @@
 
 import pytest
 import autoclasstoc
+import parametrize_from_file as pff
+
+with_autoclasstoc = pff.Namespace('from autoclasstoc import *')
+
+class MockObj:
+    data_attr = None
+    _private_data_attr = None
+
+    class InnerClass:
+        pass
+    
+    def __init__(self):
+        pass
+
+    def method(self):
+        pass
+
+    def _private_method(self):
+        pass
+
+class EmptyObj:
+    pass
+
+@pytest.mark.parametrize(
+        'name, pattern, expected', [
+            ('', 'ab', False),
+            ('ab', 'ab', True),
+            ('ba', 'ab', False),
+
+            ('', ['ab', 'cd'], False),
+            ('ab', ['ab', 'cd'], True),
+            ('ba', ['ab', 'cd'], False),
+            ('cd', ['ab', 'cd'], True),
+            ('dc', ['ab', 'cd'], False),
+            ('abcd', ['ab', 'cd'], True),
+            ('abdc', ['ab', 'cd'], True),
+            ('bacd', ['ab', 'cd'], False),
+            ('bacd', ['ab', '.*cd'], True),
+            ('badc', ['ab', 'cd'], False),
+
+            # Test some real-world patterns.
+            ('__init__', '__', True),
+            ('__len__', '__', True),
+            ('foo', '__', False),
+            ('_bar', '__', False),
+
+            ('__init__', ['__', 'on'], True),
+            ('__len__', ['__', 'on'], True),
+            ('foo', ['__', 'on'], False),
+            ('_bar', ['__', 'on'], False),
+            ('on_off', ['__', 'on'], True),
+            ('off_on', ['__', 'on'], False),
+            ('off_on', ['__', '.*on'], True),
+    ]
+)
+def test_does_match(name, pattern, expected):
+    assert autoclasstoc.does_match(name, pattern) == expected
 
 
-class ExcludeSection1(autoclasstoc.Section):
-    key = 'dummy-section-1'
-    title = "Dummy Section 1:"
-    exclude_pattern = '__'
-
-
-class ExcludeSection2(autoclasstoc.Section):
-    key = 'dummy-section-2'
-    title = "Dummy Section 2:"
-    exclude_pattern = ['__', 'on']
-
-
-class ExcludeSection3(ExcludeSection2):
-
-    def predicate(self, name, attr, meta):
-        return not self.exclude_if_match(self.exclude_pattern, name)
-
-
-class ExcludeSection4(autoclasstoc.Section):
-    key = 'dummy-section-2'
-    title = "Dummy Section 2:"
-
-
-def test_ExcludeSection1():
-    names = {
-        '__init__': True,
-        '__len__': True,
-        'foo': False,
-        'bar': False,
-        't__t': True
+@pff.parametrize
+def test_section_predicate(section, expected):
+    # For the sake of making the expected values easy to predict, remove any 
+    # attributes that python automatically adds to new classes.
+    attrs = {
+            k: v
+            for k, v in MockObj.__dict__.items()
+            if k not in EmptyObj.__dict__
     }
-    cls = ExcludeSection1('state', 'cls')
+    section_cls = with_autoclasstoc.exec(section, get='MockSection')
+    section = section_cls('state', 'cls')
+    hits = autoclasstoc.utils.filter_attrs(attrs, section.predicate)
+    assert set(hits) == set(expected)
 
-    for key, item in names.items():
-        assert item == cls.exclude_if_match(cls.exclude_pattern, key)
-
-
-def test_ExcludeSection2():
-    names = {
-        '__init__': True,
-        '__len__': True,
-        'foo': False,
-        'bar': False,
-        't__t': True,
-        'on_off': True,
-        'out': False
-    }
-
-    cls = ExcludeSection2('state', 'cls')
-    for key, item in names.items():
-        assert item == cls.exclude_if_match(cls.exclude_pattern, key)
-
-
-def test_ExcludeSection3():
-    names = {
-        '__init__': True,
-        '__len__': True,
-        'foo': False,
-        'bar': False,
-        't__t': True,
-        'on_off': True,
-        'out': False
-    }
-    cls = ExcludeSection3('state', 'cls')
-    for key, item in names.items():
-        assert not item == cls.predicate(key, 'attr', 'meta')
-
-
-def test_ExcludeSection4():
-    names = {
-        '__init__': True,
-        '__len__': True,
-        'foo': False,
-        'bar': False,
-        't__t': True,
-        'on_off': True,
-        'out': False
-    }
-    cls = ExcludeSection4('state', 'cls')
-    for key, item in names.items():
-        assert None == cls.exclude_if_match(cls.exclude_pattern, key)
