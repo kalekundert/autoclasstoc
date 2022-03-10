@@ -2,6 +2,10 @@
 
 <!--next-version-placeholder-->
 
+## v1.4.0 (2022-03-10)
+### Feature
+* Add `exclude_pattern` to `Section` class ([#18](https://github.com/kalekundert/autoclasstoc/issues/18)) ([`4b796ac`](https://github.com/kalekundert/autoclasstoc/commit/4b796ac5a25bd785e64da4e2f24fdee23f1278ea))
+
 ## v1.3.0 (2021-09-14)
 ### Feature
 * Support sphinx~=4.0 ([`405954d`](https://github.com/kalekundert/autoclasstoc/commit/405954d39db5fdb7e3c491a81cce39a82f963231))
