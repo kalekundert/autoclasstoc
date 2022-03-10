@@ -6,7 +6,6 @@ test_section_predicate:
     section:
       > class MockSection(Section):
       >     pass
-
     expected:
       - data_attr
       - method
@@ -17,24 +16,44 @@ test_section_predicate:
       - InnerClass
       - _PrivateInnerClass
   -
-    id: section-exclude-str
+    id: section-exclude-pattern
     section:
       > class MockSection(Section):
       >     exclude_pattern = '_'
-
     expected:
       - data_attr
       - method
       - InnerClass
   -
-    id: section-exclude-list
+    id: section-exclude-patterns
     section:
       > class MockSection(Section):
       >     exclude_pattern = ['_', 'Inner']
-
     expected:
       - data_attr
       - method
+  -
+    id: section-exclude-class
+    section:
+      > class MockSection(Section):
+      >     exclude_section = InnerClasses
+    expected:
+      - data_attr
+      - method
+      - _private_data_attr
+      - _private_method
+      - __special_attr__
+      - __special_method__
+  -
+    id: section-exclude-classes
+    section:
+      > class MockSection(Section):
+      >     exclude_section = [InnerClasses, PublicMethods]
+    expected:
+      - data_attr
+      - _private_data_attr
+      - _private_method
+      - __special_attr__
   -
     id: public-methods
     section: MockSection = PublicMethods
@@ -74,7 +93,6 @@ test_section_predicate:
       >
       >     def predicate(self, name, attr, meta):
       >         return meta.get('include') == 'yes'
-
     obj:
       > class MockObj:
       >     def include(self):

@@ -127,9 +127,7 @@ include the event handlers (as it otherwise would):
   from autoclasstoc import PublicMethods
 
   class RemainingPublicMethods(PublicMethods):
-      
-      def predicate(self, name, attr, meta):
-          return super().predicate(name, attr, meta) and not name.startswith('on_')
+      exclude_section = EventHandlers
   
 Finally, we need to specify that our new sections should be used by default 
 (and what order they should go in):
@@ -145,11 +143,12 @@ Finally, we need to specify that our new sections should be used by default
 
 Based on pattern
 ----------------
-Categorizing attributes based on some pattern in their names is convenient, 
-because it doesn't require making any changes or annotations to the code 
-itself. For this example, we'll make a custom "Public Methods" section that 
-will consist of public methods but excluding all "dunders" methods , e.g.  
-:meth:`__init__()`.
+Excluding attributes from a section based on their name is a common desire.  To 
+make this easier, `Section` classes have a 
+:attr:`~autoclasstoc.Section.exclude_pattern` attribute that filters any 
+matching attributes out of the section.  To demonstrate how this works,
+we'll make a custom "Public Methods" section that will consist of public 
+methods but excluding all "dunders" methods, e.g. :meth:`__init__()`.
 
 The first step is to define a new `PublicSection` subclass with the following 
 attributes:
@@ -166,24 +165,17 @@ attributes:
   from autoclasstoc import PublicSection, is_method
 
   class PublicMethodsWithoutDunders(PublicSection):
-      exclude_pattern = '__'
       key = 'public-methods-without-dunders'
-
-
-No more is necessary because the `PublicSection` (and all other `Section` 
-subclasses) check for possible `exclude_pattern`. Note here, that 
-`exclude_pattern` can also be a list of strings.
-
-Finally, we need to specify that our new sections should be used by default 
-(and what order they should go in):
-
-.. code-block::
-  :caption: conf.py
+      exclude_pattern = '__'
 
   autoclasstoc_sections = [
           'public-methods-without-dunders',
           'private-methods',
   ]
+
+No more is necessary because the `PublicSection` (and all other `Section` 
+subclasses) check for possible `exclude_pattern`. Note here, that 
+`exclude_pattern` can also be a list of strings.
 
 This class we just created (`PublicMethodsWithoutDunders`) is already within 
 :rst:dir:`autoclasstoc`. It can be used with the key 
@@ -290,6 +282,7 @@ would give ``{'key': 'value'}``. This dictionary is provided to the
           'read-only',
           'read-write',
   ]
+
 
 Custom CSS
 ==========

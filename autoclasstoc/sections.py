@@ -54,6 +54,12 @@ class Section:
     names that should be excluded from this section.
     """
 
+    exclude_section = None
+    """
+    A section class (or list of section classes) whose members should be 
+    excluded from this section.
+    """
+
     def __init__(self, state, cls):
         """
         Create a section for a specific class.
@@ -146,7 +152,15 @@ class Section:
             `is_private`
             `is_special`
         """
-        return not does_match(name, self.exclude_pattern)
+        if does_match(name, self.exclude_pattern):
+            return False
+
+        for section_cls in always_iterable(self.exclude_section):
+            section = section_cls(self.state, self.cls)
+            if section.predicate(name, attr, meta):
+                return False
+
+        return True
 
     def _make_container(self):
         """
