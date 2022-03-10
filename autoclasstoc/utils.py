@@ -162,12 +162,20 @@ def filter_attrs(attrs, predicate):
     Remove attributes for which the given predicate function returns False.
     """
     from inspect import getdoc
-    from sphinx.util.docstrings import extract_metadata
+
+    try:
+        # sphinx>=4
+        from sphinx.util.docstrings import separate_metadata
+        get_meta = lambda doc: separate_metadata(doc)[1]
+    except ImportError:
+        # sphinx<4
+        from sphinx.util.docstrings import extract_metadata
+        get_meta = extract_metadata
 
     return {
         k: v
         for k, v in attrs.items()
-        if predicate(k, v, extract_metadata(getdoc(v)))
+        if predicate(k, v, get_meta(getdoc(v)))
     }
 
 

@@ -3,7 +3,9 @@
 import pytest
 import autoclasstoc
 import parametrize_from_file as pff
+from voluptuous import Schema, Optional
 
+with_py = pff.Namespace()
 with_autoclasstoc = pff.Namespace('from autoclasstoc import *')
 
 class MockObj:
@@ -65,13 +67,21 @@ def test_does_match(name, pattern, expected):
     assert autoclasstoc.does_match(name, pattern) == expected
 
 
-@pff.parametrize
-def test_section_predicate(section, expected):
+@pff.parametrize(
+        schema=Schema({
+            'section': str,
+            Optional('obj', default=""): str,
+            'expected': [str],
+        })
+)
+def test_section_predicate(section, obj, expected):
+    obj_cls = with_py.exec(obj, get='MockObj') if obj else MockObj
+
     # For the sake of making the expected values easy to predict, remove any 
     # attributes that python automatically adds to new classes.
     attrs = {
             k: v
-            for k, v in MockObj.__dict__.items()
+            for k, v in obj_cls.__dict__.items()
             if k not in EmptyObj.__dict__
     }
     section_cls = with_autoclasstoc.exec(section, get='MockSection')

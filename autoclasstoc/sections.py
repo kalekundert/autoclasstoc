@@ -135,7 +135,7 @@ class Section:
             attr (object): The attribute object itself.
             meta (dict): Any `:meta:`__ fields present in the attribute's 
                 docstring, as parsed by 
-                :func:`sphinx.util.docstrings.extract_metadata()`. 
+                :func:`sphinx.util.docstrings.separate_metadata()`. 
 
         __ https://www.sphinx-doc.org/en/master/usage/restructuredtext/domains.html#info-field-lists
 

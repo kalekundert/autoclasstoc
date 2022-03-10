@@ -67,3 +67,19 @@ test_section_predicate:
     expected:
       - InnerClass
       - _PrivateInnerClass
+  -
+    id: metadata
+    section:
+      > class MockSection(Section):
+      >
+      >     def predicate(self, name, attr, meta):
+      >         return meta.get('include') == 'yes'
+
+    obj:
+      > class MockObj:
+      >     def include(self):
+      >         ":meta include: yes"
+      >     def exclude(self):
+      >         ":meta include: no"
+    expected:
+      - include
