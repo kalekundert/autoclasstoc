@@ -1,30 +1,22 @@
 [build-system]
-requires = ["flit"]
-build-backend = "flit.buildapi"
+requires = ["flit_core >=3.2,<4"]
+build-backend = "flit_core.buildapi"
 
-[tool.flit.metadata]
-module = "autoclasstoc"
-author = "Kale Kundert"
-author-email = "kale@thekunderts.net"
-home-page = 'https://github.com/kalekundert/autoclasstoc'
-description-file = 'README.rst'
+[project]
+name = "autoclasstoc"
+authors = [
+  {name = "Kale Kundert", email = "kale@thekunderts.net"},
+]
+readme = "README.rst"
+dynamic = ["version", "description"]
 requires-python = ">=3.6,<3.11"
-requires = [
+dependencies = [
   'sphinx>=3.0',
   'docutils',
   'more_itertools',
 ]
-classifiers = [
-  'Programming Language :: Python :: 3',
-  'Programming Language :: Python :: 3.6',
-  'Programming Language :: Python :: 3.7',
-  'Programming Language :: Python :: 3.8',
-  'Programming Language :: Python :: 3.9',
-  'Programming Language :: Python :: 3.10',
-  'License :: OSI Approved :: MIT License',
-]
 
-[tool.flit.metadata.requires-extra]
+[project.optional-dependencies]
 tests = [
   'pytest',
   'pytest-cov',
@@ -36,7 +28,7 @@ docs = [
   'sphinx_rtd_theme',
 ]
 
-[tool.flit.metadata.urls]
+[project.urls]
 'Documentation' = 'https://autoclasstoc.readthedocs.io/en/latest/'
 'Version Control' = 'https://github.com/kalekundert/autoclasstoc'
 'Bug Tracker' = 'https://github.com/kalekundert/autoclasstoc/issues'
