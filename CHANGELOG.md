@@ -2,6 +2,11 @@
 
 <!--next-version-placeholder-->
 
+## v1.5.0 (2022-03-10)
+### Feature
+* Allow sections to exclude other sections ([`b757374`](https://github.com/kalekundert/autoclasstoc/commit/b75737451abcfd16a1cda2f3a02d8ba8a2ed43cd))
+* Be more precise about what's considered public ([`fbda744`](https://github.com/kalekundert/autoclasstoc/commit/fbda7444c54e1e51c3699f13caada2d8c374a98b))
+
 ## v1.4.0 (2022-03-10)
 ### Feature
 * Add `exclude_pattern` to `Section` class ([#18](https://github.com/kalekundert/autoclasstoc/issues/18)) ([`4b796ac`](https://github.com/kalekundert/autoclasstoc/commit/4b796ac5a25bd785e64da4e2f24fdee23f1278ea))
