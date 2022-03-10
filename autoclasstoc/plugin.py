@@ -3,6 +3,7 @@
 from sphinx.util.docutils import SphinxDirective
 from . import utils, __version__, ConfigError
 
+
 class AutoClassToc(SphinxDirective):
     """
     Generate a succinct TOC for automatically documented classes.
@@ -14,8 +15,8 @@ class AutoClassToc(SphinxDirective):
     """
     optional_arguments = 1
     option_spec = {
-            'sections': utils.comma_separated_list,
-            'exclude-sections': utils.comma_separated_list,
+        'sections': utils.comma_separated_list,
+        'exclude-sections': utils.comma_separated_list,
     }
 
     def run(self):
@@ -27,13 +28,15 @@ class AutoClassToc(SphinxDirective):
             mod_name, cls_name = utils.pick_class(qual_name, self.env)
             mod, cls = utils.load_class(mod_name, cls_name)
             sections = utils.pick_sections(
-                    self.options.get('sections') or self.config.autoclasstoc_sections,
-                    exclude=self.options.get('exclude-sections'),
+                self.options.get('sections') or
+                self.config.autoclasstoc_sections,
+                exclude=self.options.get('exclude-sections'),
             )
             return utils.make_toc(self.state, cls, sections)
 
         except ConfigError as err:
             raise self.error(str(err))
+
 
 def load_static_assets(app, config):
     """
@@ -48,15 +51,16 @@ def load_static_assets(app, config):
 
     app.add_css_file('autoclasstoc.css')
 
+
 def setup(app):
     from . import nodes
     nodes.setup(app)
 
     default_sections = [
-            'public-attrs',
-            'public-methods',
-            'private-attrs',
-            'private-methods'
+        'public-attrs',
+        'public-methods',
+        'private-attrs',
+        'private-methods'
     ]
 
     app.add_config_value('autoclasstoc_sections', default_sections, 'env')
@@ -64,9 +68,6 @@ def setup(app):
     app.connect('config-inited', load_static_assets)
 
     return {
-            'version': __version__,
-            'parallel_read_safe': True,
+        'version': __version__,
+        'parallel_read_safe': True,
     }
-
-
-

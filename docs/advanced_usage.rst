@@ -10,7 +10,7 @@ A TOC for every class
 It is also possible to use :rst:dir:`autoclasstoc` in auto-generated API 
 documentation, i.e. where all of the classes in your project are documented 
 without you having to explicitly write an :rst:dir:`autoclass` directive for 
-each one.  The way to do this is to use the :ext:`autosummary` extension with a 
+each one. The way to do this is to use the :ext:`autosummary` extension with a 
 custom Jinja template for classes, as detailed below:
 
 1. Configure the :ext:`autosummary` extension to automatically generate stub 
@@ -22,7 +22,7 @@ custom Jinja template for classes, as detailed below:
       autosummary_generate = True
 
    Alternatively, you could generate stub files yourself by running the 
-   ``autogen`` command when necessary (after completing steps 2 and 3 below).  
+   ``autogen`` command when necessary (after completing steps 2 and 3 below). 
    I find this less convenient, but it might be better if you intend to edit 
    the stub files by hand:
 
@@ -31,7 +31,7 @@ custom Jinja template for classes, as detailed below:
       $ sphinx-autogen -t _templates path/to/doc/with/autosummary.rst
 
 2. Add an :rst:dir:`autosummary` directive with the ``:toctree:`` and 
-   ``:recursive:`` options to your documentation.  Anywhere will work, but 
+   ``:recursive:`` options to your documentation. Anywhere will work, but 
    ``index.rst`` is a common choice:
 
    .. code-block:: rst
@@ -43,7 +43,7 @@ custom Jinja template for classes, as detailed below:
 
          module.to.document
 
-3. Provide a custom Jinja_ template for formatting class stub files.  The 
+3. Provide a custom Jinja_ template for formatting class stub files. The 
    purpose of this template is to specify that :rst:dir:`autoclasstoc` should 
    be used for each class:
 
@@ -72,10 +72,10 @@ custom Jinja template for classes, as detailed below:
 Custom sections
 ===============
 By default, :rst:dir:`autoclasstoc` divides the TOC into sections based whether 
-or not attributes are methods, and whether or not they are public.  This is a 
+or not attributes are methods, and whether or not they are public. This is a 
 reasonable default, but for many projects it may make sense to add custom 
-sections specific to the idioms of that project.  Fortunately, this is easy to 
-configure.  The basic steps are:
+sections specific to the idioms of that project. Fortunately, this is easy to 
+configure. The basic steps are:
 
 1. Define new :class:`autoclasstoc.Section` subclasses.
 2. Reference the subclasses either in ``conf.py`` or in the documentation 
@@ -83,13 +83,13 @@ configure.  The basic steps are:
   
 This approach is very powerful, because the `Section` class controls all 
 aspects of defining and formatting the TOC sections, and its subclasses can 
-overwrite any of that behavior.  Below are some specific examples showing how 
+overwrite any of that behavior. Below are some specific examples showing how 
 custom sections can be configured:
 
 Based on name
 -------------
 Categorizing attributes based on their names is convenient, because it doesn't 
-require making any changes or annotations to the code itself.  For this 
+require making any changes or annotations to the code itself. For this 
 example, we'll make a custom "Event Handlers" section that will consist of 
 methods that begin with the prefix "on\_", e.g. :meth:`on_mouse_down()` or 
 :meth:`on_key_up()`.
@@ -143,12 +143,58 @@ Finally, we need to specify that our new sections should be used by default
           'private-methods',
   ]
 
+Based on pattern
+----------------
+Categorizing attributes based on some pattern in their names is convenient, 
+because it doesn't require making any changes or annotations to the code 
+itself. For this example, we'll make a custom "Public Methods" section that 
+will consist of public methods but excluding all "dunders" methods , e.g.  
+:meth:`__init__()`.
+
+The first step is to define a new `PublicSection` subclass with the following 
+attributes:
+
+- :attr:`~autoclasstoc.Section.key`: used to include or exclude the section 
+  from class TOCs.
+
+- :attr:`~autoclasstoc.Section.exclude_pattern`:  used for regex matching of 
+  the name for exclusion
+
+.. code-block::
+  :caption: conf.py
+
+  from autoclasstoc import PublicSection, is_method
+
+  class PublicMethodsWithoutDunders(PublicSection):
+      exclude_pattern = '__'
+      key = 'public-methods-without-dunders'
+
+
+No more is necessary because the `PublicSection` (and all other `Section` 
+subclasses) check for possible `exclude_pattern`. Note here, that 
+`exclude_pattern` can also be a list of strings.
+
+Finally, we need to specify that our new sections should be used by default 
+(and what order they should go in):
+
+.. code-block::
+  :caption: conf.py
+
+  autoclasstoc_sections = [
+          'public-methods-without-dunders',
+          'private-methods',
+  ]
+
+This class we just created (`PublicMethodsWithoutDunders`) is already within 
+:rst:dir:`autoclasstoc`. It can be used with the key 
+`public-methods-without-dunders` in the `autoclasstoc_sections` variable.
+
 Based on decorator
 ------------------
 A more explicit way to categorize methods is to use a decorator to label 
-methods that belong to a particular section.  This approach only is only 
+methods that belong to a particular section. This approach only is only 
 applicable to methods and inner classes (because data attributes cannot be 
-decorated), but is easy to implement.  For this example, we'll make a section 
+decorated), but is easy to implement. For this example, we'll make a section 
 for "Read Only" methods that are identified by a decorator:
 
 The first step is to write a decorator to label read-only methods:
@@ -201,8 +247,8 @@ With :ext:`autodoc`, it's possible to describe how an object should be
 documented by including `:meta: <info-field-lists>` fields in that object's 
 docstring.  :rst:dir:`autoclasstoc` automatically parses these fields and 
 provides them as an argument to :meth:`~autoclasstoc.Section.predicate()`, so 
-they can be easily used to categorize attributes.  As in the previous example, 
-we'll make a custom section for read-only methods.  The snippet below shows how 
+they can be easily used to categorize attributes. As in the previous example, 
+we'll make a custom section for read-only methods. The snippet below shows how 
 such a method might be identified using a meta field:
 
 .. code-block:: python
@@ -218,7 +264,7 @@ such a method might be identified using a meta field:
           pass
 
 These meta fields are parsed into a dictionary such that ``:meta key: value`` 
-would give ``{'key': 'value'}``.  This dictionary is provided to the 
+would give ``{'key': 'value'}``. This dictionary is provided to the 
 :meth:`~autoclasstoc.Section.predicate()` method via the *meta* argument:
 
 .. code-block:: python
@@ -248,8 +294,8 @@ would give ``{'key': 'value'}``.  This dictionary is provided to the
 Custom CSS
 ==========
 All of the HTML elements generated by :rst:dir:`autoclasstoc` are contained in 
-a ``<div>`` with class ``autoclasstoc``.  This can be used to select and style 
-the elements in the class TOC.  Note that the plugin includes some default 
+a ``<div>`` with class ``autoclasstoc``. This can be used to select and style 
+the elements in the class TOC. Note that the plugin includes some default 
 rules to control the spacing around the ``<details>`` elements that contain 
 TOCs for inherited attributes.
 

@@ -5,6 +5,7 @@ from docutils.statemachine import StringList, string2lines
 from importlib import import_module
 from .errors import ConfigError
 
+
 def pick_class(qual_name, env):
     """
     Figure out which class to make the TOC for.
@@ -15,25 +16,28 @@ def pick_class(qual_name, env):
 
     Arguments:
         qual_name (str): The name of the class to pick, or None if the class 
-            should be inferred from the environment.
+        should be inferred from the environment.
         env (sphinx.environment.BuildEnvironment): This object is available as 
-            :attr:`self.env` from :class:`~sphinx.util.docutils.SphinxDirective` 
-            subclasses.
+        :attr:`self.env` from :class:`~sphinx.util.docutils.SphinxDirective` 
+        subclasses.
     """
     if qual_name:
         mod_name, cls_name = qual_name.rsplit('.', 1)
     else:
         cls_name = \
-                env.temp_data.get('autodoc:class') or \
-                env.ref_context.get('py:class')
+            env.temp_data.get('autodoc:class') or \
+            env.ref_context.get('py:class')
         mod_name = \
-                env.temp_data.get('autodoc:module') or \
-                env.ref_context.get('py:module')
+            env.temp_data.get('autodoc:module') or \
+            env.ref_context.get('py:module')
 
-        if not cls_name: raise ConfigError("no class name")
-        if not mod_name: raise ConfigError("no module name")
+        if not cls_name:
+            raise ConfigError("no class name")
+        if not mod_name:
+            raise ConfigError("no module name")
 
     return mod_name, cls_name
+
 
 def load_class(mod_name, cls_name):
     """
@@ -42,6 +46,7 @@ def load_class(mod_name, cls_name):
     mod = import_module(mod_name)
     cls = getattr(mod, cls_name)
     return mod, cls
+
 
 def pick_sections(sections, exclude=None):
     """
@@ -68,18 +73,19 @@ def pick_sections(sections, exclude=None):
         raise ConfigError(f"cannot interpret {x!r} as a section")
 
     sections = [
-            _section_from_anything(x)
-            for x in sections
+        _section_from_anything(x)
+        for x in sections
     ]
     exclude = {
-            _section_from_anything(x)
-            for x in exclude or []
+        _section_from_anything(x)
+        for x in exclude or []
     }
     return [
-            x
-            for x in sections
-            if x not in exclude
+        x
+        for x in sections
+        if x not in exclude
     ]
+
 
 def make_toc(state, cls, sections):
     """
@@ -94,6 +100,7 @@ def make_toc(state, cls, sections):
     n.append(_nodes.transition())
     return n
 
+
 def make_container():
     """
     Make a container node to identify elements associated with the 
@@ -101,11 +108,13 @@ def make_container():
     """
     return _nodes.container(classes=['autoclasstoc'])
 
+
 def make_rubric(title):
     """
     Make an informal header.
     """
     return _nodes.rubric(title, title)
+
 
 def make_inherited_details(state, parent, open_by_default=False):
     """
@@ -113,11 +122,13 @@ def make_inherited_details(state, parent, open_by_default=False):
     """
     from .nodes import details, details_summary
     s = details_summary()
-    s += strip_p(nodes_from_rst(state, f"Inherited from :py:class:`{parent.__qualname__}`"))
+    s += strip_p(nodes_from_rst(state,
+                                f"Inherited from    : py: class:`{parent.__qualname__}`"))
 
     d = details(open_by_default)
     d += s
     return d
+
 
 def make_links(state, attrs):
     """
@@ -133,16 +144,18 @@ def make_links(state, attrs):
         *[f'    {x}' for x in attrs],
     ])
 
+
 def find_inherited_attrs(cls):
     """
     Return a dictionary mapping parent classes to the attributes inherited from 
     those classes.
     """
     return {
-            base: base.__dict__
-            for base in cls.__mro__
-            if base not in (cls, object)
+        base: base.__dict__
+        for base in cls.__mro__
+        if base not in (cls, object)
     }
+
 
 def filter_attrs(attrs, predicate):
     """
@@ -152,10 +165,11 @@ def filter_attrs(attrs, predicate):
     from sphinx.util.docstrings import extract_metadata
 
     return {
-            k: v
-            for k, v in attrs.items()
-            if predicate(k, v, extract_metadata(getdoc(v)))
+        k: v
+        for k, v in attrs.items()
+        if predicate(k, v, extract_metadata(getdoc(v)))
     }
+
 
 def nodes_from_rst(state, rst):
     """
@@ -180,12 +194,13 @@ def nodes_from_rst(state, rst):
     state.nested_parse(rst, 0, wrapper)
     return wrapper.children
 
+
 def strip_p(nodes):
     """
     Remove any top-level paragraph nodes.
 
     Parsing a simple string like "Hello world" with `nodes_from_rst` will 
-    return text wrapped in a paragraph.  If this paragraph is not desired (e.g. 
+    return text wrapped in a paragraph.  If this paragraph is not desired (e.g.  
     because it messes with formatting), this function can be used to get rid of 
     it.
     """
@@ -193,10 +208,9 @@ def strip_p(nodes):
         nodes = nodes[0].children
     return nodes
 
+
 def comma_separated_list(x):
     """
     Parse a restructured text option as a comma-separated list of strings.
     """
     return x.split(',')
-
-

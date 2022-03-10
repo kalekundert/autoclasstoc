@@ -2,9 +2,12 @@
 
 import inspect
 from docutils import nodes as _nodes
+from more_itertools import always_iterable
 from . import utils
+import re
 
 SECTIONS = {}
+
 
 class Section:
     """
@@ -32,7 +35,7 @@ class Section:
     :rst:dir:`autoclasstoc` options such as ``:sections:`` and 
     ``:exclude-sections:``.
     """
-    
+
     title = None
     """
     The text that will be used to label this section.
@@ -43,6 +46,12 @@ class Section:
     include_inherited = True
     """
     Whether or not to include inherited attributes in this section.
+    """
+
+    exclude_pattern = None
+    """
+    A regular expression (or list of regular expressions) matching attribute 
+    names that should be excluded from this section.
     """
 
     def __init__(self, state, cls):
@@ -71,9 +80,11 @@ class Section:
         e.g. if it doesn't have a title specified.
         """
         if not self.key:
-            raise ConfigError(f"no key specified for {self.__class__.__name__!r}")
+            raise ConfigError(
+                f"no key specified for {self.__class__.__name__!r}")
         if not self.title:
-            raise ConfigError(f"no title specified for {self.__class__.__name__!r}")
+            raise ConfigError(
+                f"no title specified for {self.__class__.__name__!r}")
 
     def format(self):
         """
@@ -88,8 +99,8 @@ class Section:
 
         attrs = self._filter_attrs(self._find_attrs())
         inherited_attrs = {
-                parent: self._filter_attrs(attrs)
-                for parent, attrs in self._find_inherited_attrs().items()
+            parent: self._filter_attrs(attrs)
+            for parent, attrs in self._find_inherited_attrs().items()
         }
 
         if not attrs and not any(inherited_attrs.values()):
@@ -135,7 +146,7 @@ class Section:
             `is_private`
             `is_special`
         """
-        raise NotImplementedError
+        return not does_match(name, self.exclude_pattern)
 
     def _make_container(self):
         """
@@ -196,7 +207,7 @@ class Section:
     def _find_attrs(self):
         """
         Return all attributes associated with this class.
-        
+
         These attributes will subsequently be filtered to remove any that 
         aren't relevant to this section, so there is no need to do any 
         filtering here.  The return value should be a name-to-attribute 
@@ -215,6 +226,7 @@ class Section:
         """
         return utils.find_inherited_attrs(self.cls)
 
+
 class PublicMethods(Section):
     """
     Include a "Public Methods" section in the class TOC.
@@ -223,7 +235,19 @@ class PublicMethods(Section):
     title = "Public Methods:"
 
     def predicate(self, name, attr, meta):
-        return is_method(name, attr) and is_public(name)
+        return (
+            super().predicate(name, attr, meta) and
+            is_method(name, attr) and
+            is_public(name)
+        )
+
+
+class PublicMethodsWithoutDunders(PublicMethods):
+    """
+    Include a "Public Methods" section in the class TOC.
+    """
+    key = 'public-methods-without-dunders'
+    exclude_pattern = '__'
 
 
 class PrivateMethods(Section):
@@ -234,7 +258,12 @@ class PrivateMethods(Section):
     title = "Private Methods:"
 
     def predicate(self, name, attr, meta):
-        return is_method(name, attr) and is_private(name)
+        return (
+            super().predicate(name, attr, meta) and
+            is_method(name, attr) and
+            is_private(name)
+        )
+
 
 class PublicDataAttrs(Section):
     """
@@ -248,7 +277,12 @@ class PublicDataAttrs(Section):
     title = "Public Data Attributes:"
 
     def predicate(self, name, attr, meta):
-        return is_data_attr(name, attr) and is_public(name)
+        return (
+            super().predicate(name, attr, meta) and
+            is_data_attr(name, attr) and
+            is_public(name)
+        )
+
 
 class PrivateDataAttrs(Section):
     """
@@ -262,7 +296,12 @@ class PrivateDataAttrs(Section):
     title = "Private Data Attributes:"
 
     def predicate(self, name, attr, meta):
-        return is_data_attr(name, attr) and is_private(name)
+        return (
+            super().predicate(name, attr, meta) and
+            is_data_attr(name, attr) and
+            is_private(name)
+        )
+
 
 class InnerClasses(Section):
     """
@@ -272,7 +311,11 @@ class InnerClasses(Section):
     title = "Inner Classes:"
 
     def predicate(self, name, attr, meta):
-        return inspect.isclass(attr)
+        return (
+            super().predicate(name, attr, meta) and
+            inspect.isclass(attr)
+        )
+
 
 def is_method(name, attr):
     """
@@ -282,6 +325,7 @@ def is_method(name, attr):
         inspect.isfunction(attr),
         inspect.ismethoddescriptor(attr),
     ])
+
 
 def is_data_attr(name, attr, exclude_special=True):
     """
@@ -302,6 +346,7 @@ def is_data_attr(name, attr, exclude_special=True):
         not inspect.ismethoddescriptor(attr),
     ])
 
+
 def is_public(name):
     """
     Return true if the given name is public.
@@ -312,6 +357,7 @@ def is_public(name):
     """
     return not name.startswith('_') or is_special(name)
 
+
 def is_private(name):
     """
     Return true if the given name is private.
@@ -321,6 +367,7 @@ def is_private(name):
     """
     return not is_public(name)
 
+
 def is_special(name):
     """
     Return True if the name starts and ends with a double-underscore.
@@ -328,4 +375,18 @@ def is_special(name):
     Such names typically have special meaning to Python, e.g. :meth:`__init__`.
     """
     return name.startswith('__') and name.endswith('__')
+
+
+def does_match(name, pattern, **kwargs):
+    """
+    Return true if the name matches the given pattern.
+
+    Under the hood, `re.match` is used to find the pattern.  This means that 
+    the match must start at the beginning of the name.  If you want to match an 
+    internal pattern, the pattern must start with ``.*``.
+    """
+    return pattern and any(
+            re.match(p, name, **kwargs)
+            for p in always_iterable(pattern)
+    )
 
