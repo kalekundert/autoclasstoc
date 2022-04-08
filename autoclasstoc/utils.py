@@ -122,8 +122,7 @@ def make_inherited_details(state, parent, open_by_default=False):
     """
     from .nodes import details, details_summary
     s = details_summary()
-    s += strip_p(nodes_from_rst(state,
-                                f"Inherited from    : py: class:`{parent.__qualname__}`"))
+    s += strip_p(nodes_from_rst(state, f"Inherited from :py:class:`{parent.__qualname__}`"))
 
     d = details(open_by_default)
     d += s
