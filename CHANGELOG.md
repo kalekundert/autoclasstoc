@@ -2,6 +2,10 @@
 
 <!--next-version-placeholder-->
 
+## v1.5.1 (2022-04-08)
+### Fix
+* Remove extra spaces from :py:class: ([`fc547f6`](https://github.com/kalekundert/autoclasstoc/commit/fc547f654391ae798a54d9ed136ada3676920660))
+
 ## v1.5.0 (2022-03-10)
 ### Feature
 * Allow sections to exclude other sections ([`b757374`](https://github.com/kalekundert/autoclasstoc/commit/b75737451abcfd16a1cda2f3a02d8ba8a2ed43cd))
