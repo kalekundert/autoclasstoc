@@ -365,6 +365,7 @@ def is_public(name):
     Specifically, a name is public if it either doesn't start with an 
     underscore.
     """
+    name = name.split('.')[-1]
     return not name.startswith('_')
 
 
@@ -384,6 +385,7 @@ def is_special(name):
 
     Such names typically have special meaning to Python, e.g. :meth:`__init__`.
     """
+    name = name.split('.')[-1]
     return name.startswith('__') and name.endswith('__')
 
 
