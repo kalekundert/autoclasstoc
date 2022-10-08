@@ -139,7 +139,7 @@ def make_links(state, attrs):
     def qualname(name: str, attr):
         if not hasattr(attr, '__qualname__') or not hasattr(attr, '__module__'):
             return name
-        return getattr(attr, '__module__', name) + '.' + getattr(attr, '__qualname__', name)
+        return '~' + getattr(attr, '__module__', name) + '.' + getattr(attr, '__qualname__', name)
 
     assert attrs
     return nodes_from_rst(state, [
