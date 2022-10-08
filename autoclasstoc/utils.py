@@ -137,9 +137,9 @@ def make_links(state, attrs):
     directive.
     """
     def fullname(name: str, attr):
-        if not hasattr(attr, '__qualname__') or not hasattr(attr, '__module__'):
+        if not hasattr(attr, '__module__') or not hasattr(attr, '__qualname__'):
             return name
-        return '~' + getattr(attr, '__module__', name) + '.' + getattr(attr, '__qualname__', name)
+        return f'~{attr.__module__}.{attr.__qualname__}'
 
     assert attrs
     return nodes_from_rst(state, [
