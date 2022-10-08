@@ -136,7 +136,7 @@ def make_links(state, attrs):
     More specifically, the links are made using the :rst:dir:`autosummary` 
     directive.
     """
-    def qualname(name: str, attr):
+    def fullname(name: str, attr):
         if not hasattr(attr, '__qualname__') or not hasattr(attr, '__module__'):
             return name
         return '~' + getattr(attr, '__module__', name) + '.' + getattr(attr, '__qualname__', name)
@@ -145,7 +145,7 @@ def make_links(state, attrs):
     return nodes_from_rst(state, [
         '.. autosummary::',
         '',
-        *[f'    {qualname(name, attr)}' for name, attr in attrs.items()],
+        *[f'    {fullname(name, attr)}' for name, attr in attrs.items()],
     ])
 
 
