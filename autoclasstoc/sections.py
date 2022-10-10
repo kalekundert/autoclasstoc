@@ -1,11 +1,10 @@
 #!/usr/bin/env python3
 
 import inspect
+import re
 from collections.abc import Iterable
 
-from docutils import nodes as _nodes
-from . import utils
-import re
+from autoclasstoc import utils
 
 SECTIONS = {}
 
