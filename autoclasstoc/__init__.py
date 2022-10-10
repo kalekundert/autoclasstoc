@@ -1,8 +1,4 @@
-#!/usr/bin/env python3
-
-"""\
-Add a succinct TOC to auto-documented classes.
-"""
+""" Add a succinct TOC to auto-documented classes. """
 
 __version__ = '1.1.0'
 

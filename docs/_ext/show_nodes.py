@@ -1,12 +1,10 @@
-#!/usr/bin/env python3
-
 from docutils import nodes
 from docutils.parsers.rst import Directive
 
 class ShowNodesDirective(Directive):
     """
-    Pretty print all the nodes in the restructured-text contained in this 
-    directive.  This is only meant to be a tool for developing and debugging 
+    Pretty print all the nodes in the restructured-text contained in this
+    directive.  This is only meant to be a tool for developing and debugging
     new Sphinx extensions.
 
     Example:

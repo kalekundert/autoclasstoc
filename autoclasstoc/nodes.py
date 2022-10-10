@@ -1,7 +1,5 @@
-#!/usr/bin/env python3
-
-"""\
-The :mod:`autoclasstoc` module defines two new *docutils* nodes, which make it 
+"""
+The :mod:`autoclasstoc` module defines two new *docutils* nodes, which make it
 possible to create collapsible content in HTML.
 """
 
@@ -11,7 +9,7 @@ class details(General, Element):
     """
     A node that can be expanded or collapsed by the user.
 
-    This is rendered as a ``<details>`` element in HTML.  It is not currently 
+    This is rendered as a ``<details>`` element in HTML.  It is not currently
     compatible with non-HTML output formats.
     """
 
@@ -42,7 +40,7 @@ class details_summary(General, TextElement):
     """
     The summary text to display when a `details` node is collapsed.
 
-    This is rendered as a ``<summary>`` element in HTML.  It is not currently 
+    This is rendered as a ``<summary>`` element in HTML.  It is not currently
     compatible with non-HTML output formats.
     """
 
@@ -66,4 +64,3 @@ def setup(app):
             details_summary,
             html=details_summary.html,
     )
-

@@ -1,15 +1,14 @@
-#!/usr/bin/env python3
-
 from sphinx.util.docutils import SphinxDirective
 from . import utils, __version__, ConfigError
+
 
 class AutoClassToc(SphinxDirective):
     """
     Generate a succinct TOC for automatically documented classes.
 
-    This class implements the :rst:dir:`autoclasstoc` directive.  More 
-    specifically, it implements the `run` function as expected by docutils.  
-    However, most of the actual logic is delegated to other classes and 
+    This class implements the :rst:dir:`autoclasstoc` directive.  More
+    specifically, it implements the `run` function as expected by docutils.
+    However, most of the actual logic is delegated to other classes and
     functions.
     """
     optional_arguments = 1
@@ -67,6 +66,3 @@ def setup(app):
             'version': __version__,
             'parallel_read_safe': True,
     }
-
-
-

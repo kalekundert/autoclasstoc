@@ -1,5 +1,3 @@
-#!/usr/bin/env python3
-
 from docutils import nodes
 from docutils.parsers.rst import Directive
 from sphinx.util.docutils import ReferenceRole
