@@ -2,6 +2,13 @@
 
 <!--next-version-placeholder-->
 
+## v1.5.2 (2022-10-10)
+### Fix
+* Link to (rather than copy) parent class members ([`b1eebd0`](https://github.com/kalekundert/autoclasstoc/commit/b1eebd0a41ce73f012f835ef53a41da33ade3d19))
+
+### Documentation
+* Use unicode homoglyphs to fix documentation error ([`d948ea7`](https://github.com/kalekundert/autoclasstoc/commit/d948ea79c431e2bdd689a976f2fa618fea1043d2))
+
 ## v1.5.1 (2022-04-08)
 ### Fix
 * Remove extra spaces from :py:class: ([`fc547f6`](https://github.com/kalekundert/autoclasstoc/commit/fc547f654391ae798a54d9ed136ada3676920660))
