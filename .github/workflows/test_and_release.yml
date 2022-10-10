@@ -24,6 +24,7 @@ jobs:
         run: |
           pytest tests --cov autoclasstoc
       - name: Report test coverage
+        if: github.repository == 'kalekundert/autoclasstoc'
         env:
           COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_TOKEN }}
         run: |
@@ -31,6 +32,7 @@ jobs:
 
   release:
     name: Release to PyPI
+    if: github.repository == 'kalekundert/autoclasstoc'
     runs-on: ubuntu-latest
     needs: [test]
 
