@@ -32,7 +32,6 @@ jobs:
   release:
     name: Release to PyPI
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/release'
     needs: [test]
 
     steps:
