@@ -1,6 +1,6 @@
 name: Test and release
 
-on: push
+on: pull_request
 jobs:
 
   test:
@@ -37,7 +37,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
         with:
-          # Make sure the whole repository history is present, so that 
+          # Make sure the whole repository history is present, so that
           # python-semantic-release can decide if a new release is needed.
           fetch-depth: 0
 
