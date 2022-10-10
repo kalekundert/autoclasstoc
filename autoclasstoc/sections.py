@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
 
 import inspect
+from collections.abc import Iterable
+
 from docutils import nodes as _nodes
-from more_itertools import always_iterable
 from . import utils
 import re
 
@@ -155,7 +156,13 @@ class Section:
         if does_match(name, self.exclude_pattern):
             return False
 
-        for section_cls in always_iterable(self.exclude_section):
+        if isinstance(self.exclude_section, Section):
+            excluded_sections = (self.exclude_section,)
+        else:
+            excluded_sections = self.exclude_section
+            assert isinstance(excluded_sections, Iterable)
+
+        for section_cls in excluded_sections:
             section = section_cls(self.state, self.cls)
             if section.predicate(name, attr, meta):
                 return False
