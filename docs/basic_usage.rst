@@ -62,13 +62,7 @@ Follow these steps to start using :rst:dir:`autoclasstoc` in your project:
           :members:
           :special-members:
           :private-members:
-
-          .. autoclasstoc::
- 
-       .. autoclass:: basic_example.Parent
-          :members:
-          :special-members:
-          :private-members:
+          :inherited-members:
 
           .. autoclasstoc::
           
