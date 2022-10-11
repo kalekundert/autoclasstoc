@@ -1,5 +1,5 @@
 class Parent:
-    #: This is a public attributes
+    #: This is a public attribute
     public_attribute = 1
     #: This is a private attribute
     _private_attribute = 2
