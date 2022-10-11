@@ -116,7 +116,7 @@ class Section:
         wrapper += self._make_rubric()
 
         if attrs:
-            wrapper += self._make_links(attrs)
+            wrapper += self._make_links(attrs, self.cls)
 
         if not self.include_inherited:
             return [wrapper]
@@ -126,7 +126,7 @@ class Section:
                 continue
 
             d = self._make_inherited_details(parent)
-            d += self._make_links(attrs, parent=parent)
+            d += self._make_links(attrs, parent)
             wrapper += d
 
         return [wrapper]
@@ -181,7 +181,7 @@ class Section:
         """
         return utils.make_rubric(self.title)
 
-    def _make_links(self, attrs, parent=None):
+    def _make_links(self, attrs, cls=None):
         """
         Make a link to the full documentation for each attribute.
 
@@ -192,9 +192,9 @@ class Section:
         Arguments:
             attrs (dict): A dictionary of attributes, in the same format as 
                 ``__dict__``.
-            parent (type): The class that the attributes were inherited from.
+            cls (type): The class that the attributes belong to.
         """
-        return utils.make_links(self.state, attrs, parent)
+        return utils.make_links(self.state, attrs, cls)
 
     def _make_inherited_details(self, parent):
         """
