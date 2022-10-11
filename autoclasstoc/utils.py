@@ -129,7 +129,7 @@ def make_inherited_details(state, parent, open_by_default=False):
     return d
 
 
-def make_links(state, attrs):
+def make_links(state, attrs, parent=None):
     """
     Make links to the given class attributes.
 
@@ -138,7 +138,7 @@ def make_links(state, attrs):
     """
     def fullname(name: str, attr):
         if not hasattr(attr, '__module__') or not hasattr(attr, '__qualname__'):
-            return name
+            return name if parent is None else f"~{parent.__module__}.{parent.__qualname__}.{name}"
         return f'~{attr.__module__}.{attr.__qualname__}'
 
     assert attrs
