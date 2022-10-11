@@ -1,4 +1,8 @@
 class Parent:
+    #: This is a public attributes
+    public_attribute = 1
+    #: This is a private attribute
+    _private_attribute = 2
 
     def inherited_method(self):
         """Duis lacus metus, euismod ut viverra sit amet, pulvinar sed urna."""
