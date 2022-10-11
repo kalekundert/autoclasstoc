@@ -129,23 +129,18 @@ def make_inherited_details(state, parent, open_by_default=False):
     return d
 
 
-def make_links(state, attrs, cls=None):
+def make_links(state, attrs, cls):
     """
     Make links to the given class attributes.
 
     More specifically, the links are made using the :rst:dir:`autosummary` 
     directive.
     """
-    def fullname(name: str, attr):
-        if not hasattr(attr, '__module__') or not hasattr(attr, '__qualname__'):
-            return name if cls is None else f"~{cls.__module__}.{cls.__qualname__}.{name}"
-        return f'~{attr.__module__}.{attr.__qualname__}'
-
     assert attrs
     return nodes_from_rst(state, [
         '.. autosummary::',
         '',
-        *[f'    {fullname(name, attr)}' for name, attr in attrs.items()],
+        *[f'    ~{cls.__module__}.{cls.__qualname__}.{x}' for x in attrs],
     ])
 
 

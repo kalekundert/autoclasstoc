@@ -181,7 +181,7 @@ class Section:
         """
         return utils.make_rubric(self.title)
 
-    def _make_links(self, attrs, cls=None):
+    def _make_links(self, attrs, cls):
         """
         Make a link to the full documentation for each attribute.
 
