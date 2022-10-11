@@ -16,7 +16,6 @@ classifiers = [
 dependencies = [
   'sphinx>=3.0',
   'docutils',
-  'more_itertools',
 ]
 
 [project.optional-dependencies]
