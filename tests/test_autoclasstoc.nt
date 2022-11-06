@@ -1,0 +1,56 @@
+test_autoclasstoc:
+  -
+    id: baseline
+    tmp_files:
+      index.rst:
+        > .. autoclass:: mock_project.Class
+        >   :members:
+        >
+        >   .. autoclasstoc::
+
+      mock_project.py:
+        > class Class:
+        >     "Class docstring"
+        >   
+        >     def method(self):
+        >         "Method docstring"
+
+    expected:
+      index.html:
+        //div[contains(@class,'autoclasstoc')]/p: Public Methods
+        //div[contains(@class,'autoclasstoc')]//td[last()]/p: Method docstring
+
+  -
+    id: inheritance
+    tmp_files:
+
+      index.rst:
+        > .. autoclass:: mock_project.Child
+        >   :members:
+        >
+        >   .. autoclasstoc::
+
+      mock_project.py:
+        > class Parent:
+        >     "Parent class docstring"
+        >   
+        >     def parent_method(self):
+        >         "Parent method docstring"
+        >
+        > class Child(Parent):
+        >     "Child class docstring"
+        >
+        >     def child_method(self):
+        >       "Child method docstring"
+
+    expected:
+      index.html:
+        //div[contains(@class,'autoclasstoc')]/p: Public Methods
+        //div[contains(@class,'autoclasstoc')]/table//td[1]/p: child_method\(\)
+        //div[contains(@class,'autoclasstoc')]/table//td[2]/p: Child method docstring
+        //div[contains(@class,'autoclasstoc')]/details/summary: Inherited from Parent
+        //div[contains(@class,'autoclasstoc')]/details//td[1]/p: parent_method\(\)
+        //div[contains(@class,'autoclasstoc')]/details//td[2]/p: Parent method docstring
+
+
+

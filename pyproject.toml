@@ -24,6 +24,9 @@ tests = [
   'pytest',
   'pytest-cov',
   'parametrize_from_file',
+  're_assert',
+  'pytest_tmp_files',
+  'lxml',
   'coveralls',
 ]
 docs = [
