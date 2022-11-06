@@ -3,7 +3,6 @@
 import pytest
 import autoclasstoc
 import parametrize_from_file as pff
-from voluptuous import Schema, Optional
 
 with_py = pff.Namespace()
 with_autoclasstoc = pff.Namespace('from autoclasstoc import *')
@@ -67,13 +66,7 @@ def test_does_match(name, pattern, expected):
     assert autoclasstoc.does_match(name, pattern) == expected
 
 
-@pff.parametrize(
-        schema=Schema({
-            'section': str,
-            Optional('obj', default=""): str,
-            'expected': [str],
-        })
-)
+@pff.parametrize(schema=pff.defaults(obj=''))
 def test_section_predicate(section, obj, expected):
     obj_cls = with_py.exec(obj, get='MockObj') if obj else MockObj
 
