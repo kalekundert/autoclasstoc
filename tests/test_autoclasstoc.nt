@@ -19,7 +19,6 @@ test_autoclasstoc:
       index.html:
         //div[contains(@class,'autoclasstoc')]/p: Public Methods
         //div[contains(@class,'autoclasstoc')]//td[last()]/p: Method docstring
-
   -
     id: inheritance
     tmp_files:
@@ -51,6 +50,220 @@ test_autoclasstoc:
         //div[contains(@class,'autoclasstoc')]/details/summary: Inherited from Parent
         //div[contains(@class,'autoclasstoc')]/details//td[1]/p: parent_method\(\)
         //div[contains(@class,'autoclasstoc')]/details//td[2]/p: Parent method docstring
+  -
+    id: custom-section-name
+    tmp_files:
+      conf.py:
+        > from autoclasstoc import PublicMethods
+        >
+        > extensions = [
+        >         'autoclasstoc',
+        >         'sphinx.ext.autosummary',
+        > ]
+        >
+        > class CustomMethods(PublicMethods):
+        >     key = 'custom-methods'
+        >     title = 'Custom Methods'
+        >
+        >     def predicate(self, name, attr, meta):
+        >         return name.startswith('custom')
+        >
+        > class PublicMethods(PublicMethods):
+        >     exclude_section = CustomMethods
+        >
+        > autoclasstoc_sections = [
+        >     'custom-methods',
+        >     'public-methods',
+        > ]
 
+      index.rst:
+        > .. autoclass:: mock_project.Class
+        >   :members:
+        >
+        >   .. autoclasstoc::
 
+      mock_project.py:
+        > class Class:
+        >     "Class docstring"
+        >   
+        >     def method(self):
+        >         "Method docstring"
+        >
+        >     def custom_method(self):
+        >         "Custom method docstring"
 
+    expected:
+      index.html:
+        //div[contains(@class,'autoclasstoc')][1]/p: Custom Methods
+        //div[contains(@class,'autoclasstoc')][1]/table//td[1]/p: custom_method\(\)
+        //div[contains(@class,'autoclasstoc')][1]/table//td[2]/p: Custom method docstring
+
+        //div[contains(@class,'autoclasstoc')][2]/p: Public Methods
+        //div[contains(@class,'autoclasstoc')][2]/table//td[1]/p: method\(\)
+        //div[contains(@class,'autoclasstoc')][2]/table//td[2]/p: Method docstring
+  -
+    id: custom-section-attr
+    tmp_files:
+      conf.py:
+        > from autoclasstoc import PublicMethods
+        >
+        > extensions = [
+        >         'autoclasstoc',
+        >         'sphinx.ext.autosummary',
+        > ]
+        >
+        > class CustomMethods(PublicMethods):
+        >     key = 'custom-methods'
+        >     title = 'Custom Methods'
+        >
+        >     def predicate(self, name, attr, meta):
+        >         return getattr(attr, 'custom', False)
+        >
+        > class PublicMethods(PublicMethods):
+        >     exclude_section = CustomMethods
+        >
+        > autoclasstoc_sections = [
+        >     'custom-methods',
+        >     'public-methods',
+        > ]
+
+      index.rst:
+        > .. autoclass:: mock_project.Class
+        >   :members:
+        >
+        >   .. autoclasstoc::
+
+      mock_project.py:
+        > def custom(f):
+        >     f.custom = True
+        >     return f
+        >
+        > class Class:
+        >     "Class docstring"
+        >   
+        >     @custom
+        >     def method_1(self):
+        >         "Method 1 docstring"
+        >
+        >     def method_2(self):
+        >         "Method 2 docstring"
+
+    expected:
+      index.html:
+        //div[contains(@class,'autoclasstoc')][1]/p: Custom Methods
+        //div[contains(@class,'autoclasstoc')][1]/table//td[1]/p: method_1\(\)
+        //div[contains(@class,'autoclasstoc')][1]/table//td[2]/p: Method 1 docstring
+
+        //div[contains(@class,'autoclasstoc')][2]/p: Public Methods
+        //div[contains(@class,'autoclasstoc')][2]/table//td[1]/p: method_2\(\)
+        //div[contains(@class,'autoclasstoc')][2]/table//td[2]/p: Method 2 docstring
+  -
+    id: custom-section-meta-key
+    tmp_files:
+      conf.py:
+        > from autoclasstoc import PublicMethods
+        >
+        > extensions = [
+        >         'autoclasstoc',
+        >         'sphinx.ext.autosummary',
+        > ]
+        >
+        > class CustomMethods(PublicMethods):
+        >     key = 'custom-methods'
+        >     title = 'Custom Methods'
+        >
+        >     def predicate(self, name, attr, meta):
+        >         return 'custom' in meta
+        >
+        > class PublicMethods(PublicMethods):
+        >     exclude_section = CustomMethods
+        >
+        > autoclasstoc_sections = [
+        >     'custom-methods',
+        >     'public-methods',
+        > ]
+
+      index.rst:
+        > .. autoclass:: mock_project.Class
+        >   :members:
+        >
+        >   .. autoclasstoc::
+
+      mock_project.py:
+        > class Class:
+        >     "Class docstring"
+        >   
+        >     def method_1(self):
+        >         """
+        >         Method 1 docstring
+        >
+        >         :meta custom:
+        >         """
+        >
+        >     def method_2(self):
+        >         "Method 2 docstring"
+
+    expected:
+      index.html:
+        //div[contains(@class,'autoclasstoc')][1]/p: Custom Methods
+        //div[contains(@class,'autoclasstoc')][1]/table//td[1]/p: method_1\(\)
+        //div[contains(@class,'autoclasstoc')][1]/table//td[2]/p: Method 1 docstring
+
+        //div[contains(@class,'autoclasstoc')][2]/p: Public Methods
+        //div[contains(@class,'autoclasstoc')][2]/table//td[1]/p: method_2\(\)
+        //div[contains(@class,'autoclasstoc')][2]/table//td[2]/p: Method 2 docstring
+  -
+    id: custom-section-meta-value
+    tmp_files:
+      conf.py:
+        > from autoclasstoc import PublicMethods
+        >
+        > extensions = [
+        >         'autoclasstoc',
+        >         'sphinx.ext.autosummary',
+        > ]
+        >
+        > class CustomMethods(PublicMethods):
+        >     key = 'custom-methods'
+        >     title = 'Custom Methods'
+        >
+        >     def predicate(self, name, attr, meta):
+        >         return meta.get('section') == 'custom'
+        >
+        > class PublicMethods(PublicMethods):
+        >     exclude_section = CustomMethods
+        >
+        > autoclasstoc_sections = [
+        >     'custom-methods',
+        >     'public-methods',
+        > ]
+
+      index.rst:
+        > .. autoclass:: mock_project.Class
+        >   :members:
+        >
+        >   .. autoclasstoc::
+
+      mock_project.py:
+        > class Class:
+        >     "Class docstring"
+        >   
+        >     def method_1(self):
+        >         """
+        >         Method 1 docstring
+        >
+        >         :meta section: custom
+        >         """
+        >
+        >     def method_2(self):
+        >         "Method 2 docstring"
+
+    expected:
+      index.html:
+        //div[contains(@class,'autoclasstoc')][1]/p: Custom Methods
+        //div[contains(@class,'autoclasstoc')][1]/table//td[1]/p: method_1\(\)
+        //div[contains(@class,'autoclasstoc')][1]/table//td[2]/p: Method 1 docstring
+
+        //div[contains(@class,'autoclasstoc')][2]/p: Public Methods
+        //div[contains(@class,'autoclasstoc')][2]/table//td[1]/p: method_2\(\)
+        //div[contains(@class,'autoclasstoc')][2]/table//td[2]/p: Method 2 docstring

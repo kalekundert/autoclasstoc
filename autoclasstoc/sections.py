@@ -98,7 +98,7 @@ class Section:
 
         The default implementation of this method creates and populates 
         :rst:dir:`autosummary` directives for the class in question and all of 
-        its superclasses.  Almost all of 
+        its superclasses.
         """
         assert self.state
         assert self.cls

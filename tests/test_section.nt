@@ -90,7 +90,6 @@ test_section_predicate:
     id: metadata
     section:
       > class MockSection(Section):
-      >
       >     def predicate(self, name, attr, meta):
       >         return meta.get('include') == 'yes'
     obj:
