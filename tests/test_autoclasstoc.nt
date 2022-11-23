@@ -267,3 +267,48 @@ test_autoclasstoc:
         //div[contains(@class,'autoclasstoc')][2]/p: Public Methods
         //div[contains(@class,'autoclasstoc')][2]/table//td[1]/p: method_2\(\)
         //div[contains(@class,'autoclasstoc')][2]/table//td[2]/p: Method 2 docstring
+  -
+    id: custom-section-open-details-node
+    tmp_files:
+      conf.py:
+        > from autoclasstoc import PublicMethods
+        > from autoclasstoc.utils import make_inherited_details
+        >
+        > extensions = [
+        >         'autoclasstoc',
+        >         'sphinx.ext.autosummary',
+        > ]
+        >
+        > class OpenPublicMethods(PublicMethods):
+        >     def _make_inherited_details(self, parent):
+        >         return make_inherited_details(self.state, parent, True)
+
+      index.rst:
+        > .. autoclass:: mock_project.Child
+        >   :members:
+        >
+        >   .. autoclasstoc::
+
+      mock_project.py:
+        > class Parent:
+        >     "Parent class docstring"
+        >   
+        >     def parent_method(self):
+        >         "Parent method docstring"
+        >
+        > class Child(Parent):
+        >     "Child class docstring"
+        >
+        >     def child_method(self):
+        >       "Child method docstring"
+
+    expected:
+      index.html:
+        //div[contains(@class,'autoclasstoc')]/p: Public Methods
+        //div[contains(@class,'autoclasstoc')]/table//td[1]/p: child_method\(\)
+        //div[contains(@class,'autoclasstoc')]/table//td[2]/p: Child method docstring
+        //div[contains(@class,'autoclasstoc')]/details/@open: ^$
+        //div[contains(@class,'autoclasstoc')]/details/summary: Inherited from Parent
+        //div[contains(@class,'autoclasstoc')]/details//td[1]/p: parent_method\(\)
+        //div[contains(@class,'autoclasstoc')]/details//td[2]/p: Parent method docstring
+

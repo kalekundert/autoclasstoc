@@ -30,7 +30,7 @@ class details(General, Element):
             if v
         ]
         if node['open']:
-            parts += 'open'
+            parts.append('open')
 
         visitor.body.append(f"<{' '.join(parts)}>")
 
