@@ -3,6 +3,7 @@
 from docutils import nodes as _nodes
 from docutils.statemachine import StringList, string2lines
 from importlib import import_module
+from inspect import isclass
 from .errors import ConfigError
 
 
@@ -67,7 +68,7 @@ def pick_sections(sections, exclude=None):
             except KeyError:
                 raise ConfigError(f"no autoclasstoc section with key {x!r}")
 
-        if issubclass(x, Section):
+        if isclass(x) and issubclass(x, Section):
             return x
 
         raise ConfigError(f"cannot interpret {x!r} as a section")
