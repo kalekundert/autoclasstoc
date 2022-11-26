@@ -45,6 +45,33 @@ test_autoclasstoc:
         //div[contains(@class,'autoclasstoc')]/details//td[1]/p: parent_method\(\)
         //div[contains(@class,'autoclasstoc')]/details//td[2]/p: Parent method docstring
   -
+    id: inheritance-no-child-members
+    tmp_files:
+
+      index.rst:
+        > .. autoclasstoc:: mock_project.Child
+
+      mock_project.py:
+        > class Parent:
+        >     "Parent class docstring"
+        >     
+        >     def parent_method(self):
+        >         "Parent method docstring"
+        >
+        > class Child(Parent):
+        >     "Child class docstring"
+
+    expected:
+      index.html:
+        //div[contains(@class,'autoclasstoc')]/p: Public Methods
+        //div[contains(@class,'autoclasstoc')]/details/summary: Inherited from Parent
+        //div[contains(@class,'autoclasstoc')]/details//td[1]/p: parent_method\(\)
+        //div[contains(@class,'autoclasstoc')]/details//td[2]/p: Parent method docstring
+
+    forbidden:
+      index.html:
+        - //div[contains(@class,'autoclasstoc')]/table
+  -
     id: inheritance-no-parent-members
     tmp_files:
 
