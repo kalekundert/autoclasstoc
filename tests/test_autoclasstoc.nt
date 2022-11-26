@@ -153,7 +153,7 @@ test_autoclasstoc:
         >         "Method docstring"
 
     stderr:
-      - .*WARNING: no class name
+      - .*no class name
   -
     id: directive-options-missing-module-name-error
     tmp_files:
@@ -170,7 +170,7 @@ test_autoclasstoc:
         >         "Method docstring"
 
     stderr:
-      - .*WARNING: no module name
+      - .*no module name
   -
     id: directive-options-sections
     tmp_files:
@@ -550,7 +550,7 @@ test_autoclasstoc:
         >         "Method docstring"
 
     stderr:
-      - .*WARNING: no key specified for 'CustomSection'
+      - .*no key specified for 'CustomSection'
   -
     id: custom-section-missing-title-error
     tmp_files:
@@ -580,7 +580,7 @@ test_autoclasstoc:
         >         "Method docstring"
 
     stderr:
-      - .*WARNING: no title specified for 'CustomSection'
+      - .*no title specified for 'CustomSection'
   -
     id: custom-section-wrong-key-type
     tmp_files:
@@ -606,4 +606,4 @@ test_autoclasstoc:
         >         "Method docstring"
 
     stderr:
-      - .*WARNING: cannot interpret None as a section
+      - .*cannot interpret None as a section

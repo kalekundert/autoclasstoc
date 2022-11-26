@@ -22,12 +22,11 @@ dependencies = [
 [project.optional-dependencies]
 tests = [
   'pytest',
-  'pytest-cov',
   'parametrize_from_file',
   're_assert',
   'pytest_tmp_files',
   'lxml',
-  'coveralls',
+  'coverage[toml]',
 ]
 docs = [
   'sphinx>=3.1',
@@ -40,6 +39,23 @@ docs = [
 'Bug Tracker' = 'https://github.com/kalekundert/autoclasstoc/issues'
 'Continuous Integration' = 'https://github.com/kalekundert/autoclasstoc/actions'
 'Test Coverage' = 'https://coveralls.io/github/kalekundert/autoclasstoc'
+
+[tool.coverage.run]
+branch = true
+parallel = true
+source = ['autoclasstoc']
+
+[tool.coverage.paths]
+source = [
+    'autoclasstoc',
+    '.tox/*/site-packages',
+]
+
+[tool.coverage.report]
+exclude_lines = [
+    "^\\s*raise AssertionError\\b",
+    "^\\s*raise NotImplementedError\\b",
+]
 
 [tool.semantic_release]
 version_variable = 'autoclasstoc/__init__.py:__version__'
