@@ -123,30 +123,25 @@ def make_inherited_details(state, parent, open_by_default=False):
     """
     from .nodes import details, details_summary
     s = details_summary()
-    s += strip_p(nodes_from_rst(state, f"Inherited from :py:class:`{parent.__qualname__}`"))
+    s += strip_p(nodes_from_rst(state, f"Inherited from :py:class:`~{parent.__module__}.{parent.__qualname__}`"))
 
     d = details(open_by_default)
     d += s
     return d
 
 
-def make_links(state, attrs):
+def make_links(state, attrs, cls):
     """
     Make links to the given class attributes.
 
     More specifically, the links are made using the :rst:dir:`autosummary` 
     directive.
     """
-    def fullname(name: str, attr):
-        if not hasattr(attr, '__module__') or not hasattr(attr, '__qualname__'):
-            return name
-        return f'~{attr.__module__}.{attr.__qualname__}'
-
     assert attrs
     return nodes_from_rst(state, [
         '.. autosummary::',
         '',
-        *[f'    {fullname(name, attr)}' for name, attr in attrs.items()],
+        *[f'    ~{cls.__module__}.{cls.__qualname__}.{x}' for x in attrs],
     ])
 
 
