@@ -1,5 +1,3 @@
-#!/usr/bin/env python3
-
 """\
 Add a succinct TOC to auto-documented classes.
 """
