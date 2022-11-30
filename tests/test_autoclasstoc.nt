@@ -660,10 +660,14 @@ test_autoclasstoc:
         >   child
 
       parent.rst:
+        > Parent
+        > ======
         > .. autoclass:: mock_project.Parent
         >   :members:
 
       child.rst:
+        > Child
+        > =====
         > .. autoclass:: mock_project.Child
         >   :members:
         >
@@ -752,10 +756,14 @@ test_autoclasstoc:
         >   child
 
       parent.rst:
+        > Parent
+        > ======
         > .. autoclass:: mock_project.parent.Parent
         >   :members:
 
       child.rst:
+        > Child
+        > =====
         > .. autoclass:: mock_project.child.Child
         >   :members:
         >
@@ -807,10 +815,14 @@ test_autoclasstoc:
         >   child
 
       parent.rst:
+        > Parent
+        > ======
         > .. autoclass:: mock_project.Parent
         >   :members:
 
       child.rst:
+        > Child
+        > =====
         > .. autoclass:: mock_project.Child
         >   :members:
         >

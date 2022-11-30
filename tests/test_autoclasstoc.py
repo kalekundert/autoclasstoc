@@ -40,8 +40,27 @@ extensions = [
     
     cap = capsys.readouterr()
 
+    (tmp_files / 'build' / 'stdout').write_text(cap.out)
+    (tmp_files / 'build' / 'stderr').write_text(cap.err)
+
     for pattern in stderr:
         re_assert.Matches(pattern).assert_matches(cap.err)
+
+    if not stderr:
+        expected_warnings = [
+                # This happens because the `autoclasstoc` directive puts a 
+                # horizontal line after itself to separate the TOC from the 
+                # full method descriptions.  It would be easy to avoid this 
+                # warning by putting some arbitrary text after every 
+                # `autoclasstoc` directive, but I felt this would be too much 
+                # of a distraction from the tests themselves.
+                'Document may not end with a transition.',
+        ]
+        unexpected_warnings = [
+            line for line in cap.err.splitlines()
+            if not any(warning in line for warning in expected_warnings)
+        ]
+        assert not unexpected_warnings
 
     # Check the HTML results:
 
