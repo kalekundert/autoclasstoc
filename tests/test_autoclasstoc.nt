@@ -747,6 +747,51 @@ test_autoclasstoc:
         - //div[contains(@class,'autoclasstoc')]/details/summary/a
         - //div[contains(@class,'autoclasstoc')]/details//td[1]/p/a
   -
+    id: link-parent-method-cant-import
+    # Test the case where autodoc can't import the parent class.  This is an 
+    # attempt to reporduce #33.
+    marks: xfail
+    tmp_files:
+      index.rst:
+        > .. autoclass:: mock_project.Child
+        >   :members:
+        >
+        >   .. autoclasstoc::
+
+      mock_project.py:
+        > def parent_factory():
+        >     class Parent:
+        >         "Parent class docstring"
+        >       
+        >         def parent_method(self):
+        >             "Parent method docstring"
+        >
+        >     return Parent
+        >
+        > class Child(parent_factory()):
+        >     "Child class docstring"
+        >
+        >     def child_method(self):
+        >         "Child method docstring"
+
+    expected:
+      index.html:
+        //div[contains(@class,'autoclasstoc')]/p: Public Methods
+        //div[contains(@class,'autoclasstoc')]/table//td[1]/p: child_method\(\)
+        //div[contains(@class,'autoclasstoc')]/table//td[1]/p/a/@href: #mock_project.Child.child_method
+        //div[contains(@class,'autoclasstoc')]/table//td[2]/p: Child method docstring
+
+        //div[contains(@class,'autoclasstoc')]/details/summary: Inherited from Parent
+        //div[contains(@class,'autoclasstoc')]/details//td[1]/p: parent_method\(\)
+        //div[contains(@class,'autoclasstoc')]/details//td[2]/p: Parent method docstring
+
+        //dl[@class='py method']/dt/@id: mock_project.Child.child_method
+
+    forbidden:
+      index.html:
+        - //div[contains(@class,'autoclasstoc')]/details/summary/a
+        - //div[contains(@class,'autoclasstoc')]/details//td[1]/p/a
+  -
     id: link-parent-diff-module
     # This tests one of the bugs fixed by #31.
     tmp_files:
