@@ -120,8 +120,9 @@ def make_inherited_details(state, parent, open_by_default=False):
     Make a collapsible node to contain information about inherited attributes.
     """
     from .nodes import details, details_summary
+
     s = details_summary()
-    s += strip_p(nodes_from_rst(state, f"Inherited from :py:class:`~{parent.__module__}.{parent.__qualname__}`"))
+    s += strip_p(nodes_from_rst(state, f"Inherited from :py:class:`{get_cls_xref(parent)}`"))
 
     d = details(open_by_default)
     d += s
@@ -136,11 +137,30 @@ def make_links(state, attrs, cls):
     directive.
     """
     assert attrs
+
+    cls_xref = get_cls_xref(cls, '')
     return nodes_from_rst(state, [
         '.. autosummary::',
         '',
-        *[f'    ~{cls.__module__}.{cls.__qualname__}.{x}' for x in attrs],
+        *[f'    {join(cls_xref, x, sep=".")}' for x in attrs],
     ])
+
+
+def get_cls_xref(cls, cant_import=None):
+    """
+    Return a RST-formatted string that references the given class.
+
+    The purpose of this function is to handle the special case where the class 
+    in question can't be imported.  Currently, this case is checked for using a 
+    simple heuristic: whether the class's qualified name includes any local 
+    namespaces.  If this is the case, the return value can be chosen to avoid 
+    triggering any Sphinx/autodoc errors and to produce output that is at least 
+    reasonable.
+    """
+    if '<locals>' in cls.__qualname__:
+        return cls.__name__ if cant_import is None else cant_import
+    else:
+        return f'~{cls.__module__}.{cls.__qualname__}'
 
 
 def find_inherited_attrs(cls):
@@ -220,3 +240,7 @@ def comma_separated_list(x):
     Parse a restructured text option as a comma-separated list of strings.
     """
     return x.split(',')
+
+
+def join(*strs, sep=''):
+    return sep.join(x for x in strs if x)

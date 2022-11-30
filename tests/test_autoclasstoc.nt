@@ -750,7 +750,6 @@ test_autoclasstoc:
     id: link-parent-method-cant-import
     # Test the case where autodoc can't import the parent class.  This is an 
     # attempt to reporduce #33.
-    marks: xfail
     tmp_files:
       index.rst:
         > .. autoclass:: mock_project.Child
