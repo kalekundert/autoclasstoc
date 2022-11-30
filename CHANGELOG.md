@@ -2,6 +2,16 @@
 
 <!--next-version-placeholder-->
 
+## v1.6.0 (2022-11-30)
+### Feature
+* Add support for annotation-only attributes ([`fb8a4d4`](https://github.com/kalekundert/autoclasstoc/commit/fb8a4d4d1ab83a52ee6276d511fba6fcea7863ac))
+
+### Fix
+* Accomodate parent classes that can't be imported ([`2f8b2c1`](https://github.com/kalekundert/autoclasstoc/commit/2f8b2c10315eedd712cdac75953ee49cb17e9808))
+* Correctly reference inherited attributes ([`f0c61ab`](https://github.com/kalekundert/autoclasstoc/commit/f0c61ab8b9e4ae31c22afc8706dbf75ddd612567))
+* Correctly handle some niche error cases ([`02d63cf`](https://github.com/kalekundert/autoclasstoc/commit/02d63cf63de549a2318624fc9a8a8ed4bab22ffa))
+* Correctly add the 'open' attribute to <details> elements ([`3adaa6e`](https://github.com/kalekundert/autoclasstoc/commit/3adaa6e74ec3ee0a390a3459d639465884b476a0))
+
 ## v1.5.2 (2022-10-10)
 ### Fix
 * Link to (rather than copy) parent class members ([`b1eebd0`](https://github.com/kalekundert/autoclasstoc/commit/b1eebd0a41ce73f012f835ef53a41da33ade3d19))

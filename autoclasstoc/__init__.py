@@ -2,7 +2,7 @@
 Add a succinct TOC to auto-documented classes.
 """
 
-__version__ = '1.5.2'
+__version__ = '1.6.0'
 
 from .errors import *
 from . import utils, nodes
