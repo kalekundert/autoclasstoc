@@ -211,7 +211,9 @@ class Section:
 
         Arguments:
             attrs (dict): A dictionary of attributes, in the same format as 
-                ``__dict__``.
+                ``__dict__``.  Attributes have only an annotation, but no 
+                value, will be present in this dictionary, but will have the 
+                special value `utils.ANNOTATED_ATTR`.
 
         Return:
             A dictionary in the same format as *attrs*.
@@ -227,7 +229,7 @@ class Section:
         filtering here.  The return value should be a name-to-attribute 
         dictionary in the same format as :attr:`__dict__`.
         """
-        return self.cls.__dict__
+        return utils.find_attrs(self.cls)
 
     def _find_inherited_attrs(self):
         """

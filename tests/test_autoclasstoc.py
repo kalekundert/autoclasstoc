@@ -3,16 +3,16 @@
 
 import pytest, parametrize_from_file as pff, re_assert
 import lxml.html
-import sys
+import sys, io
 
 from pathlib import Path
-from contextlib import contextmanager
+from contextlib import contextmanager, redirect_stderr
 
 @pff.parametrize(
         schema=pff.defaults(expected={}, forbidden={}, stderr=[]),
         indirect=['tmp_files'],
 )
-def test_autoclasstoc(tmp_files, expected, forbidden, stderr, monkeypatch, capsys):
+def test_autoclasstoc(tmp_files, expected, forbidden, stderr, monkeypatch):
     # Fill in missing files:
 
     conf_py = tmp_files / 'conf.py'
@@ -28,7 +28,10 @@ extensions = [
 
     monkeypatch.syspath_prepend(tmp_files)
 
-    with cleanup_imports():
+    io_out = io.StringIO()
+    io_err = io.StringIO()
+
+    with cleanup_imports(), tee() as captured:
         from sphinx.cmd.build import build_main
         build_main([
                 '-b', 'html',
@@ -37,14 +40,12 @@ extensions = [
         ])
 
     # Check the error messages:
-    
-    cap = capsys.readouterr()
 
-    (tmp_files / 'build' / 'stdout').write_text(cap.out)
-    (tmp_files / 'build' / 'stderr').write_text(cap.err)
+    (tmp_files / 'build' / 'stdout').write_text(captured.stdout)
+    (tmp_files / 'build' / 'stderr').write_text(captured.stderr)
 
     for pattern in stderr:
-        re_assert.Matches(pattern).assert_matches(cap.err)
+        re_assert.Matches(pattern).assert_matches(captured.stderr)
 
     if not stderr:
         expected_warnings = [
@@ -57,7 +58,7 @@ extensions = [
                 'Document may not end with a transition.',
         ]
         unexpected_warnings = [
-            line for line in cap.err.splitlines()
+            line for line in captured.stderr.splitlines()
             if not any(warning in line for warning in expected_warnings)
         ]
         assert not unexpected_warnings
@@ -120,4 +121,50 @@ def cleanup_imports():
         for key in list(sys.modules):
             if key not in whitelist:
                 del sys.modules[key]
+
+class tee:
+
+    class IO:
+
+        def __init__(self, *files):
+            self.files = files
+
+        def write(self, str):
+            for file in self.files:
+                file.write(str)
+
+        def flush(self):
+            for file in self.files:
+                file.flush()
+
+    def __enter__(self):
+        self.stdout_original = sys.stdout
+        self.stdout_captured = io.StringIO()
+
+        sys.stdout = self.IO(
+            self.stdout_original,
+            self.stdout_captured,
+        )
+
+        self.stderr_original = sys.stderr
+        self.stderr_captured = io.StringIO()
+
+        sys.stderr = self.IO(
+            self.stderr_original,
+            self.stderr_captured,
+        )
+
+        return self
+
+    def __exit__(self, *args):
+        sys.stdout = self.stdout_original
+        sys.stderr = self.stderr_original
+
+    @property
+    def stdout(self):
+        return self.stdout_captured.getvalue()
+
+    @property
+    def stderr(self):
+        return self.stderr_captured.getvalue()
 

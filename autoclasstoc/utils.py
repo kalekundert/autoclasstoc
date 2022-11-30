@@ -15,10 +15,10 @@ def pick_class(qual_name, env):
 
     Arguments:
         qual_name (str): The name of the class to pick, or None if the class 
-        should be inferred from the environment.
+            should be inferred from the environment.
         env (sphinx.environment.BuildEnvironment): This object is available as 
-        :attr:`self.env` from :class:`~sphinx.util.docutils.SphinxDirective` 
-        subclasses.
+            :attr:`self.env` from :class:`~sphinx.util.docutils.SphinxDirective` 
+            subclasses.
     """
     if qual_name:
         mod_name, cls_name = qual_name.rsplit('.', 1)
@@ -163,13 +163,29 @@ def get_cls_xref(cls, cant_import=None):
         return f'~{cls.__module__}.{cls.__qualname__}'
 
 
+def find_attrs(cls):
+    """
+    Return a dictionary containing every attribute of the given class.
+
+    This dictionary is very similar to ``__dict__``, except that it also 
+    includes attributes that have annotations but not values.  Such attributes 
+    are assigned the sentinel value `ANNOTATED_ATTR`.
+    """
+    annotated_attrs = {
+            k: ANNOTATED_ATTR
+            for k in getattr(cls, '__annotations__', {})
+            if k not in cls.__dict__
+    }
+    return {**cls.__dict__, **annotated_attrs}
+
+
 def find_inherited_attrs(cls):
     """
     Return a dictionary mapping parent classes to the attributes inherited from 
     those classes.
     """
     return {
-        base: base.__dict__
+        base: find_attrs(base)
         for base in cls.__mro__
         if base not in (cls, object)
     }
@@ -243,4 +259,15 @@ def comma_separated_list(x):
 
 
 def join(*strs, sep=''):
+    """
+    Concatenate the given strings, excluding any that are empty.
+    """
     return sep.join(x for x in strs if x)
+
+ANNOTATED_ATTR = object()
+"""
+A special value used to represent attributes that are annotated, but assigned 
+no value.
+
+This value can appear in the dictionary passed to `filter_attrs()`.
+"""

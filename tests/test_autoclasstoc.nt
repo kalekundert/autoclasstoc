@@ -652,6 +652,30 @@ test_autoclasstoc:
         //div[contains(@class,'autoclasstoc')]//td[2]/p: Data attr docstring
         //dl[@class='py attribute']/dt/@id: mock_project.Class.data_attr
   -
+    id: link-data-attr-annotation-only
+    # Attributes that only have annotations (no values) are a special case, 
+    # because they don't appear in `__dict__`.
+    tmp_files:
+      index.rst:
+        > .. autoclass:: mock_project.Class
+        >   :members:
+        >
+        >   .. autoclasstoc::
+
+      mock_project.py:
+        > class Class:
+        >     "Class docstring"
+        >   
+        >     data_attr: int
+        >     "Data attr docstring"
+
+    expected:
+      index.html:
+        //div[contains(@class,'autoclasstoc')]/p: Public Data Attributes
+        //div[contains(@class,'autoclasstoc')]//td[1]/p/a/@href: #mock_project.Class.data_attr
+        //div[contains(@class,'autoclasstoc')]//td[2]/p: Data attr docstring
+        //dl[@class='py attribute']/dt/@id: mock_project.Class.data_attr
+  -
     id: link-parent-method
     tmp_files:
       index.rst:
@@ -903,4 +927,70 @@ test_autoclasstoc:
       parent.html:
         //dl[@class='py class']/dt/@id: mock_project.Parent
         //dl[@class='py attribute']/dt/@id: mock_project.Parent.parent_data_attr
+  -
+    id: link-parent-data-attr-annotation-only
+    tmp_files:
+      index.rst:
+        > .. toctree::
+        >   parent
+        >   child
+
+      parent.rst:
+        > Parent
+        > ======
+        > .. autoclass:: mock_project.Parent
+        >   :members:
+
+      child.rst:
+        > Child
+        > =====
+        > .. autoclass:: mock_project.Child
+        >   :members:
+        >
+        >   .. autoclasstoc::
+
+      mock_project.py:
+        > class Parent:
+        >     "Parent class docstring"
+        >   
+        >     parent_data_attr: int
+        >     "Parent data attr docstring"
+        >
+        > class Child(Parent):
+        >     "Child class docstring"
+        >
+        >     child_data_attr: int
+        >     "Child data attr docstring"
+
+    expected:
+      child.html:
+        //div[contains(@class,'autoclasstoc')]/p: Public Data Attributes
+        //div[contains(@class,'autoclasstoc')]/table//td[1]/p: child_data_attr
+        //div[contains(@class,'autoclasstoc')]/table//td[1]/p/a/@href: #mock_project.Child.child_data_attr
+        //div[contains(@class,'autoclasstoc')]/table//td[2]/p: Child data attr docstring
+
+        //div[contains(@class,'autoclasstoc')]/details/summary: Inherited from Parent
+        //div[contains(@class,'autoclasstoc')]/details/summary/a/@href: parent.html#mock_project.Parent
+        //div[contains(@class,'autoclasstoc')]/details//td[1]/p: parent_data_attr
+        //div[contains(@class,'autoclasstoc')]/details//td[1]/p/a/@href: parent.html#mock_project.Parent.parent_data_attr
+        //div[contains(@class,'autoclasstoc')]/details//td[2]/p: Parent data attr docstring
+
+        //dl[@class='py attribute']/dt/@id: mock_project.Child.child_data_attr
+
+      parent.html:
+        //dl[@class='py class']/dt/@id: mock_project.Parent
+        //dl[@class='py attribute']/dt/@id: mock_project.Parent.parent_data_attr
+
+    # This test case triggers the following warning:
+    #   
+    #   WARNING: autosummary: failed to import mock_project.Child.parent_data_attr.
+    #
+    # The documentation is built correctly, but presumably the warning is 
+    # issued because the attribute is only annotated; it doesn't actually 
+    # exist.  This is a case that autodoc needs to detect and handle more 
+    # gracefully.  We can't avoid the warning without getting rid of the 
+    # links altogether, so instead we have to just ignore the usual stderr 
+    # tests by matching anything.
+    stderr: 
+      - .*
 
