@@ -11,6 +11,12 @@ autoclasstoc
 .. image:: https://img.shields.io/readthedocs/autoclasstoc.svg
    :target: https://autoclasstoc.readthedocs.io/en/latest/?badge=latest
 
+.. image:: https://img.shields.io/github/workflow/status/kalekundert/autoclasstoc/Test
+   :target: https://github.com/kalekundert/autoclasstoc/actions
+
+.. image:: https://img.shields.io/codecov/c/gh/kalekundert/autoclasstoc
+   :target: https://app.codecov.io/gh/kalekundert/autoclasstoc
+
 It's surprisingly difficult to document large Python classes in a way that's 
 easy for users to navigate.  Most projects use the ``autodoc`` Sphinx plugin, 
 which simply puts the complete documentation for each class member one after 
