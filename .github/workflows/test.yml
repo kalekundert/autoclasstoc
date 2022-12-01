@@ -53,6 +53,7 @@ jobs:
         run: |
           python -m coverage combine
           python -m coverage html --skip-covered --skip-empty
+          python -m coverage xml
           python -m coverage report | sed 's/^/    /' >> $GITHUB_STEP_SUMMARY
 
       - name: Upload HTML coverage report
@@ -60,5 +61,8 @@ jobs:
         with:
           name: coverage-report-html
           path: htmlcov
+
+      - name: Upload Codecov report
+        uses: codecov/codecov-action@v3
 
 
