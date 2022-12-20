@@ -11,7 +11,7 @@ autoclasstoc
 .. image:: https://img.shields.io/readthedocs/autoclasstoc.svg
    :target: https://autoclasstoc.readthedocs.io/en/latest/?badge=latest
 
-.. image:: https://img.shields.io/github/workflow/status/kalekundert/autoclasstoc/Test
+.. image:: https://img.shields.io/github/actions/workflow/status/kalekundert/autoclasstoc/test.yml?branch=master
    :target: https://github.com/kalekundert/autoclasstoc/actions
 
 .. image:: https://img.shields.io/codecov/c/gh/kalekundert/autoclasstoc
