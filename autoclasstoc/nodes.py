@@ -57,6 +57,7 @@ class details_summary(General, TextElement):
 
 
 class AutoClassTocLatexTranslator(LaTeXTranslator):
+    """A custom LaTeX translator that incorporates the `details` and `details_summary` nodes."""
 
     def visit_details(self, node):
         pass
