@@ -8,9 +8,7 @@ Follow these steps to start using :rst:dir:`autoclasstoc` in your project:
 
     $ pip install autoclasstoc
 
-2. Enable the ``autoclasstoc`` and :ext:`autosummary` extensions for your 
-   Sphinx project.  The latter is required because ``autoclasstoc`` uses it to 
-   create the TOC.  The snippet below also enables :ext:`autodoc` and 
+2. Enable the ``autoclasstoc``  The snippet below also enables :ext:`autodoc` and 
    :ext:`viewcode` to demonstrate a typical configuration, but neither of these 
    extensions are required:
 
@@ -21,7 +19,6 @@ Follow these steps to start using :rst:dir:`autoclasstoc` in your project:
               ...
               'autoclasstoc',
               'sphinx.ext.autodoc',
-              'sphinx.ext.autosummary',
               'sphinx.ext.viewcode',
               ...
       ]

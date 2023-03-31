@@ -63,6 +63,7 @@ def setup(app):
 
     app.add_config_value('autoclasstoc_sections', default_sections, 'env')
     app.add_directive('autoclasstoc', AutoClassToc)
+    app.setup_extension("sphinx.ext.autosummary")
     app.connect('config-inited', load_static_assets)
 
     return {
