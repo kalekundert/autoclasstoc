@@ -8,11 +8,15 @@ import sys, io
 from pathlib import Path
 from contextlib import contextmanager, redirect_stderr
 
+@pytest.mark.parametrize(
+        argnames=["builder"],
+        argvalues=[('html', ), ("latex", )],
+)
 @pff.parametrize(
         schema=pff.defaults(expected={}, forbidden={}, stderr=[]),
         indirect=['tmp_files'],
 )
-def test_autoclasstoc(tmp_files, expected, forbidden, stderr, monkeypatch):
+def test_autoclasstoc(tmp_files, expected, forbidden, stderr, monkeypatch, builder):
     # Fill in missing files:
 
     conf_py = tmp_files / 'conf.py'
@@ -34,15 +38,15 @@ extensions = [
     with cleanup_imports(), tee() as captured:
         from sphinx.cmd.build import build_main
         build_main([
-                '-b', 'html',
+                '-b', builder,
                 str(tmp_files),
-                str(tmp_files / 'build'),
+                str(tmp_files / 'build' / builder),
         ])
 
     # Check the error messages:
 
-    (tmp_files / 'build' / 'stdout').write_text(captured.stdout)
-    (tmp_files / 'build' / 'stderr').write_text(captured.stderr)
+    (tmp_files / 'build' / builder / 'stdout').write_text(captured.stdout)
+    (tmp_files / 'build' / builder / 'stderr').write_text(captured.stderr)
 
     for pattern in stderr:
         re_assert.Matches(pattern).assert_matches(captured.stderr)
@@ -63,12 +67,16 @@ extensions = [
         ]
         assert not unexpected_warnings
 
+    # TODO Check the LaTeX results:
+    if builder == 'latex':
+        return
+
     # Check the HTML results:
 
     html_paths = [*expected.keys(), *forbidden.keys()]
 
     for html_path in html_paths:
-        html_str = (tmp_files / 'build' / html_path).read_text()
+        html_str = (tmp_files / 'build' / builder / html_path).read_text()
         html = lxml.html.fromstring(html_str)
 
         for xpath, pattern in expected.get(html_path, {}).items():
