@@ -56,7 +56,7 @@ class details_summary(General, TextElement):
     html = visit_html, depart_html
 
 
-class AutoClassTocLaTexTranslator(LaTeXTranslator):
+class AutoClassTocLaTeXTranslator(LaTeXTranslator):
     """A custom LaTeX translator that incorporates the `details` and `details_summary` nodes."""
 
     def visit_details(self, node):
@@ -84,4 +84,4 @@ def setup(app):
         details_summary,
         html=details_summary.html,
     )
-    app.set_translator('latex', AutoClassTocLaTexTranslator, override=True)
+    app.set_translator('latex', AutoClassTocLaTeXTranslator, override=True)
