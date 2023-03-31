@@ -66,7 +66,7 @@ class AutoClassTocLaTexTranslator(LaTeXTranslator):
         pass
 
     def visit_details_summary(self, node):
-        pass
+        self.body.append('\n')
 
     def depart_details_summary(self, node):
         self.body.append('\n')
