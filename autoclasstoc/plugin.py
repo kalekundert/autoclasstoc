@@ -61,7 +61,7 @@ def setup(app):
         'private-methods'
     ]
 
-    app.setup_extension("sphinx.ext.autosummary")
+    app.setup_extension('sphinx.ext.autosummary')
     app.add_config_value('autoclasstoc_sections', default_sections, 'env')
     app.add_directive('autoclasstoc', AutoClassToc)
     app.connect('config-inited', load_static_assets)
