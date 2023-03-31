@@ -124,7 +124,7 @@ def make_inherited_details(state, parent, open_by_default=False):
     s = details_summary()
     s += strip_p(nodes_from_rst(state, f"Inherited from :py:class:`{get_cls_xref(parent)}`"))
 
-    d = details(open_by_default)
+    d = details(open_by_default=open_by_default)
     d += s
     return d
 

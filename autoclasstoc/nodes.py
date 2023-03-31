@@ -4,6 +4,7 @@ possible to create collapsible content in HTML.
 """
 
 from docutils.nodes import General, Element, TextElement
+from sphinx.writers.latex import LaTeXTranslator
 
 
 class details(General, Element):
@@ -14,8 +15,8 @@ class details(General, Element):
     compatible with non-HTML output formats.
     """
 
-    def __init__(self, open_by_default=False):
-        super().__init__()
+    def __init__(self, rawsource='', *children, open_by_default=False, **attributes):
+        super().__init__(rawsource, *children, **attributes)
         self['open'] = open_by_default
 
     def visit_html(visitor, node):
@@ -55,6 +56,21 @@ class details_summary(General, TextElement):
     html = visit_html, depart_html
 
 
+class AutoClassTocLatexTranslator(LaTeXTranslator):
+
+    def visit_details(self, node):
+        pass
+
+    def depart_details(self, node):
+        pass
+
+    def visit_details_summary(self, node):
+        pass
+
+    def depart_details_summary(self, node):
+        self.body.append('\n')
+
+
 def setup(app):
     """
     Configure Sphinx to use the `details` and `details_summary` nodes.
@@ -67,3 +83,4 @@ def setup(app):
         details_summary,
         html=details_summary.html,
     )
+    app.set_translator('latex', AutoClassTocLatexTranslator, override=True)
