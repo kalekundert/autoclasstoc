@@ -177,7 +177,6 @@ test_autoclasstoc:
       conf.py:
         > extensions = [
         >         'autoclasstoc',
-        >         'sphinx.ext.autosummary',
         > ]
         > autoclasstoc_sections = []
 
@@ -210,7 +209,6 @@ test_autoclasstoc:
       conf.py:
         > extensions = [
         >         'autoclasstoc',
-        >         'sphinx.ext.autosummary',
         > ]
         > autoclasstoc_sections = [
         >     'public-methods',
@@ -244,7 +242,6 @@ test_autoclasstoc:
         >
         > extensions = [
         >         'autoclasstoc',
-        >         'sphinx.ext.autosummary',
         > ]
         >
         > class CustomMethods(PublicMethods):
@@ -292,7 +289,6 @@ test_autoclasstoc:
         >
         > extensions = [
         >         'autoclasstoc',
-        >         'sphinx.ext.autosummary',
         > ]
         >
         > class CustomMethods(PublicMethods):
@@ -345,7 +341,6 @@ test_autoclasstoc:
         >
         > extensions = [
         >         'autoclasstoc',
-        >         'sphinx.ext.autosummary',
         > ]
         >
         > class CustomMethods(PublicMethods):
@@ -397,7 +392,6 @@ test_autoclasstoc:
         >
         > extensions = [
         >         'autoclasstoc',
-        >         'sphinx.ext.autosummary',
         > ]
         >
         > class CustomMethods(PublicMethods):
@@ -449,7 +443,6 @@ test_autoclasstoc:
         >
         > extensions = [
         >         'autoclasstoc',
-        >         'sphinx.ext.autosummary',
         > ]
         >
         > class PublicMethods(PublicMethods):
@@ -489,7 +482,6 @@ test_autoclasstoc:
         >
         > extensions = [
         >         'autoclasstoc',
-        >         'sphinx.ext.autosummary',
         > ]
         >
         > class OpenPublicMethods(PublicMethods):
@@ -529,7 +521,6 @@ test_autoclasstoc:
         >
         > extensions = [
         >         'autoclasstoc',
-        >         'sphinx.ext.autosummary',
         > ]
         >
         > class CustomSection(Section):
@@ -559,7 +550,6 @@ test_autoclasstoc:
         >
         > extensions = [
         >         'autoclasstoc',
-        >         'sphinx.ext.autosummary',
         > ]
         >
         > class CustomSection(Section):
@@ -589,7 +579,6 @@ test_autoclasstoc:
         >
         > extensions = [
         >         'autoclasstoc',
-        >         'sphinx.ext.autosummary',
         > ]
         > autoclasstoc_sections = [
         >     None,
