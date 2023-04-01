@@ -37,3 +37,19 @@ The following setting can be defined in ``conf.py``:
             'private-attrs',
             'private-methods',
     ]
+
+.. confval:: autoclasstoc_include_inherited
+
+  Whether or not to include inherited attributes in this section.  The default value is
+  ``None``.
+
+  This configuration will override the ``include-inherited`` attribute of the
+  :class:`autoclasstoc.Section` class and its subclasses when it is not ``None``.
+
+.. confval:: autoclasstoc_exclude_pattern
+
+  A regular expression (or list of regular expressions) matching attribute
+  names that should be excluded from this section.
+
+  This configuration will override the ``exclude-pattern`` attribute of the
+  :class:`autoclasstoc.Section` class and its subclasses when it is not ``None``.

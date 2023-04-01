@@ -29,6 +29,8 @@ class AutoClassToc(SphinxDirective):
                 self.options.get('sections') or
                 self.config.autoclasstoc_sections,
                 exclude=self.options.get('exclude-sections'),
+                include_inherited=self.config.autoclasstoc_include_inherited,
+                exclude_pattern=self.config.autoclasstoc_exclude_pattern,
             )
             return utils.make_toc(self.state, cls, sections)
 
@@ -62,6 +64,8 @@ def setup(app):
     ]
 
     app.add_config_value('autoclasstoc_sections', default_sections, 'env')
+    app.add_config_value('autoclasstoc_include_inherited', None, 'env')
+    app.add_config_value('autoclasstoc_exclude_pattern', None, 'env')
     app.add_directive('autoclasstoc', AutoClassToc)
     app.connect('config-inited', load_static_assets)
 
