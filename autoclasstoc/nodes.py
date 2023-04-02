@@ -4,7 +4,6 @@ possible to create collapsible content in HTML.
 """
 
 from docutils.nodes import General, Element, TextElement
-from sphinx.writers.latex import LaTeXTranslator
 
 
 class details(General, Element):
@@ -33,10 +32,17 @@ class details(General, Element):
 
         visitor.body.append(f"<{' '.join(parts)}>")
 
+    def visit_latex(visitor, node):
+        pass
+
     def depart_html(visitor, node):
         visitor.body.append('</details>')
 
+    def depart_latex(visitor, node):
+        pass
+
     html = visit_html, depart_html
+    latex = visit_latex, depart_latex
 
 
 class details_summary(General, TextElement):
@@ -50,26 +56,17 @@ class details_summary(General, TextElement):
     def visit_html(visitor, node):
         visitor.body.append('<summary>')
 
+    def visit_latex(visitor, node):
+        visitor.body.append('\n')
+
     def depart_html(visitor, node):
         visitor.body.append('</summary>')
 
+    def depart_latex(visitor, node):
+        visitor.body.append('\n')
+
     html = visit_html, depart_html
-
-
-class AutoClassTocLaTeXTranslator(LaTeXTranslator):
-    """A custom LaTeX translator that incorporates the `details` and `details_summary` nodes."""
-
-    def visit_details(self, node):
-        pass
-
-    def depart_details(self, node):
-        pass
-
-    def visit_details_summary(self, node):
-        self.body.append('\n')
-
-    def depart_details_summary(self, node):
-        self.body.append('\n')
+    latex = visit_latex, depart_latex
 
 
 def setup(app):
@@ -79,9 +76,10 @@ def setup(app):
     app.add_node(
         details,
         html=details.html,
+        latex=details.latex,
     )
     app.add_node(
         details_summary,
         html=details_summary.html,
+        latex=details_summary.latex,
     )
-    app.set_translator('latex', AutoClassTocLaTeXTranslator, override=True)
