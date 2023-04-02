@@ -27,6 +27,7 @@ tests = [
   'pytest_tmp_files',
   'lxml',
   'coverage[toml]',
+  'coverage_enable_subprocess',
 ]
 docs = [
   'sphinx>=3.1',
@@ -43,12 +44,13 @@ docs = [
 [tool.coverage.run]
 branch = true
 parallel = true
+data_file = '${COVERAGE_OUTPUT_DIR-.}/.coverage'
 source = ['autoclasstoc']
 
 [tool.coverage.paths]
 source = [
     'autoclasstoc',
-    '.tox/*/site-packages',
+    '.tox/*/lib/*/site-packages/autoclasstoc',
 ]
 
 [tool.coverage.report]
