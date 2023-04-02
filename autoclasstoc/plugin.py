@@ -63,6 +63,7 @@ def setup(app):
         'private-methods'
     ]
 
+    app.setup_extension('sphinx.ext.autosummary')
     app.add_config_value('autoclasstoc_sections', default_sections, 'env')
     app.add_config_value('autoclasstoc_include_inherited', None, 'env')
     app.add_config_value('autoclasstoc_exclude_pattern', None, 'env')

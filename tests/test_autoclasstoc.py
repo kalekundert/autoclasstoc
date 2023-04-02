@@ -24,7 +24,6 @@ def test_autoclasstoc(tmp_files, expected, forbidden, stderr, monkeypatch, build
         conf_py.write_text("""\
 extensions = [
         'autoclasstoc',
-        'sphinx.ext.autosummary',
 ]
 """)
 
