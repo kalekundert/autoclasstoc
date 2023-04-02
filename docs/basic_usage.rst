@@ -81,6 +81,4 @@ Follow these steps to start using :rst:dir:`autoclasstoc` in your project:
           :special-members:
           :private-members:
           :autoclasstoc:
-          
-   The :rst:dir:`autoclasstoc` directive can also be accessed via the
-   `autoclasstoc` option to :rst:dir:`autoclass`:
+
