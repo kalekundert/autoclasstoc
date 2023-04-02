@@ -16,4 +16,4 @@ for obj in locals().copy().values():
     if isfunction(obj) or isclass(obj):
         obj.__module__ = 'autoclasstoc'
 
-del inspect, isfunction, isclass, obj
+del isfunction, isclass, obj

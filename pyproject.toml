@@ -62,3 +62,9 @@ exclude_lines = [
 [tool.semantic_release]
 version_variable = 'autoclasstoc/__init__.py:__version__'
 build_command = 'python -m pip install flit && flit build'
+
+[tool.ruff]
+select = ["F"]
+
+[tool.ruff.per-file-ignores]
+"__init__.py" = ["F401", "F403"]
