@@ -117,6 +117,25 @@ test_autoclasstoc:
         //div[contains(@class,'autoclasstoc')]/p: Public Methods
         //div[contains(@class,'autoclasstoc')]//td[last()]/p: Method docstring
   -
+    id: directive-options-autoclass-option
+    tmp_files:
+      index.rst:
+        > .. autoclass:: mock_project.Class
+        >   :autoclasstoc:
+
+      mock_project.py:
+        > class Class:
+        >     "Class docstring"
+        >   
+        >     def method(self):
+        >         "Method docstring"
+
+    expected:
+      index.html:
+        //div[contains(@class,'autoclasstoc')]/p: Public Methods
+        //div[contains(@class,'autoclasstoc')]//td[last()]/p: Method docstring
+
+  -
     id: directive-options-infer-class-from-py-domain
     tmp_files:
       index.rst:

@@ -1,12 +1,61 @@
-# Integration tests, where the inputs are RST files and the outputs are HTML 
-# files.
+"""\
+Integration tests, where the inputs are RST files and the outputs are HTML 
+files.
 
-import pytest, parametrize_from_file as pff, re_assert
+The basic process carried out by each of these tests is to (i) fill in a 
+temporary directory with all the files needed by sphinx to build a project, 
+(ii) invoke sphinx on those files, and (iii) check that the resulting HTML 
+contains any expected elements.  This script implements all the logic that is 
+shared that is shared between every test case.  The parameters that vary 
+between each test (namely the specific files to populate the temporary 
+directory and the expected HTML elements to check for) are specified in 
+`test_autoclasstoc.nt`.
+
+As mentioned above, each test project is built in its own temporary directory.  
+The path to this directory is listed in the pytest output, and its contents are 
+very useful for debugging.  Specifically, this directory contains:
+
+- All the input files, so you can re-run sphinx for individual test cases.  
+  Doing this in a way that exactly reproduces the test environment requires 
+  some care.  Specifically, you need to (i) specify `$PYTHONPATH` to mimic 
+  the way the way that `sys.path` is set in the test, (ii) use the tox 
+  virtual environment that has the right dependencies installed, and (iii) 
+  provide the right source/build directory arguments.  Here is the exact 
+  command to use, assuming that the current working directory is the 
+  temporary test directory and `$TOC` is the path to the autoclasstoc 
+  repository:
+
+  $ rm -rf build
+  $ PYTHONPATH=. $TOC/.tox/py*-sphinx*/bin/sphinx-build -b html . build
+
+  Rather than deleting the existing build directory, you may prefer to have 
+  sphinx build into a new directory, so you can compare results.
+
+  Note that changes to the source will not automatically be visible to the 
+  tox virtual environments.  One way to get around this is to manually 
+  install autoclasstoc in "editable" mode in the tox virtual environment:
+
+  $ $TOC/.tox/py*-sphinx*/bin/pip install -e $TOC
+
+- All the output HTML files, so you can look at them in a web browser and see 
+  what's exactly wrong, e.g. is an element totally missing, is it just in the 
+  wrong place, etc.
+
+- Files called `stdout` and `stderr`, which contain any output that was 
+  captured when sphinx was running.  This information is also included in the 
+  pytest output, but it can be useful to review later.
+"""
+
+import pytest
+import parametrize_from_file as pff
+import re_assert
 import lxml.html
-import sys, io
+import subprocess
+import sys
 
 from pathlib import Path
-from contextlib import contextmanager, redirect_stderr
+
+ROOT = Path(__file__).parents[1]
 
 @pytest.mark.parametrize(
         argnames=["builder"],
@@ -29,26 +78,35 @@ extensions = [
 
     # Run sphinx:
 
-    monkeypatch.syspath_prepend(tmp_files)
-
-    io_out = io.StringIO()
-    io_err = io.StringIO()
-
-    with cleanup_imports(), tee() as captured:
-        from sphinx.cmd.build import build_main
-        build_main([
-                '-b', builder,
-                str(tmp_files),
-                str(tmp_files / 'build' / builder),
-        ])
+    sphinx_cmd = [
+            sys.executable,
+            '-m', 'sphinx.cmd.build',
+            '-b', builder,
+            str(tmp_files),
+            str(tmp_files / 'build' / builder),
+    ]
+    p = subprocess.run(
+            sphinx_cmd,
+            cwd=tmp_files,
+            env={
+                'PYTHONPATH': str(tmp_files),
+                'COVERAGE_PROCESS_START': str(ROOT / 'pyproject.toml'),
+                'COVERAGE_OUTPUT_DIR': str(ROOT),
+            },
+            capture_output=True,
+            text=True,
+    )
 
     # Check the error messages:
 
-    (tmp_files / 'build' / builder / 'stdout').write_text(captured.stdout)
-    (tmp_files / 'build' / builder / 'stderr').write_text(captured.stderr)
+    print(p.stdout, file=sys.stdout)
+    print(p.stderr, file=sys.stderr)
+
+    (tmp_files / 'build' / builder / 'stdout').write_text(p.stdout)
+    (tmp_files / 'build' / builder / 'stderr').write_text(p.stderr)
 
     for pattern in stderr:
-        re_assert.Matches(pattern).assert_matches(captured.stderr)
+        re_assert.Matches(pattern).assert_matches(p.stderr)
 
     if not stderr:
         expected_warnings = [
@@ -61,7 +119,7 @@ extensions = [
                 'Document may not end with a transition.',
         ]
         unexpected_warnings = [
-            line for line in captured.stderr.splitlines()
+            line for line in p.stderr.splitlines()
             if not any(warning in line for warning in expected_warnings)
         ]
         assert not unexpected_warnings
@@ -92,86 +150,4 @@ extensions = [
         for xpath in forbidden.get(html_path, []):
             if html.xpath(xpath):
                 raise AssertionError(f"forbidden xpath query matched {html_path!r}: {xpath}")
-
-@contextmanager
-def cleanup_imports():
-    """
-    Unimport any modules/packages that were imported within the `with` block.
-
-    The reason for doing this is to keep the test cases independent from each 
-    other.  Python caches imported modules/packages by default, so without 
-    this, imports made by one test case would persist into the next.
-
-    There are really two specific modules/packages that cause problems:
-
-        `mock_project`:
-            Most of the test cases include a module with this name that defines 
-            the python objects to document in that test.  It's easy to see how 
-            caching this module between test cases could lead to problems.  
-            This could be avoided by using a different module name for each 
-            test case, but that's too much of a burden on the test author.
-
-        `sphinx`:
-            I don't exactly understand how, but there is some amount of global 
-            state that is stored somewhere in the this package.  I think it has 
-            something to do with the way attribute docstrings are parsed, 
-            because (i) the tests that involve attributes fail when sphinx 
-            isn't un-imported between test cases and (ii) attributes don't 
-            really have docstrings, so sphinx has to do some magic to make it 
-            seem like they do.  In any case, un-importing this module solves 
-            the problem.
-    """
-    try:
-        whitelist = set(sys.modules.keys())
-        yield
-    finally:
-        for key in list(sys.modules):
-            if key not in whitelist:
-                del sys.modules[key]
-
-class tee:
-
-    class IO:
-
-        def __init__(self, *files):
-            self.files = files
-
-        def write(self, str):
-            for file in self.files:
-                file.write(str)
-
-        def flush(self):
-            for file in self.files:
-                file.flush()
-
-    def __enter__(self):
-        self.stdout_original = sys.stdout
-        self.stdout_captured = io.StringIO()
-
-        sys.stdout = self.IO(
-            self.stdout_original,
-            self.stdout_captured,
-        )
-
-        self.stderr_original = sys.stderr
-        self.stderr_captured = io.StringIO()
-
-        sys.stderr = self.IO(
-            self.stderr_original,
-            self.stderr_captured,
-        )
-
-        return self
-
-    def __exit__(self, *args):
-        sys.stdout = self.stdout_original
-        sys.stderr = self.stderr_original
-
-    @property
-    def stdout(self):
-        return self.stdout_captured.getvalue()
-
-    @property
-    def stderr(self):
-        return self.stderr_captured.getvalue()
 

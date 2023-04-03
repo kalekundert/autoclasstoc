@@ -1,5 +1,4 @@
 import inspect
-from docutils import nodes as _nodes
 from more_itertools import always_iterable
 from . import utils
 from .errors import ConfigError
