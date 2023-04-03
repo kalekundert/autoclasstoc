@@ -47,7 +47,7 @@ def load_class(mod_name, cls_name):
     return mod, cls
 
 
-def pick_sections(sections, exclude=None):
+def pick_sections(sections, exclude=None, include_inherited=None, exclude_pattern=None):
     """
     Determine which sections to include in the class TOC.
 
@@ -57,17 +57,24 @@ def pick_sections(sections, exclude=None):
     classes.  All names will be converted to classes in the return value.
     """
 
+    def _set_section_options(section):
+        if include_inherited is not None:
+            section.include_inherited = include_inherited
+        if exclude_pattern is not None:
+            section.exclude_pattern = exclude_pattern
+        return section
+
     def _section_from_anything(x):
         from .sections import Section, SECTIONS
 
         if isinstance(x, str):
             try:
-                return SECTIONS[x]
+                return _set_section_options(SECTIONS[x])
             except KeyError:
                 raise ConfigError(f"no autoclasstoc section with key {x!r}")
 
         if isclass(x) and issubclass(x, Section):
-            return x
+            return _set_section_options(x)
 
         raise ConfigError(f"cannot interpret {x!r} as a section")
 
@@ -124,7 +131,7 @@ def make_inherited_details(state, parent, open_by_default=False):
     s = details_summary()
     s += strip_p(nodes_from_rst(state, f"Inherited from :py:class:`{get_cls_xref(parent)}`"))
 
-    d = details(open_by_default)
+    d = details(open_by_default=open_by_default)
     d += s
     return d
 

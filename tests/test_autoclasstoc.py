@@ -46,6 +46,7 @@ very useful for debugging.  Specifically, this directory contains:
   pytest output, but it can be useful to review later.
 """
 
+import pytest
 import parametrize_from_file as pff
 import re_assert
 import lxml.html
@@ -56,11 +57,15 @@ from pathlib import Path
 
 ROOT = Path(__file__).parents[1]
 
+@pytest.mark.parametrize(
+        argnames=["builder"],
+        argvalues=[('html', ), ("latex", )],
+)
 @pff.parametrize(
         schema=pff.defaults(expected={}, forbidden={}, stderr=[]),
         indirect=['tmp_files'],
 )
-def test_autoclasstoc(tmp_files, expected, forbidden, stderr, monkeypatch):
+def test_autoclasstoc(tmp_files, expected, forbidden, stderr, monkeypatch, builder):
     # Fill in missing files:
 
     conf_py = tmp_files / 'conf.py'
@@ -76,9 +81,9 @@ extensions = [
     sphinx_cmd = [
             sys.executable,
             '-m', 'sphinx.cmd.build',
-            '-b', 'html',
+            '-b', builder,
             str(tmp_files),
-            str(tmp_files / 'build'),
+            str(tmp_files / 'build' / builder),
     ]
     p = subprocess.run(
             sphinx_cmd,
@@ -97,8 +102,8 @@ extensions = [
     print(p.stdout, file=sys.stdout)
     print(p.stderr, file=sys.stderr)
 
-    (tmp_files / 'build' / 'stdout').write_text(p.stdout)
-    (tmp_files / 'build' / 'stderr').write_text(p.stderr)
+    (tmp_files / 'build' / builder / 'stdout').write_text(p.stdout)
+    (tmp_files / 'build' / builder / 'stderr').write_text(p.stderr)
 
     for pattern in stderr:
         re_assert.Matches(pattern).assert_matches(p.stderr)
@@ -119,12 +124,16 @@ extensions = [
         ]
         assert not unexpected_warnings
 
+    # TODO Check the LaTeX results:
+    if builder == 'latex':
+        return
+
     # Check the HTML results:
 
     html_paths = [*expected.keys(), *forbidden.keys()]
 
     for html_path in html_paths:
-        html_str = (tmp_files / 'build' / html_path).read_text()
+        html_str = (tmp_files / 'build' / builder / html_path).read_text()
         html = lxml.html.fromstring(html_str)
 
         for xpath, pattern in expected.get(html_path, {}).items():

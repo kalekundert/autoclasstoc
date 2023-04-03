@@ -14,8 +14,8 @@ class details(General, Element):
     compatible with non-HTML output formats.
     """
 
-    def __init__(self, open_by_default=False):
-        super().__init__()
+    def __init__(self, rawsource='', *children, open_by_default=False, **attributes):
+        super().__init__(rawsource, *children, **attributes)
         self['open'] = open_by_default
 
     def visit_html(visitor, node):
@@ -32,10 +32,17 @@ class details(General, Element):
 
         visitor.body.append(f"<{' '.join(parts)}>")
 
+    def visit_latex(visitor, node):
+        pass
+
     def depart_html(visitor, node):
         visitor.body.append('</details>')
 
+    def depart_latex(visitor, node):
+        pass
+
     html = visit_html, depart_html
+    latex = visit_latex, depart_latex
 
 
 class details_summary(General, TextElement):
@@ -49,10 +56,17 @@ class details_summary(General, TextElement):
     def visit_html(visitor, node):
         visitor.body.append('<summary>')
 
+    def visit_latex(visitor, node):
+        visitor.body.append('\n')
+
     def depart_html(visitor, node):
         visitor.body.append('</summary>')
 
+    def depart_latex(visitor, node):
+        visitor.body.append('\n')
+
     html = visit_html, depart_html
+    latex = visit_latex, depart_latex
 
 
 def setup(app):
@@ -62,8 +76,10 @@ def setup(app):
     app.add_node(
         details,
         html=details.html,
+        latex=details.latex,
     )
     app.add_node(
         details_summary,
         html=details_summary.html,
+        latex=details_summary.latex,
     )
