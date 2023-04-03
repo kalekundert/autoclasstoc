@@ -44,8 +44,21 @@ Follow these steps to start using :rst:dir:`autoclasstoc` in your project:
           'exclude-members': '__weakref__',
       }
    
-3. Use the :rst:dir:`autoclasstoc` directive to add a TOC to a class.  Follow 
-   the link for a full description of the directive, but typical usage is 
+3. Use the :rst:dir:`autoclasstoc` directive or the `autoclasstoc` option for
+   :rst:dir:`autoclass` directive to add a TOC to a class.
+
+   .. code-block:: rst
+
+      .. autoclass:: my_module.MyClass
+         :members:
+
+         .. autoclasstoc::
+
+      .. autoclass:: my_module.MyClass
+         :members:
+         :autoclasstoc:
+
+   Follow the link for a full description of the directive, but typical usage is
    pretty straight-forward.  For example, consider the ``Example`` class in the 
    following snippet:
 
@@ -67,6 +80,5 @@ Follow these steps to start using :rst:dir:`autoclasstoc` in your project:
           :members:
           :special-members:
           :private-members:
+          :autoclasstoc:
 
-          .. autoclasstoc::
-          

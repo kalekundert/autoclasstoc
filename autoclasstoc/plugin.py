@@ -1,3 +1,5 @@
+from docutils.parsers.rst import directives
+from sphinx.ext.autodoc import ClassDocumenter
 from sphinx.util.docutils import SphinxDirective
 from . import utils, __version__, ConfigError
 
@@ -50,6 +52,16 @@ def load_static_assets(app, config):
     app.add_css_file('autoclasstoc.css')
 
 
+class AutoClassTocClassDocumenter(ClassDocumenter):
+    option_spec = ClassDocumenter.option_spec.copy()
+    option_spec['autoclasstoc'] = directives.flag
+
+    def add_content(self, more_content):
+        super().add_content(more_content)
+        if 'autoclasstoc' in self.options:
+            self.add_line('.. autoclasstoc::', self.get_sourcename())
+
+
 def setup(app):
     from . import nodes
     nodes.setup(app)
@@ -64,6 +76,7 @@ def setup(app):
     app.setup_extension('sphinx.ext.autosummary')
     app.add_config_value('autoclasstoc_sections', default_sections, 'env')
     app.add_directive('autoclasstoc', AutoClassToc)
+    app.add_autodocumenter(AutoClassTocClassDocumenter, override=True)
     app.connect('config-inited', load_static_assets)
 
     return {
