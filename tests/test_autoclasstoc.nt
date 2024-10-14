@@ -918,6 +918,16 @@ test_autoclasstoc:
         //dl[@class='py attribute']/dt/@id: mock_project.Parent.parent_data_attr
   -
     id: link-parent-data-attr-annotation-only
+
+    # This test fails because the parent attribute is incorrectly included in 
+    # the child class's TOC.  However, this is due to the fact that `autodoc` 
+    # manually adds the parent class annotations to the the child class's 
+    # `__annotations__` dictionary.  This specifically happens in
+    # `sphinx.ext.autodoc.AttributeDocumenter.update_annotations()`.  Until 
+    # this behavior is changed, there's no way for `autoclasstoc` to get this 
+    # right.
+    marks: xfail
+
     tmp_files:
       index.rst:
         > .. toctree::
@@ -969,17 +979,3 @@ test_autoclasstoc:
       parent.html:
         //dl[@class='py class']/dt/@id: mock_project.Parent
         //dl[@class='py attribute']/dt/@id: mock_project.Parent.parent_data_attr
-
-    # This test case triggers the following warning:
-    #   
-    #   WARNING: autosummary: failed to import mock_project.Child.parent_data_attr.
-    #
-    # The documentation is built correctly, but presumably the warning is 
-    # issued because the attribute is only annotated; it doesn't actually 
-    # exist.  This is a case that autodoc needs to detect and handle more 
-    # gracefully.  We can't avoid the warning without getting rid of the 
-    # links altogether, so instead we have to just ignore the usual stderr 
-    # tests by matching anything.
-    stderr: 
-      - .*
-

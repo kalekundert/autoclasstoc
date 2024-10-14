@@ -1,6 +1,7 @@
 from docutils import nodes as _nodes
 from docutils.statemachine import StringList, string2lines
 from importlib import import_module
+from functools import partial
 from inspect import isclass
 from .errors import ConfigError
 
@@ -22,6 +23,7 @@ def pick_class(qual_name, env):
     """
     if qual_name:
         mod_name, cls_name = qual_name.rsplit('.', 1)
+        xref_factory = get_cls_xref
     else:
         cls_name = \
             env.temp_data.get('autodoc:class') or \
@@ -29,13 +31,14 @@ def pick_class(qual_name, env):
         mod_name = \
             env.temp_data.get('autodoc:module') or \
             env.ref_context.get('py:module')
+        xref_factory = partial(get_cls_xref, implied_mod=f'{mod_name}.')
 
         if not cls_name:
             raise ConfigError("no class name")
         if not mod_name:
             raise ConfigError("no module name")
 
-    return mod_name, cls_name
+    return mod_name, cls_name, xref_factory
 
 
 def load_class(mod_name, cls_name):
@@ -86,13 +89,13 @@ def pick_sections(sections, exclude=None):
     ]
 
 
-def make_toc(state, cls, sections):
+def make_toc(state, cls, xref_factory, sections):
     """
     Create the class TOC.
     """
     n = []
     for section_cls in sections:
-        section = section_cls(state, cls)
+        section = section_cls(state, cls, xref_factory)
         section.check()
         n += section.format()
 
@@ -128,8 +131,7 @@ def make_inherited_details(state, parent, open_by_default=False):
     d += s
     return d
 
-
-def make_links(state, attrs, cls):
+def make_links(state, attrs, cls, xref_factory):
     """
     Make links to the given class attributes.
 
@@ -138,7 +140,8 @@ def make_links(state, attrs, cls):
     """
     assert attrs
 
-    cls_xref = get_cls_xref(cls, '')
+    cls_xref = xref_factory(cls, if_cant_import='')
+
     return nodes_from_rst(state, [
         '.. autosummary::',
         '',
@@ -146,7 +149,7 @@ def make_links(state, attrs, cls):
     ])
 
 
-def get_cls_xref(cls, cant_import=None):
+def get_cls_xref(cls, *, if_cant_import=None, implied_mod=None):
     """
     Return a RST-formatted string that references the given class.
 
@@ -157,10 +160,14 @@ def get_cls_xref(cls, cant_import=None):
     triggering any Sphinx/autodoc errors and to produce output that is at least 
     reasonable.
     """
+
     if '<locals>' in cls.__qualname__:
-        return cls.__name__ if cant_import is None else cant_import
+        return cls.__name__ if if_cant_import is None else if_cant_import
     else:
-        return f'~{cls.__module__}.{cls.__qualname__}'
+        xref = f'{cls.__module__}.{cls.__qualname__}'
+        if implied_mod and xref.startswith(implied_mod):
+            xref = xref[len(implied_mod):]
+        return f'~{xref}'
 
 
 def find_attrs(cls):
@@ -173,7 +180,16 @@ def find_attrs(cls):
     """
     annotated_attrs = {
             k: ANNOTATED_ATTR
-            for k in getattr(cls, '__annotations__', {})
+
+            # This is the recommended way to get the annotations for a class 
+            # object, prior to the introduction of `inspect.get_annotations()` 
+            # in python 3.10 [1].  The awkward `__dict__.get()` syntax is to 
+            # avoid getting the parent class annotations if the child class 
+            # doesn't have any.
+            #
+            # [1]: https://docs.python.org/3/howto/annotations.html#accessing-the-annotations-dict-of-an-object-in-python-3-9-and-older
+            for k in cls.__dict__.get('__annotations__', {})
+
             if k not in cls.__dict__
     }
     return {**cls.__dict__, **annotated_attrs}
@@ -225,6 +241,7 @@ def nodes_from_rst(state, rst):
       text)
     - node
     """
+
     if isinstance(rst, str):
         rst = string2lines(rst)
     if isinstance(rst, list):

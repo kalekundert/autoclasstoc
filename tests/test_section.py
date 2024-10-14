@@ -76,7 +76,7 @@ def test_section_predicate(section, obj, expected):
             if k not in EmptyObj.__dict__
     }
     section_cls = with_autoclasstoc.exec(section, get='MockSection')
-    section = section_cls('state', 'cls')
+    section = section_cls('state', 'cls', 'xref_factory')
     hits = autoclasstoc.utils.filter_attrs(attrs, section.predicate)
     assert set(hits) == set(expected)
 

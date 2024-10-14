@@ -28,6 +28,7 @@ tests = [
   'lxml',
   'coverage[toml]',
   'coverage_enable_subprocess',
+  'tox',
 ]
 docs = [
   'sphinx>=3.1',
@@ -63,8 +64,8 @@ exclude_lines = [
 version_variable = 'autoclasstoc/__init__.py:__version__'
 build_command = 'python -m pip install flit && flit build'
 
-[tool.ruff]
+[tool.ruff.lint]
 select = ["F"]
 
-[tool.ruff.per-file-ignores]
+[tool.ruff.lint.per-file-ignores]
 "__init__.py" = ["F401", "F403"]

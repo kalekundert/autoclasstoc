@@ -58,7 +58,7 @@ class Section:
     excluded from this section.
     """
 
-    def __init__(self, state, cls):
+    def __init__(self, state, cls, xref_factory):
         """
         Create a section for a specific class.
 
@@ -67,10 +67,20 @@ class Section:
                 associated with the :rst:dir:`autoclasstoc` directive.  This 
                 can be used to evaluate restructured text markup using 
                 `nodes_from_rst()`.  
+
             cls (type): The class to make the TOC section for.
+
+            xref_factory: A function that, given a class, returns the string 
+                that should be used to make a cross-reference to that class.  
+                These strings, unfortunately, are context-dependent.  If 
+                :rst:dir:`autoclasstoc` is used within a class, 
+                cross-references must not include the module that the class is 
+                defined in.  (:rst:dir:`autosummary` requires this for some 
+                reason).  Otherwise, fully-qualified names must be used.
         """
         self.state = state
         self.cls = cls
+        self.xref_factory = xref_factory
 
     def __init_subclass__(cls):
         """
@@ -154,7 +164,7 @@ class Section:
             return False
 
         for section_cls in always_iterable(self.exclude_section):
-            section = section_cls(self.state, self.cls)
+            section = section_cls(self.state, self.cls, self.xref_factory)
             if section.predicate(name, attr, meta):
                 return False
 
@@ -192,7 +202,7 @@ class Section:
                 ``__dict__``.
             cls (type): The class that the attributes belong to.
         """
-        return utils.make_links(self.state, attrs, cls)
+        return utils.make_links(self.state, attrs, cls, self.xref_factory)
 
     def _make_inherited_details(self, parent):
         """
