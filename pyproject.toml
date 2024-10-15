@@ -61,8 +61,8 @@ exclude_lines = [
 ]
 
 [tool.semantic_release]
-version_variable = 'autoclasstoc/__init__.py:__version__'
-build_command = 'python -m pip install flit && flit build'
+version_variables = ['autoclasstoc/__init__.py:__version__']
+build_command = 'python -m pip install build && python -m build'
 
 [tool.ruff.lint]
 select = ["F"]

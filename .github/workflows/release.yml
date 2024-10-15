@@ -5,15 +5,27 @@ jobs:
   release:
     name: Release to PyPI
     runs-on: ubuntu-latest
+    concurrency: release
+
+    permissions:
+      id-token: write
+      contents: write
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
         with:
-          # Make sure the whole repository history is present, so that 
-          # python-semantic-release can decide if a new release is needed.
           fetch-depth: 0
 
-      - uses: relekang/python-semantic-release@master
+      - uses: python-semantic-release/python-semantic-release@v9.3.1
+        id: release
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          pypi_token: ${{ secrets.PYPI_TOKEN }}
+          changelog: false
+
+      - uses: pypa/gh-action-pypi-publish@release/v1
+        if: steps.release.outputs.released == 'true'
+
+      - uses: python-semantic-release/upload-to-gh-release@main
+        if: steps.release.outputs.released == 'true'
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
