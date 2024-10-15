@@ -25,14 +25,15 @@ class AutoClassToc(SphinxDirective):
         """
         try:
             qual_name = self.arguments[0] if self.arguments else None
-            mod_name, cls_name = utils.pick_class(qual_name, self.env)
+            mod_name, cls_name, xref_factory = \
+                    utils.pick_class(qual_name, self.env)
             mod, cls = utils.load_class(mod_name, cls_name)
             sections = utils.pick_sections(
                 self.options.get('sections') or
                 self.config.autoclasstoc_sections,
                 exclude=self.options.get('exclude-sections'),
             )
-            return utils.make_toc(self.state, cls, sections)
+            return utils.make_toc(self.state, cls, xref_factory, sections)
 
         except ConfigError as err:
             raise self.error(str(err))
